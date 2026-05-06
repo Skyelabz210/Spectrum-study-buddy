@@ -1,8 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { MODULES, type Module } from "@/data/curriculum";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Sparkles, BookmarkPlus } from "lucide-react";
+import { trackLesson, trackModule, addTakeaway } from "@/lib/tutorMemory";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/curriculum/$moduleId")({
   component: ModulePage,
