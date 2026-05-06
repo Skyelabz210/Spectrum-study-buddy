@@ -1,12 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { MODULES } from "@/data/curriculum";
+import { MODULES, type Module } from "@/data/curriculum";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/curriculum/$moduleId")({
   component: ModulePage,
-  loader: ({ params }) => {
+  loader: ({ params }): { mod: Module } => {
     const mod = MODULES.find((m) => m.id === params.moduleId);
     if (!mod) throw notFound();
     return { mod };
