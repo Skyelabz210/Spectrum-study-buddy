@@ -72,11 +72,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Tish-Sticks — Phlebotomy Study, Your Way" },
+      { name: "description", content: "A calm, focus-mode study buddy for phlebotomy: lessons, flashcards, AI tutor, and a gentle plan." },
+      { name: "author", content: "Tish-Sticks" },
+      { property: "og:title", content: "Tish-Sticks — Phlebotomy Study, Your Way" },
+      { property: "og:description", content: "Lessons, flashcards, AI tutor, and a gentle study plan for phlebotomy." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
@@ -108,12 +108,30 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <SidebarProvider>
+        <div className="flex min-h-screen w-full bg-background text-foreground">
+          <AppSidebar />
+          <div className="flex flex-1 flex-col">
+            <header className="sticky top-0 z-30 flex h-12 items-center gap-2 border-b border-border bg-background/80 px-3 backdrop-blur">
+              <SidebarTrigger />
+              <span className="text-sm font-semibold tracking-tight">
+                Tish-Sticks <span className="text-muted-foreground font-normal">· phlebotomy study</span>
+              </span>
+            </header>
+            <main className="flex-1">
+              <Outlet />
+            </main>
+          </div>
+        </div>
+      </SidebarProvider>
     </QueryClientProvider>
   );
 }
