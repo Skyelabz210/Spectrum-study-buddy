@@ -48,6 +48,10 @@ function FlipDeck() {
   const [flipped, setFlipped] = useState(false);
   const card = order[i];
 
+  useEffect(() => {
+    if (flipped && card) trackFlashcard(card.id);
+  }, [flipped, card]);
+
   const next = () => {
     setFlipped(false);
     setI((x) => (x + 1) % order.length);
