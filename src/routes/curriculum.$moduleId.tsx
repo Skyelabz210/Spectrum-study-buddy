@@ -23,6 +23,17 @@ export const Route = createFileRoute("/curriculum/$moduleId")({
 
 function ModulePage() {
   const { mod } = Route.useLoaderData() as { mod: Module };
+
+  useEffect(() => {
+    trackModule(mod.id);
+  }, [mod.id]);
+
+  const remember = (lessonId: string, lessonTitle: string, takeaway: string) => {
+    trackLesson(lessonId, lessonTitle, mod.title);
+    addTakeaway(takeaway);
+    toast.success("Saved to tutor memory ✓");
+  };
+
   return (
     <div className="mx-auto max-w-3xl px-6 py-10">
       <Link
@@ -68,6 +79,16 @@ function ModulePage() {
                       ))}
                     </ul>
                   )}
+                  <div className="mt-4 flex justify-end">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => remember(l.id, l.title, `${l.title} — ${l.why}`)}
+                    >
+                      <BookmarkPlus className="mr-1 h-3.5 w-3.5" />
+                      I got this
+                    </Button>
+                  </div>
                 </Card>
               ))}
             </div>
