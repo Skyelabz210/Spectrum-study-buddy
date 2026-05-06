@@ -19,7 +19,7 @@ export const Route = createFileRoute("/curriculum/$moduleId")({
 });
 
 function ModulePage() {
-  const { mod } = Route.useLoaderData();
+  const { mod } = Route.useLoaderData() as { mod: Module };
   return (
     <div className="mx-auto max-w-3xl px-6 py-10">
       <Link
