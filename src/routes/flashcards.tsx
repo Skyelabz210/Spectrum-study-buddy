@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FLASHCARDS, type Flashcard } from "@/data/curriculum";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ChevronLeft, ChevronRight, Shuffle, RotateCcw } from "lucide-react";
+import { trackFlashcard } from "@/lib/tutorMemory";
 
 export const Route = createFileRoute("/flashcards")({
   component: Flashcards,
@@ -46,6 +47,10 @@ function FlipDeck() {
   const [i, setI] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const card = order[i];
+
+  useEffect(() => {
+    if (flipped && card) trackFlashcard(card.id);
+  }, [flipped, card]);
 
   const next = () => {
     setFlipped(false);
