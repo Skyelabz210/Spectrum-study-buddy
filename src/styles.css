@@ -55,67 +55,67 @@
   --popover: oklch(0.19 0.045 262);
   --popover-foreground: oklch(0.96 0.015 230);
 
-  /* Neon teal/cyan primary */
-  --primary: oklch(0.82 0.18 195);
+  /* Hot pink primary (night-mode-for-her) */
+  --primary: oklch(0.72 0.27 350);
   --primary-foreground: oklch(0.16 0.04 260);
 
   --secondary: oklch(0.28 0.05 262);
   --secondary-foreground: oklch(0.96 0.015 230);
 
   --muted: oklch(0.24 0.04 262);
-  --muted-foreground: oklch(0.72 0.03 240);
+  --muted-foreground: oklch(0.74 0.03 240);
 
-  --accent: oklch(0.32 0.08 285);
-  --accent-foreground: oklch(0.96 0.015 230);
+  --accent: oklch(0.4 0.18 340);
+  --accent-foreground: oklch(0.98 0.015 230);
 
   --destructive: oklch(0.62 0.22 25);
   --destructive-foreground: oklch(0.98 0.01 230);
 
-  --border: oklch(0.3 0.04 262);
-  --input: oklch(0.26 0.04 262);
-  --ring: oklch(0.82 0.18 195);
+  --border: oklch(0.32 0.05 290);
+  --input: oklch(0.26 0.04 270);
+  --ring: oklch(0.72 0.27 350);
 
-  /* Brand extras */
-  --neon: oklch(0.82 0.18 195);
-  --neon-soft: oklch(0.82 0.18 195 / 0.15);
+  /* Brand extras — hot pink takes the "neon" slot so existing classes light up pink */
+  --neon: oklch(0.74 0.28 350);
+  --neon-soft: oklch(0.74 0.28 350 / 0.18);
   --blood: oklch(0.65 0.22 22);
-  --magenta: oklch(0.7 0.24 340);
+  --magenta: oklch(0.72 0.27 350);
 
   --gradient-hero: radial-gradient(
       1200px 600px at 10% -10%,
-      oklch(0.82 0.18 195 / 0.18),
+      oklch(0.74 0.28 350 / 0.22),
       transparent 60%
     ),
     radial-gradient(
       900px 500px at 100% 0%,
-      oklch(0.7 0.24 340 / 0.12),
+      oklch(0.6 0.22 320 / 0.18),
       transparent 55%
     ),
     linear-gradient(180deg, oklch(0.18 0.045 262), oklch(0.14 0.04 260));
   --gradient-primary: linear-gradient(
     135deg,
-    oklch(0.82 0.18 195),
-    oklch(0.74 0.16 215)
+    oklch(0.78 0.27 355),
+    oklch(0.62 0.24 330)
   );
   --gradient-blood: linear-gradient(
     135deg,
-    oklch(0.65 0.22 22),
-    oklch(0.55 0.2 12)
+    oklch(0.7 0.26 350),
+    oklch(0.55 0.22 12)
   );
 
-  --shadow-glow: 0 0 0 1px oklch(0.82 0.18 195 / 0.25),
-    0 10px 40px -10px oklch(0.82 0.18 195 / 0.35);
+  --shadow-glow: 0 0 0 1px oklch(0.74 0.28 350 / 0.35),
+    0 10px 40px -10px oklch(0.74 0.28 350 / 0.5);
   --shadow-card: 0 1px 0 oklch(1 0 0 / 0.04) inset,
     0 12px 32px -16px oklch(0 0 0 / 0.6);
 
   --sidebar: oklch(0.18 0.045 262);
   --sidebar-foreground: oklch(0.92 0.02 230);
-  --sidebar-primary: oklch(0.82 0.18 195);
+  --sidebar-primary: oklch(0.74 0.28 350);
   --sidebar-primary-foreground: oklch(0.16 0.04 260);
-  --sidebar-accent: oklch(0.24 0.05 262);
+  --sidebar-accent: oklch(0.26 0.06 290);
   --sidebar-accent-foreground: oklch(0.96 0.015 230);
-  --sidebar-border: oklch(0.28 0.04 262);
-  --sidebar-ring: oklch(0.82 0.18 195);
+  --sidebar-border: oklch(0.3 0.05 290);
+  --sidebar-ring: oklch(0.74 0.28 350);
 }
 
 .dark {
