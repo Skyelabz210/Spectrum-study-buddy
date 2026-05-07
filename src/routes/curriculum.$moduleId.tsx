@@ -101,6 +101,38 @@ function ModulePage() {
         </div>
       </div>
 
+      {/* Autoplay bar */}
+      <div className="mt-6 flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card/60 p-3">
+        {auto ? (
+          <Button size="sm" onClick={stop} className="bg-gradient-primary text-primary-foreground">
+            <Pause className="mr-1 h-3.5 w-3.5" /> Stop
+          </Button>
+        ) : (
+          <Button size="sm" onClick={() => playFrom(0)} className="bg-gradient-primary text-primary-foreground">
+            <Play className="mr-1 h-3.5 w-3.5" /> Autoplay module
+          </Button>
+        )}
+        {auto && (
+          <Button size="sm" variant="outline" onClick={skip}>
+            <SkipForward className="mr-1 h-3.5 w-3.5" /> Skip
+          </Button>
+        )}
+        <select
+          value={rate}
+          onChange={(e) => setRate(Number(e.target.value))}
+          className="h-8 rounded-md border border-border bg-card px-2 text-xs"
+          title="Voice speed"
+        >
+          <option value={0.85}>0.85×</option>
+          <option value={1}>1×</option>
+          <option value={1.15}>1.15×</option>
+          <option value={1.3}>1.3×</option>
+        </select>
+        <span className="text-xs text-muted-foreground">
+          {auto ? "Reading aloud — tap any lesson's ▶ to jump" : "Plays each lesson aloud, in order"}
+        </span>
+      </div>
+
       <div className="mt-8 space-y-8">
         {mod.sections.map((sec) => (
           <section key={sec.id}>
@@ -109,7 +141,13 @@ function ModulePage() {
             </h2>
             <div className="space-y-3">
               {sec.lessons.map((l) => (
-                <Card key={l.id} className="card-elevated border-border bg-card/70 p-5">
+                <Card
+                  key={l.id}
+                  id={`lesson-${l.id}`}
+                  className={`card-elevated border-border bg-card/70 p-5 transition ${
+                    activeId === l.id ? "ring-2 ring-neon glow" : ""
+                  }`}
+                >
                   <h3 className="text-lg font-semibold">{l.title}</h3>
                   <p className="mt-2 text-sm text-neon/90">
                     <span className="font-semibold">Why it matters:</span> {l.why}
