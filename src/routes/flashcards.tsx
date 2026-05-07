@@ -117,7 +117,28 @@ function FlipDeck() {
         <span>
           Card {i + 1} of {order.length} · <span className="text-neon">{card.category}</span>
         </span>
-        <div className="flex gap-1">
+        <div className="flex flex-wrap items-center gap-1">
+          <Button
+            size="sm"
+            variant={auto ? "default" : "outline"}
+            onClick={() => setAuto((a) => !a)}
+            className={auto ? "bg-gradient-primary text-primary-foreground" : ""}
+            title="Autoplay reads each card aloud and advances"
+          >
+            {auto ? <Pause className="mr-1 h-3.5 w-3.5" /> : <Play className="mr-1 h-3.5 w-3.5" />}
+            {auto ? "Pause" : "Autoplay"}
+          </Button>
+          <select
+            value={rate}
+            onChange={(e) => setRate(Number(e.target.value))}
+            className="h-8 rounded-md border border-border bg-card px-1 text-xs"
+            title="Voice speed"
+          >
+            <option value={0.85}>0.85×</option>
+            <option value={1}>1×</option>
+            <option value={1.15}>1.15×</option>
+            <option value={1.3}>1.3×</option>
+          </select>
           <Button size="sm" variant="ghost" onClick={shuffle}>
             <Shuffle className="mr-1 h-3.5 w-3.5" /> Shuffle
           </Button>
@@ -126,6 +147,7 @@ function FlipDeck() {
           </Button>
         </div>
       </div>
+
 
       <button
         onClick={() => setFlipped((f) => !f)}
