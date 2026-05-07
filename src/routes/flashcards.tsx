@@ -4,8 +4,9 @@ import { FLASHCARDS, type Flashcard } from "@/data/curriculum";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ChevronLeft, ChevronRight, Shuffle, RotateCcw } from "lucide-react";
+import { ChevronLeft, ChevronRight, Shuffle, RotateCcw, Play, Pause } from "lucide-react";
 import { trackFlashcard } from "@/lib/tutorMemory";
+import { speak, stopSpeaking } from "@/lib/speak";
 
 export const Route = createFileRoute("/flashcards")({
   component: Flashcards,
@@ -46,11 +47,50 @@ function FlipDeck() {
   const [order, setOrder] = useState<Flashcard[]>(FLASHCARDS);
   const [i, setI] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [auto, setAuto] = useState(false);
+  const [rate, setRate] = useState(1);
   const card = order[i];
 
   useEffect(() => {
     if (flipped && card) trackFlashcard(card.id);
   }, [flipped, card]);
+
+  // Autoplay loop: speak front → flip → speak back → next card.
+  useEffect(() => {
+    if (!auto || !card) return;
+    let cancelled = false;
+    const pause = (ms: number) =>
+      new Promise<void>((r) => setTimeout(() => !cancelled && r(), ms));
+
+    const run = async () => {
+      setFlipped(false);
+      await new Promise<void>((resolve) => {
+        speak(`Question. ${card.front}`, { rate, onend: () => resolve() });
+      });
+      if (cancelled) return;
+      await pause(400);
+      if (cancelled) return;
+      setFlipped(true);
+      await pause(300);
+      await new Promise<void>((resolve) => {
+        speak(`Answer. ${card.back}`, { rate, onend: () => resolve() });
+      });
+      if (cancelled) return;
+      await pause(800);
+      if (cancelled) return;
+      setFlipped(false);
+      setI((x) => (x + 1) % order.length);
+    };
+    run();
+    return () => {
+      cancelled = true;
+      stopSpeaking();
+    };
+  }, [auto, i, card, order.length, rate]);
+
+  // Stop voice if user leaves the page.
+  useEffect(() => () => stopSpeaking(), []);
+
 
   const next = () => {
     setFlipped(false);
@@ -77,7 +117,28 @@ function FlipDeck() {
         <span>
           Card {i + 1} of {order.length} · <span className="text-neon">{card.category}</span>
         </span>
-        <div className="flex gap-1">
+        <div className="flex flex-wrap items-center gap-1">
+          <Button
+            size="sm"
+            variant={auto ? "default" : "outline"}
+            onClick={() => setAuto((a) => !a)}
+            className={auto ? "bg-gradient-primary text-primary-foreground" : ""}
+            title="Autoplay reads each card aloud and advances"
+          >
+            {auto ? <Pause className="mr-1 h-3.5 w-3.5" /> : <Play className="mr-1 h-3.5 w-3.5" />}
+            {auto ? "Pause" : "Autoplay"}
+          </Button>
+          <select
+            value={rate}
+            onChange={(e) => setRate(Number(e.target.value))}
+            className="h-8 rounded-md border border-border bg-card px-1 text-xs"
+            title="Voice speed"
+          >
+            <option value={0.85}>0.85×</option>
+            <option value={1}>1×</option>
+            <option value={1.15}>1.15×</option>
+            <option value={1.3}>1.3×</option>
+          </select>
           <Button size="sm" variant="ghost" onClick={shuffle}>
             <Shuffle className="mr-1 h-3.5 w-3.5" /> Shuffle
           </Button>
@@ -86,6 +147,7 @@ function FlipDeck() {
           </Button>
         </div>
       </div>
+
 
       <button
         onClick={() => setFlipped((f) => !f)}

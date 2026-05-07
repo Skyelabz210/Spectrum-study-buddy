@@ -1,10 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { MODULES, type Module } from "@/data/curriculum";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Sparkles, BookmarkPlus } from "lucide-react";
+import { ArrowLeft, Sparkles, BookmarkPlus, Play, Pause, SkipForward } from "lucide-react";
 import { trackLesson, trackModule, addTakeaway } from "@/lib/tutorMemory";
+import { speak, stopSpeaking } from "@/lib/speak";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/curriculum/$moduleId")({
@@ -23,10 +24,55 @@ export const Route = createFileRoute("/curriculum/$moduleId")({
 
 function ModulePage() {
   const { mod } = Route.useLoaderData() as { mod: Module };
+  const [auto, setAuto] = useState(false);
+  const [rate, setRate] = useState(1);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const cancelRef = useRef(false);
+
+  const playlist = useMemo(
+    () => mod.sections.flatMap((s) => s.lessons),
+    [mod]
+  );
 
   useEffect(() => {
     trackModule(mod.id);
   }, [mod.id]);
+
+  useEffect(() => () => stopSpeaking(), []);
+
+  const speakAsync = (text: string) =>
+    new Promise<void>((resolve) => {
+      speak(text, { rate, onend: () => resolve() });
+    });
+
+  const playFrom = async (startIndex: number) => {
+    cancelRef.current = false;
+    setAuto(true);
+    for (let i = startIndex; i < playlist.length; i++) {
+      if (cancelRef.current) break;
+      const l = playlist[i];
+      setActiveId(l.id);
+      const el = document.getElementById(`lesson-${l.id}`);
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      const tipsText = l.tips?.length ? ` Tips: ${l.tips.join(". ")}.` : "";
+      await speakAsync(`${l.title}. Why it matters: ${l.why}. ${l.body}${tipsText}`);
+      if (cancelRef.current) break;
+      await new Promise((r) => setTimeout(r, 500));
+    }
+    setAuto(false);
+    setActiveId(null);
+  };
+
+  const stop = () => {
+    cancelRef.current = true;
+    stopSpeaking();
+    setAuto(false);
+    setActiveId(null);
+  };
+
+  const skip = () => {
+    stopSpeaking();
+  };
 
   const remember = (lessonId: string, lessonTitle: string, takeaway: string) => {
     trackLesson(lessonId, lessonTitle, mod.title);
@@ -55,6 +101,38 @@ function ModulePage() {
         </div>
       </div>
 
+      {/* Autoplay bar */}
+      <div className="mt-6 flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card/60 p-3">
+        {auto ? (
+          <Button size="sm" onClick={stop} className="bg-gradient-primary text-primary-foreground">
+            <Pause className="mr-1 h-3.5 w-3.5" /> Stop
+          </Button>
+        ) : (
+          <Button size="sm" onClick={() => playFrom(0)} className="bg-gradient-primary text-primary-foreground">
+            <Play className="mr-1 h-3.5 w-3.5" /> Autoplay module
+          </Button>
+        )}
+        {auto && (
+          <Button size="sm" variant="outline" onClick={skip}>
+            <SkipForward className="mr-1 h-3.5 w-3.5" /> Skip
+          </Button>
+        )}
+        <select
+          value={rate}
+          onChange={(e) => setRate(Number(e.target.value))}
+          className="h-8 rounded-md border border-border bg-card px-2 text-xs"
+          title="Voice speed"
+        >
+          <option value={0.85}>0.85×</option>
+          <option value={1}>1×</option>
+          <option value={1.15}>1.15×</option>
+          <option value={1.3}>1.3×</option>
+        </select>
+        <span className="text-xs text-muted-foreground">
+          {auto ? "Reading aloud — tap any lesson's ▶ to jump" : "Plays each lesson aloud, in order"}
+        </span>
+      </div>
+
       <div className="mt-8 space-y-8">
         {mod.sections.map((sec) => (
           <section key={sec.id}>
@@ -63,7 +141,13 @@ function ModulePage() {
             </h2>
             <div className="space-y-3">
               {sec.lessons.map((l) => (
-                <Card key={l.id} className="card-elevated border-border bg-card/70 p-5">
+                <Card
+                  key={l.id}
+                  id={`lesson-${l.id}`}
+                  className={`card-elevated border-border bg-card/70 p-5 transition ${
+                    activeId === l.id ? "ring-2 ring-neon glow" : ""
+                  }`}
+                >
                   <h3 className="text-lg font-semibold">{l.title}</h3>
                   <p className="mt-2 text-sm text-neon/90">
                     <span className="font-semibold">Why it matters:</span> {l.why}
@@ -79,7 +163,18 @@ function ModulePage() {
                       ))}
                     </ul>
                   )}
-                  <div className="mt-4 flex justify-end">
+                  <div className="mt-4 flex justify-end gap-2">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => {
+                        const idx = playlist.findIndex((p) => p.id === l.id);
+                        if (idx >= 0) playFrom(idx);
+                      }}
+                      title="Play from this lesson"
+                    >
+                      <Play className="mr-1 h-3.5 w-3.5" /> Play
+                    </Button>
                     <Button
                       size="sm"
                       variant="outline"
