@@ -24,10 +24,55 @@ export const Route = createFileRoute("/curriculum/$moduleId")({
 
 function ModulePage() {
   const { mod } = Route.useLoaderData() as { mod: Module };
+  const [auto, setAuto] = useState(false);
+  const [rate, setRate] = useState(1);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const cancelRef = useRef(false);
+
+  const playlist = useMemo(
+    () => mod.sections.flatMap((s) => s.lessons),
+    [mod]
+  );
 
   useEffect(() => {
     trackModule(mod.id);
   }, [mod.id]);
+
+  useEffect(() => () => stopSpeaking(), []);
+
+  const speakAsync = (text: string) =>
+    new Promise<void>((resolve) => {
+      speak(text, { rate, onend: () => resolve() });
+    });
+
+  const playFrom = async (startIndex: number) => {
+    cancelRef.current = false;
+    setAuto(true);
+    for (let i = startIndex; i < playlist.length; i++) {
+      if (cancelRef.current) break;
+      const l = playlist[i];
+      setActiveId(l.id);
+      const el = document.getElementById(`lesson-${l.id}`);
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      const tipsText = l.tips?.length ? ` Tips: ${l.tips.join(". ")}.` : "";
+      await speakAsync(`${l.title}. Why it matters: ${l.why}. ${l.body}${tipsText}`);
+      if (cancelRef.current) break;
+      await new Promise((r) => setTimeout(r, 500));
+    }
+    setAuto(false);
+    setActiveId(null);
+  };
+
+  const stop = () => {
+    cancelRef.current = true;
+    stopSpeaking();
+    setAuto(false);
+    setActiveId(null);
+  };
+
+  const skip = () => {
+    stopSpeaking();
+  };
 
   const remember = (lessonId: string, lessonTitle: string, takeaway: string) => {
     trackLesson(lessonId, lessonTitle, mod.title);
