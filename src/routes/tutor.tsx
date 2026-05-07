@@ -13,7 +13,7 @@ import {
   Trash2,
   PencilLine,
 } from "lucide-react";
-import { askTutor, extractTakeaway } from "@/server/tutor.functions";
+import { askTutor, extractTakeaway } from "@/lib/tutor.functions";
 import {
   loadMemory,
   buildMemoryPrompt,
