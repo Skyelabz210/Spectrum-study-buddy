@@ -76,10 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "A calm, focus-mode study buddy for phlebotomy: lessons, flashcards, AI tutor, and a gentle plan." },
       { name: "author", content: "Tish-Sticks" },
       { property: "og:title", content: "Tish-Sticks — Phlebotomy Study, Your Way" },
-      { property: "og:description", content: "Lessons, flashcards, AI tutor, and a gentle study plan for phlebotomy." },
+      { property: "og:description", content: "A calm, focus-mode study buddy for phlebotomy: lessons, flashcards, AI tutor, and a gentle plan." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Tish-Sticks — Phlebotomy Study, Your Way" },
+      { name: "twitter:description", content: "A calm, focus-mode study buddy for phlebotomy: lessons, flashcards, AI tutor, and a gentle plan." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/13680820-58c3-4ab4-8522-954840b7d336" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/13680820-58c3-4ab4-8522-954840b7d336" },
     ],
     links: [
       {
