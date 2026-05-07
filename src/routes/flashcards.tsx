@@ -4,8 +4,9 @@ import { FLASHCARDS, type Flashcard } from "@/data/curriculum";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ChevronLeft, ChevronRight, Shuffle, RotateCcw } from "lucide-react";
+import { ChevronLeft, ChevronRight, Shuffle, RotateCcw, Play, Pause } from "lucide-react";
 import { trackFlashcard } from "@/lib/tutorMemory";
+import { speak, stopSpeaking } from "@/lib/speak";
 
 export const Route = createFileRoute("/flashcards")({
   component: Flashcards,
