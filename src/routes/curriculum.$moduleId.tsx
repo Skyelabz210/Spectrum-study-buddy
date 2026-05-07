@@ -163,7 +163,18 @@ function ModulePage() {
                       ))}
                     </ul>
                   )}
-                  <div className="mt-4 flex justify-end">
+                  <div className="mt-4 flex justify-end gap-2">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => {
+                        const idx = playlist.findIndex((p) => p.id === l.id);
+                        if (idx >= 0) playFrom(idx);
+                      }}
+                      title="Play from this lesson"
+                    >
+                      <Play className="mr-1 h-3.5 w-3.5" /> Play
+                    </Button>
                     <Button
                       size="sm"
                       variant="outline"
