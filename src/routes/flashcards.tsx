@@ -47,11 +47,50 @@ function FlipDeck() {
   const [order, setOrder] = useState<Flashcard[]>(FLASHCARDS);
   const [i, setI] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [auto, setAuto] = useState(false);
+  const [rate, setRate] = useState(1);
   const card = order[i];
 
   useEffect(() => {
     if (flipped && card) trackFlashcard(card.id);
   }, [flipped, card]);
+
+  // Autoplay loop: speak front → flip → speak back → next card.
+  useEffect(() => {
+    if (!auto || !card) return;
+    let cancelled = false;
+    const pause = (ms: number) =>
+      new Promise<void>((r) => setTimeout(() => !cancelled && r(), ms));
+
+    const run = async () => {
+      setFlipped(false);
+      await new Promise<void>((resolve) => {
+        speak(`Question. ${card.front}`, { rate, onend: () => resolve() });
+      });
+      if (cancelled) return;
+      await pause(400);
+      if (cancelled) return;
+      setFlipped(true);
+      await pause(300);
+      await new Promise<void>((resolve) => {
+        speak(`Answer. ${card.back}`, { rate, onend: () => resolve() });
+      });
+      if (cancelled) return;
+      await pause(800);
+      if (cancelled) return;
+      setFlipped(false);
+      setI((x) => (x + 1) % order.length);
+    };
+    run();
+    return () => {
+      cancelled = true;
+      stopSpeaking();
+    };
+  }, [auto, i, card, order.length, rate]);
+
+  // Stop voice if user leaves the page.
+  useEffect(() => () => stopSpeaking(), []);
+
 
   const next = () => {
     setFlipped(false);
