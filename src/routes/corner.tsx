@@ -1,6 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Card } from "@/components/ui/card";
 import { Leaf, Sparkles } from "lucide-react";
+import corner01 from "@/assets/corner-01-canopy-under-light.jpg";
+import corner02 from "@/assets/corner-02-healthy-canopy.jpg";
+import corner03 from "@/assets/corner-03-purple-buds-tent.jpg";
+
 
 export const Route = createFileRoute("/corner")({
   head: () => ({
@@ -30,27 +34,27 @@ const GALLERY: Array<{
 }> = [
   {
     position: 1,
-    src: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1600&q=80",
-    alt: "Lush green canopy of leaves backlit by sun",
-    tag: "soil first",
+    src: corner01,
+    alt: "My flowering tent under full-spectrum LED — dense, deep green canopy with zero stress signs",
+    tag: "this is health",
     caption:
-      "Healthy canopy is downstream of healthy soil. Feed the microbes, the plant feeds itself.",
+      "My room, my plants. No spots. No bleeding. No nute burn. No clawing. Just deep, even green from soil to canopy — exactly what living soil delivers when you stop fighting it.",
   },
   {
     position: 2,
-    src: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=900&q=80",
-    alt: "Young seedlings in dark organic soil",
-    tag: "silica · agsil",
+    src: corner02,
+    alt: "Close-up of healthy flowering tops — uniform color, frosty trichomes, no deficiencies",
+    tag: "no deficiencies",
     caption:
-      "Silica (Agsil/pro-tekt) every other watering = thicker cell walls, sturdier stems, drought + pest resistance.",
+      "Look close — even color, fat calyxes, frost stacking on every site. That single lime-green leaf in front? Brand-new growth. That's vigor, not a problem. No CalMag, no synthetics, no rescue feeds.",
   },
   {
     position: 3,
-    src: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=900&q=80",
-    alt: "Detailed leaf veins close-up",
-    tag: "Ca deficiency",
+    src: corner03,
+    alt: "Tent shot with deep-purple finished colas next to a fresh veg run",
+    tag: "non-toxic finish",
     caption:
-      "Spotting Ca def: interveinal yellowing + curled new growth + brown leaf tips. Don't wait for it — top-dress dolomite ~1 month before the flip. Calcium is SLOW to break down.",
+      "Purple expression on the right — pure genetics talking, no stress, no cold-shock tricks. Because there's no synthetic salt load to flush, there's nothing to detox. You consume what the soil grew, clean.",
   },
   {
     position: 4,
@@ -62,11 +66,11 @@ const GALLERY: Array<{
   },
   {
     position: 5,
-    src: "https://images.unsplash.com/photo-1502331538081-041522531548?auto=format&fit=crop&w=900&q=80",
-    alt: "Indoor plant shelf with grow light",
-    tag: "no cal-mag",
+    src: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=900&q=80",
+    alt: "Detailed leaf veins close-up",
+    tag: "silica + dolomite",
     caption:
-      "I run zero CalMag. CalMag is a band-aid — it nudges, it doesn't fix. Build the soil right and the plant pulls exactly what it needs, exactly when it needs it.",
+      "Silica (Agsil/pro-tekt) every other watering for thick cell walls. Top-dress dolomite ~1 month before the flip — calcium is SLOW to break down, so feed it forward, not when you see the deficiency.",
   },
   {
     position: 6,
@@ -76,6 +80,7 @@ const GALLERY: Array<{
     caption:
       "Care, forethought, intention. That's the whole recipe — for soil, for code, for people.",
   },
+
 ];
 
 function Corner() {
