@@ -18,6 +18,7 @@ import {
   Sparkles,
   CalendarDays,
   Lightbulb,
+  Leaf,
 } from "lucide-react";
 
 const items = [
@@ -27,6 +28,7 @@ const items = [
   { title: "Tutor", url: "/tutor", icon: Sparkles },
   { title: "Plan", url: "/plan", icon: CalendarDays },
   { title: "Tips", url: "/tips", icon: Lightbulb },
+  { title: "Dev's Corner", url: "/corner", icon: Leaf },
 ];
 
 export function AppSidebar() {

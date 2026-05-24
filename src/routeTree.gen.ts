@@ -13,6 +13,7 @@ import { Route as TutorRouteImport } from './routes/tutor'
 import { Route as TipsRouteImport } from './routes/tips'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as FlashcardsRouteImport } from './routes/flashcards'
+import { Route as CornerRouteImport } from './routes/corner'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CurriculumIndexRouteImport } from './routes/curriculum.index'
 import { Route as CurriculumModuleIdRouteImport } from './routes/curriculum.$moduleId'
@@ -37,6 +38,11 @@ const FlashcardsRoute = FlashcardsRouteImport.update({
   path: '/flashcards',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CornerRoute = CornerRouteImport.update({
+  id: '/corner',
+  path: '/corner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -55,6 +61,7 @@ const CurriculumModuleIdRoute = CurriculumModuleIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/corner': typeof CornerRoute
   '/flashcards': typeof FlashcardsRoute
   '/plan': typeof PlanRoute
   '/tips': typeof TipsRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/corner': typeof CornerRoute
   '/flashcards': typeof FlashcardsRoute
   '/plan': typeof PlanRoute
   '/tips': typeof TipsRoute
@@ -74,6 +82,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/corner': typeof CornerRoute
   '/flashcards': typeof FlashcardsRoute
   '/plan': typeof PlanRoute
   '/tips': typeof TipsRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/corner'
     | '/flashcards'
     | '/plan'
     | '/tips'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/corner'
     | '/flashcards'
     | '/plan'
     | '/tips'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/corner'
     | '/flashcards'
     | '/plan'
     | '/tips'
@@ -113,6 +125,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CornerRoute: typeof CornerRoute
   FlashcardsRoute: typeof FlashcardsRoute
   PlanRoute: typeof PlanRoute
   TipsRoute: typeof TipsRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FlashcardsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/corner': {
+      id: '/corner'
+      path: '/corner'
+      fullPath: '/corner'
+      preLoaderRoute: typeof CornerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -177,6 +197,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CornerRoute: CornerRoute,
   FlashcardsRoute: FlashcardsRoute,
   PlanRoute: PlanRoute,
   TipsRoute: TipsRoute,
