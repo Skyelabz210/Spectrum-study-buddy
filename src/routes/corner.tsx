@@ -5,11 +5,11 @@ import { Leaf, Sparkles } from "lucide-react";
 export const Route = createFileRoute("/corner")({
   head: () => ({
     meta: [
-      { title: "Developer's Corner — Tish-Sticks" },
+      { title: "Developer's Corner — Acid @ HackFate" },
       {
         name: "description",
         content:
-          "A little gallery from the dev — organic living soil, horticulture, and things worth sharing.",
+          "A note from Acid, founder of HackFate.us — plus an organic living-soil horticulture gallery with grower tips.",
       },
     ],
   }),
@@ -17,12 +17,7 @@ export const Route = createFileRoute("/corner")({
 });
 
 /**
- * GALLERY SLOTS — swap these out monthly.
- *
- * To update: just replace the `src` for any position 1–6. Keep the alt text
- * descriptive. Image URLs can be Unsplash, your own hosted images, or any
- * direct image link. Captions are optional.
- *
+ * GALLERY SLOTS — swap monthly.
  *   position 1 → hero (large)
  *   positions 2–6 → grid (smaller)
  */
@@ -31,42 +26,55 @@ const GALLERY: Array<{
   src: string;
   alt: string;
   caption?: string;
+  tag?: string;
 }> = [
   {
     position: 1,
     src: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1600&q=80",
     alt: "Lush green canopy of leaves backlit by sun",
-    caption: "Living soil → living light. The whole stack starts underground.",
+    tag: "soil first",
+    caption:
+      "Healthy canopy is downstream of healthy soil. Feed the microbes, the plant feeds itself.",
   },
   {
     position: 2,
     src: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=900&q=80",
     alt: "Young seedlings in dark organic soil",
-    caption: "Microbe colony, week two. Quiet work.",
+    tag: "silica · agsil",
+    caption:
+      "Silica (Agsil/pro-tekt) every other watering = thicker cell walls, sturdier stems, drought + pest resistance.",
   },
   {
     position: 3,
     src: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=900&q=80",
     alt: "Detailed leaf veins close-up",
-    caption: "Trichomes, veins, geometry. Nature shows its math.",
+    tag: "Ca deficiency",
+    caption:
+      "Spotting Ca def: interveinal yellowing + curled new growth + brown leaf tips. Don't wait for it — top-dress dolomite ~1 month before the flip. Calcium is SLOW to break down.",
   },
   {
     position: 4,
     src: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80",
     alt: "Forest floor with moss and ferns",
-    caption: "OMRI-compliant compost mimics this exact biome.",
+    tag: "seaweed extract",
+    caption:
+      "Kelp / seaweed extract = cytokinins, trace minerals, stress response. Foliar at lights-on, or in your weekly compost tea.",
   },
   {
     position: 5,
     src: "https://images.unsplash.com/photo-1502331538081-041522531548?auto=format&fit=crop&w=900&q=80",
     alt: "Indoor plant shelf with grow light",
-    caption: "Recursive, self-stabilizing biosphere in a 4x4.",
+    tag: "no cal-mag",
+    caption:
+      "I run zero CalMag. CalMag is a band-aid — it nudges, it doesn't fix. Build the soil right and the plant pulls exactly what it needs, exactly when it needs it.",
   },
   {
     position: 6,
     src: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=900&q=80",
     alt: "Wildflowers in morning light",
-    caption: "Self-care isn't synthetic. It grows.",
+    tag: "intention",
+    caption:
+      "Care, forethought, intention. That's the whole recipe — for soil, for code, for people.",
   },
 ];
 
@@ -76,30 +84,65 @@ function Corner() {
 
   return (
     <div className="bg-hero">
-      <section className="mx-auto max-w-6xl px-6 pt-12 pb-6">
+      <section className="mx-auto max-w-3xl px-6 pt-12 pb-2">
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
           <Leaf className="h-3 w-3 text-neon" /> developer's corner
         </div>
         <h1 className="mt-4 text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
-          A little garden,{" "}
+          Hi everyone — I go by{" "}
           <span className="bg-gradient-primary bg-clip-text text-transparent">
-            from the dev.
+            Acidlabz
           </span>
+          , but just call me Acid.
         </h1>
-        <p className="mt-4 max-w-2xl text-balance text-sm text-muted-foreground sm:text-base">
-          Outside of building tools like Tish-Sticks, I spend a lot of time on
-          organic living soil — OMRI-compliant, sovereign, microbe-first
-          horticulture. Caring for a tiny biosphere that returns the favor.
-          Updated roughly once a month across all the apps I ship.
-        </p>
-        <div className="mt-3 inline-flex items-center gap-1.5 text-xs text-neon/80">
+
+        <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p>
+            I'm the founder of{" "}
+            <a
+              href="https://hackfate.us"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-neon underline-offset-4 hover:underline"
+            >
+              HackFate.us
+            </a>{" "}
+            and a tinker-extraordinaire — designing custom solutions for the
+            ever-changing needs of friends, family, and collaborators. I
+            leverage the bleeding edge of what's possible when we let this
+            fast-moving technological landscape actually{" "}
+            <span className="text-foreground">enrich our lives</span> —
+            preserving privacy, reinforcing sovereignty, and delivering a
+            future-rich custom application experience.
+          </p>
+          <p>
+            The days of this kind of thing only being accessible to enterprise
+            or developers themselves are{" "}
+            <span className="text-foreground">officially at an end</span>.
+            Welcome to the technological revolution — and it's made just for
+            you, exactly how you want it.
+          </p>
+          <p>
+            Reach out for anything you need and let's build something great
+            together.
+          </p>
+          <p>
+            The five images below? My little organic horticulture knowledge
+            base — grower tips for raising beautiful, healthy, beneficial
+            organic flora for the betterment of mind, body, and soul.
+          </p>
+          <p className="text-foreground">Talk soon,</p>
+          <p className="font-semibold text-foreground">— Acid</p>
+        </div>
+
+        <div className="mt-6 inline-flex items-center gap-1.5 text-xs text-neon/80">
           <Sparkles className="h-3 w-3" /> rotating gallery · slots 1–6
         </div>
       </section>
 
       {/* Hero image */}
       {hero && (
-        <section className="mx-auto max-w-6xl px-6 pb-4">
+        <section className="mx-auto max-w-6xl px-6 pt-6 pb-4">
           <Figure item={hero} priority className="aspect-[16/9] sm:aspect-[21/9]" />
         </section>
       )}
@@ -125,7 +168,13 @@ function Figure({
   className,
   priority,
 }: {
-  item: { position: number; src: string; alt: string; caption?: string };
+  item: {
+    position: number;
+    src: string;
+    alt: string;
+    caption?: string;
+    tag?: string;
+  };
   className?: string;
   priority?: boolean;
 }) {
@@ -139,13 +188,20 @@ function Figure({
           decoding="async"
           className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-background/0 to-transparent" />
-        <div className="absolute left-3 top-3 rounded-full border border-border/60 bg-background/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-neon backdrop-blur">
-          {String(item.position).padStart(2, "0")}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent" />
+        <div className="absolute left-3 top-3 flex items-center gap-2">
+          <span className="rounded-full border border-border/60 bg-background/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-neon backdrop-blur">
+            {String(item.position).padStart(2, "0")}
+          </span>
+          {item.tag && (
+            <span className="rounded-full border border-magenta/40 bg-background/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-magenta backdrop-blur">
+              {item.tag}
+            </span>
+          )}
         </div>
         {item.caption && (
-          <div className="absolute inset-x-0 bottom-0 p-4">
-            <p className="text-sm font-medium text-foreground/95 drop-shadow">
+          <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+            <p className="text-sm font-medium leading-snug text-foreground/95 drop-shadow">
               {item.caption}
             </p>
           </div>
