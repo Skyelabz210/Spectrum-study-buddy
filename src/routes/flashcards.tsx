@@ -12,8 +12,8 @@ export const Route = createFileRoute("/flashcards")({
   component: Flashcards,
   head: () => ({
     meta: [
-      { title: "Flashcards · Tish-Sticks" },
-      { name: "description", content: "Quick-flip flashcards and a cheatsheet for phlebotomy." },
+      { title: "Flashcards · CallFlow Lab" },
+      { name: "description", content: "Quick-flip flashcards and cheatsheets for call flow, SOP, tools, and sales scenarios." },
     ],
   }),
 });
@@ -23,8 +23,7 @@ function Flashcards() {
     <div className="mx-auto max-w-4xl px-6 py-10">
       <h1 className="text-3xl font-bold tracking-tight">Flashcards</h1>
       <p className="mt-2 text-muted-foreground">
-        Flip cards one at a time, or open the cheatsheet for a fast scan before a
-        quiz. One-card wins count.
+        Flip cards one at a time, or open the cheatsheet for a fast scan before a scenario drill. One-card wins count.
       </p>
 
       <Tabs defaultValue="flip" className="mt-6">
@@ -43,19 +42,34 @@ function Flashcards() {
   );
 }
 
+function integerShuffle(deck: Flashcard[], seedInput: number) {
+  const copy = [...deck];
+  let seed = seedInput | 0;
+  if (seed === 0) seed = 1;
+  for (let i = copy.length - 1; i > 0; i--) {
+    seed ^= seed << 13;
+    seed ^= seed >>> 17;
+    seed ^= seed << 5;
+    const j = Math.abs(seed) % (i + 1);
+    const temp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = temp;
+  }
+  return copy;
+}
+
 function FlipDeck() {
   const [order, setOrder] = useState<Flashcard[]>(FLASHCARDS);
   const [i, setI] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [auto, setAuto] = useState(false);
-  const [rate, setRate] = useState(1);
+  const [ratePercent, setRatePercent] = useState(100);
   const card = order[i];
 
   useEffect(() => {
     if (flipped && card) trackFlashcard(card.id);
   }, [flipped, card]);
 
-  // Autoplay loop: speak front → flip → speak back → next card.
   useEffect(() => {
     if (!auto || !card) return;
     let cancelled = false;
@@ -65,7 +79,7 @@ function FlipDeck() {
     const run = async () => {
       setFlipped(false);
       await new Promise<void>((resolve) => {
-        speak(`Question. ${card.front}`, { rate, onend: () => resolve() });
+        speak(`Question. ${card.front}`, { ratePercent, onend: () => resolve() });
       });
       if (cancelled) return;
       await pause(400);
@@ -73,7 +87,7 @@ function FlipDeck() {
       setFlipped(true);
       await pause(300);
       await new Promise<void>((resolve) => {
-        speak(`Answer. ${card.back}`, { rate, onend: () => resolve() });
+        speak(`Answer. ${card.back}`, { ratePercent, onend: () => resolve() });
       });
       if (cancelled) return;
       await pause(800);
@@ -86,11 +100,9 @@ function FlipDeck() {
       cancelled = true;
       stopSpeaking();
     };
-  }, [auto, i, card, order.length, rate]);
+  }, [auto, i, card, order.length, ratePercent]);
 
-  // Stop voice if user leaves the page.
   useEffect(() => () => stopSpeaking(), []);
-
 
   const next = () => {
     setFlipped(false);
@@ -101,7 +113,7 @@ function FlipDeck() {
     setI((x) => (x - 1 + order.length) % order.length);
   };
   const shuffle = () => {
-    setOrder([...order].sort(() => Math.random() - 0.5));
+    setOrder(integerShuffle(order, Date.now()));
     setI(0);
     setFlipped(false);
   };
@@ -129,15 +141,15 @@ function FlipDeck() {
             {auto ? "Pause" : "Autoplay"}
           </Button>
           <select
-            value={rate}
-            onChange={(e) => setRate(Number(e.target.value))}
+            value={ratePercent}
+            onChange={(e) => setRatePercent(Number(e.target.value))}
             className="h-8 rounded-md border border-border bg-card px-1 text-xs"
             title="Voice speed"
           >
-            <option value={0.85}>0.85×</option>
-            <option value={1}>1×</option>
-            <option value={1.15}>1.15×</option>
-            <option value={1.3}>1.3×</option>
+            <option value={85}>85%</option>
+            <option value={100}>100%</option>
+            <option value={115}>115%</option>
+            <option value={130}>130%</option>
           </select>
           <Button size="sm" variant="ghost" onClick={shuffle}>
             <Shuffle className="mr-1 h-3.5 w-3.5" /> Shuffle
@@ -148,12 +160,7 @@ function FlipDeck() {
         </div>
       </div>
 
-
-      <button
-        onClick={() => setFlipped((f) => !f)}
-        className="mt-3 block w-full"
-        aria-label="Flip card"
-      >
+      <button onClick={() => setFlipped((f) => !f)} className="mt-3 block w-full" aria-label="Flip card">
         <Card
           className={`card-elevated min-h-[260px] cursor-pointer border-border p-8 text-left transition ${
             flipped ? "bg-gradient-primary text-primary-foreground glow" : "bg-card/70"
