@@ -18,17 +18,19 @@ import {
   Sparkles,
   CalendarDays,
   Lightbulb,
-  Leaf,
+  ClipboardCheck,
+  History,
 } from "lucide-react";
 
 const items = [
   { title: "Home", url: "/", icon: Home },
   { title: "Curriculum", url: "/curriculum", icon: BookOpen },
+  { title: "Scenarios", url: "/scenarios", icon: ClipboardCheck },
   { title: "Flashcards", url: "/flashcards", icon: Layers },
-  { title: "Tutor", url: "/tutor", icon: Sparkles },
+  { title: "Coach", url: "/tutor", icon: Sparkles },
   { title: "Plan", url: "/plan", icon: CalendarDays },
   { title: "Tips", url: "/tips", icon: Lightbulb },
-  { title: "Dev's Corner", url: "/corner", icon: Leaf },
+  { title: "Weekly Ledger", url: "/corner", icon: History },
 ];
 
 export function AppSidebar() {
@@ -43,15 +45,15 @@ export function AppSidebar() {
       <SidebarHeader className="border-b border-sidebar-border">
         <Link to="/" className="flex items-center gap-2 px-2 py-3">
           <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-primary glow">
-            <span className="text-base">🩸</span>
+            <span className="text-base">☎️</span>
           </div>
           {!collapsed && (
             <div className="leading-tight">
               <div className="text-sm font-bold tracking-tight">
-                Tish-Sticks
+                CallFlow Lab
               </div>
               <div className="text-[11px] text-muted-foreground">
-                phlebotomy study, your way
+                weekly sales study
               </div>
             </div>
           )}
