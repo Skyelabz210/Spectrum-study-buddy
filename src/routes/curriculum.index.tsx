@@ -6,8 +6,8 @@ export const Route = createFileRoute("/curriculum/")({
   component: CurriculumIndex,
   head: () => ({
     meta: [
-      { title: "Curriculum · Tish-Sticks" },
-      { name: "description", content: "All 8 phlebotomy modules in plain language." },
+      { title: "Curriculum · CallFlow Lab" },
+      { name: "description", content: "The weekly Spectrum sales training spine in plain language." },
     ],
   }),
 });
@@ -17,7 +17,7 @@ function CurriculumIndex() {
     <div className="mx-auto max-w-4xl px-6 py-10">
       <h1 className="text-3xl font-bold tracking-tight">Curriculum</h1>
       <p className="mt-2 text-muted-foreground">
-        The whole phlebotomy corpus, broken into 8 modules. Tap any module to dive in. No rush — one bite at a time.
+        The training spine is broken into modules: call flow, SOP gates, tools, products, objections, and weekly update practice. Tap any module and take one bite at a time.
       </p>
       <div className="mt-8 space-y-3">
         {MODULES.map((m) => {
