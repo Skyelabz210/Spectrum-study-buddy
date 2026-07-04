@@ -1,21 +1,22 @@
-// Local-only memory for the Tish-Sticks tutor.
-// Persists in localStorage so the tutor "remembers" without accounts.
+// Local-only memory for the CallFlow Lab coach.
+// Persists in localStorage so the coach remembers without accounts.
 
-const KEY = "tishsticks.memory.v1";
+const KEY = "callflowlab.memory.v1";
+const EVENT = "callflowlab:memory";
 
 export type TutorMemory = {
   name: string;
-  visitedModules: string[]; // module ids
+  visitedModules: string[];
   visitedLessons: { id: string; title: string; module: string; at: number }[];
-  flashcardsSeen: string[]; // flashcard ids
-  takeaways: { text: string; at: number }[]; // distilled learnings
+  flashcardsSeen: string[];
+  takeaways: { text: string; at: number }[];
   strongTopics: string[];
   shakyTopics: string[];
   lastSeen: number;
 };
 
 const empty: TutorMemory = {
-  name: "Tish",
+  name: "Anthony",
   visitedModules: [],
   visitedLessons: [],
   flashcardsSeen: [],
@@ -49,14 +50,13 @@ export function update(fn: (m: TutorMemory) => TutorMemory): TutorMemory {
   const next = fn(loadMemory());
   next.lastSeen = Date.now();
   saveMemory(next);
-  window.dispatchEvent(new Event("tishsticks:memory"));
+  window.dispatchEvent(new Event(EVENT));
   return next;
 }
 
 export function trackLesson(id: string, title: string, moduleTitle: string) {
   update((m) => {
     if (m.visitedLessons.some((l) => l.id === id)) {
-      // bump timestamp
       m.visitedLessons = m.visitedLessons.map((l) =>
         l.id === id ? { ...l, at: Date.now() } : l
       );
@@ -92,8 +92,7 @@ export function addTakeaway(text: string) {
   const trimmed = text.trim().replace(/^["']|["']$/g, "");
   if (!trimmed || trimmed.length < 4) return;
   update((m) => {
-    if (m.takeaways.some((t) => t.text.toLowerCase() === trimmed.toLowerCase()))
-      return m;
+    if (m.takeaways.some((t) => t.text.toLowerCase() === trimmed.toLowerCase())) return m;
     return {
       ...m,
       takeaways: [...m.takeaways, { text: trimmed, at: Date.now() }].slice(-25),
@@ -102,16 +101,19 @@ export function addTakeaway(text: string) {
 }
 
 export function setName(name: string) {
-  update((m) => ({ ...m, name: name.trim() || "Tish" }));
+  update((m) => ({ ...m, name: name.trim() || "Anthony" }));
 }
 
 export function clearMemory() {
   if (typeof window === "undefined") return;
   localStorage.removeItem(KEY);
-  window.dispatchEvent(new Event("tishsticks:memory"));
+  window.dispatchEvent(new Event(EVENT));
 }
 
-/** Build a compact, model-friendly memory string. */
+export function memoryEventName() {
+  return EVENT;
+}
+
 export function buildMemoryPrompt(m: TutorMemory): string {
   const lines: string[] = [];
   lines.push(`Learner name: ${m.name}`);
