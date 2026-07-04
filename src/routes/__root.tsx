@@ -17,7 +17,7 @@ function NotFoundComponent() {
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          The page you are looking for does not exist or has moved.
         </p>
         <div className="mt-6">
           <Link
@@ -40,10 +40,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          This page did not load
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Something failed in the study shell. Refresh, or return home and reopen the module.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -72,18 +72,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Tish-Sticks — Phlebotomy Study, Your Way" },
-      { name: "description", content: "A calm, focus-mode study buddy for phlebotomy: lessons, flashcards, AI tutor, and a gentle plan." },
-      { name: "author", content: "Tish-Sticks" },
-      { property: "og:title", content: "Tish-Sticks — Phlebotomy Study, Your Way" },
-      { property: "og:description", content: "A calm, focus-mode study buddy for phlebotomy: lessons, flashcards, AI tutor, and a gentle plan." },
+      { title: "CallFlow Lab — Weekly Spectrum Sales Study" },
+      { name: "description", content: "A weekly-updated study system for Spectrum inbound sales training: call flow, SOP gates, tools, scenarios, flashcards, and an AI coach." },
+      { name: "author", content: "CallFlow Lab" },
+      { property: "og:title", content: "CallFlow Lab — Weekly Spectrum Sales Study" },
+      { property: "og:description", content: "Call flow, policy gates, A-R-M scenario drills, weekly Otter ingestion, and a plain-language AI coach." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Tish-Sticks — Phlebotomy Study, Your Way" },
-      { name: "twitter:description", content: "A calm, focus-mode study buddy for phlebotomy: lessons, flashcards, AI tutor, and a gentle plan." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/13680820-58c3-4ab4-8522-954840b7d336" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/13680820-58c3-4ab4-8522-954840b7d336" },
+      { name: "twitter:title", content: "CallFlow Lab — Weekly Spectrum Sales Study" },
+      { name: "twitter:description", content: "Weekly-updated sales training in small, actionable bites." },
     ],
     links: [
       {
@@ -127,7 +124,7 @@ function RootComponent() {
             <header className="sticky top-0 z-30 flex h-12 items-center gap-2 border-b border-border bg-background/80 px-3 backdrop-blur">
               <SidebarTrigger />
               <span className="text-sm font-semibold tracking-tight">
-                Tish-Sticks <span className="text-muted-foreground font-normal">· phlebotomy study</span>
+                CallFlow Lab <span className="text-muted-foreground font-normal">· weekly sales study</span>
               </span>
             </header>
             <main className="flex-1">
