@@ -1,5 +1,6 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "callflow-lab",
+  "version": "1.0.0-spectrum.0",
   "private": true,
   "sideEffects": false,
   "type": "module",
