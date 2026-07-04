@@ -17,7 +17,7 @@ export const Route = createFileRoute("/curriculum/$moduleId")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData ? `${loaderData.mod.title} · Tish-Sticks` : "Module" },
+      { title: loaderData ? `${loaderData.mod.title} · CallFlow Lab` : "Module" },
     ],
   }),
 });
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/curriculum/$moduleId")({
 function ModulePage() {
   const { mod } = Route.useLoaderData() as { mod: Module };
   const [auto, setAuto] = useState(false);
-  const [rate, setRate] = useState(1);
+  const [ratePercent, setRatePercent] = useState(100);
   const [activeId, setActiveId] = useState<string | null>(null);
   const cancelRef = useRef(false);
 
@@ -42,7 +42,7 @@ function ModulePage() {
 
   const speakAsync = (text: string) =>
     new Promise<void>((resolve) => {
-      speak(text, { rate, onend: () => resolve() });
+      speak(text, { ratePercent, onend: () => resolve() });
     });
 
   const playFrom = async (startIndex: number) => {
@@ -77,7 +77,7 @@ function ModulePage() {
   const remember = (lessonId: string, lessonTitle: string, takeaway: string) => {
     trackLesson(lessonId, lessonTitle, mod.title);
     addTakeaway(takeaway);
-    toast.success("Saved to tutor memory ✓");
+    toast.success("Saved to coach memory ✓");
   };
 
   return (
@@ -101,7 +101,6 @@ function ModulePage() {
         </div>
       </div>
 
-      {/* Autoplay bar */}
       <div className="mt-6 flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card/60 p-3">
         {auto ? (
           <Button size="sm" onClick={stop} className="bg-gradient-primary text-primary-foreground">
@@ -118,15 +117,15 @@ function ModulePage() {
           </Button>
         )}
         <select
-          value={rate}
-          onChange={(e) => setRate(Number(e.target.value))}
+          value={ratePercent}
+          onChange={(e) => setRatePercent(Number(e.target.value))}
           className="h-8 rounded-md border border-border bg-card px-2 text-xs"
           title="Voice speed"
         >
-          <option value={0.85}>0.85×</option>
-          <option value={1}>1×</option>
-          <option value={1.15}>1.15×</option>
-          <option value={1.3}>1.3×</option>
+          <option value={85}>85%</option>
+          <option value={100}>100%</option>
+          <option value={115}>115%</option>
+          <option value={130}>130%</option>
         </select>
         <span className="text-xs text-muted-foreground">
           {auto ? "Reading aloud — tap any lesson's ▶ to jump" : "Plays each lesson aloud, in order"}
@@ -197,11 +196,10 @@ function ModulePage() {
           <div>
             <div className="font-semibold">Stuck on something here?</div>
             <p className="mt-1 text-sm text-muted-foreground">
-              Open the tutor and paste any sentence — Tish-Sticks will simplify
-              it, quiz you on it, or make a flashcard.
+              Open the coach and paste any line — CallFlow Lab will simplify it, quiz you on it, or turn it into a scenario.
             </p>
             <Button asChild className="mt-3 bg-gradient-primary text-primary-foreground hover:opacity-95">
-              <Link to="/tutor">Ask the tutor</Link>
+              <Link to="/tutor">Ask the coach</Link>
             </Button>
           </div>
         </div>
