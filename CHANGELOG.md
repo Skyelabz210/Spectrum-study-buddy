@@ -16,6 +16,7 @@ Changed:
 - Rekeyed local memory to `callflowlab.memory.v1`.
 - Replaced floating speech-rate controls with integer percentage controls.
 - Replaced the former developer corner with a weekly training ledger.
+- Removed legacy non-Spectrum image assets that belonged to the prior developer-corner content.
 
 Known follow-up:
 
