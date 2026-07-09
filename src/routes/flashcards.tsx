@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { FLASHCARDS, type Flashcard } from "@/data/curriculum";
+import { type Flashcard } from "@/data/curriculum";
+import { ALL_FLASHCARDS } from "@/data/flashcardDeck";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/flashcards")({
   head: () => ({
     meta: [
       { title: "Flashcards · CallFlow Lab" },
-      { name: "description", content: "Quick-flip flashcards and cheatsheets for call flow, SOP, tools, and sales scenarios." },
+      { name: "description", content: "Quick-flip flashcards and cheatsheets for call flow, SOP, tools, sales scenarios, Spectrum plans, competitor intel, and personal setup." },
     ],
   }),
 });
@@ -59,7 +60,7 @@ function integerShuffle(deck: Flashcard[], seedInput: number) {
 }
 
 function FlipDeck() {
-  const [order, setOrder] = useState<Flashcard[]>(FLASHCARDS);
+  const [order, setOrder] = useState<Flashcard[]>(ALL_FLASHCARDS);
   const [i, setI] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [auto, setAuto] = useState(false);
@@ -118,7 +119,7 @@ function FlipDeck() {
     setFlipped(false);
   };
   const reset = () => {
-    setOrder(FLASHCARDS);
+    setOrder(ALL_FLASHCARDS);
     setI(0);
     setFlipped(false);
   };
@@ -190,7 +191,7 @@ function FlipDeck() {
 function Cheatsheet() {
   const grouped = useMemo(() => {
     const map = new Map<string, Flashcard[]>();
-    for (const fc of FLASHCARDS) {
+    for (const fc of ALL_FLASHCARDS) {
       const arr = map.get(fc.category) ?? [];
       arr.push(fc);
       map.set(fc.category, arr);
