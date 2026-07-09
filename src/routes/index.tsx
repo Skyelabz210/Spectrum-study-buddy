@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MODULES, FLASHCARDS } from "@/data/curriculum";
+import { MODULES } from "@/data/curriculum";
+import { ALL_FLASHCARDS } from "@/data/flashcardDeck";
 import { getCurrentWeek } from "@/data/weeklyTraining";
 import { SCENARIOS } from "@/data/scenarios";
 import { SETUP_TASKS } from "@/data/workSetup";
@@ -59,7 +60,7 @@ function Home() {
         <Tile icon={<BookOpen className="h-5 w-5 text-neon" />} title={`${MODULES.length} modules`} subtitle={`${lessonCount} lessons`} href="/curriculum" />
         <Tile icon={<KeyRound className="h-5 w-5 text-neon" />} title="My setup" subtitle={`${urgentSetupCount} do-now tasks`} href="/setup" />
         <Tile icon={<ClipboardCheck className="h-5 w-5 text-neon" />} title={`${SCENARIOS.length} scenarios`} subtitle="A-R-M + policy gates" href="/scenarios" />
-        <Tile icon={<Layers className="h-5 w-5 text-neon" />} title={`${FLASHCARDS.length} flashcards`} subtitle="Flip mode + cheatsheet" href="/flashcards" />
+        <Tile icon={<Layers className="h-5 w-5 text-neon" />} title={`${ALL_FLASHCARDS.length} flashcards`} subtitle="Flip mode + cheatsheet" href="/flashcards" />
         <Tile icon={<History className="h-5 w-5 text-neon" />} title="Weekly ledger" subtitle={week.dateRange} href="/corner" />
       </section>
 
