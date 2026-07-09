@@ -2,9 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { MODULES, FLASHCARDS } from "@/data/curriculum";
 import { getCurrentWeek } from "@/data/weeklyTraining";
 import { SCENARIOS } from "@/data/scenarios";
+import { SETUP_TASKS } from "@/data/workSetup";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Layers, BookOpen, ArrowRight, ClipboardCheck, History } from "lucide-react";
+import { Sparkles, Layers, BookOpen, ArrowRight, ClipboardCheck, History, KeyRound } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -13,6 +14,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   const week = getCurrentWeek();
   const lessonCount = MODULES.reduce((n, m) => n + m.sections.reduce((s, sec) => s + sec.lessons.length, 0), 0);
+  const urgentSetupCount = SETUP_TASKS.filter((task) => task.priority === "now").length;
 
   return (
     <div className="bg-hero">
@@ -27,12 +29,17 @@ function Home() {
           </span>
         </h1>
         <p className="mt-5 max-w-2xl text-balance text-base text-muted-foreground sm:text-lg">
-          CallFlow Lab turns recorded classroom training into small study bites: SOP gates, product navigation, A-R-M objection drills, flashcards, weekly ledgers, and a coach that keeps the current training spine in view.
+          CallFlow Lab turns recorded classroom training into small study bites: SOP gates, product navigation, A-R-M objection drills, employee setup checklists, flashcards, weekly ledgers, and a coach that keeps the current training spine in view.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
           <Button asChild size="lg" className="bg-gradient-primary text-primary-foreground glow hover:opacity-95">
             <Link to="/curriculum">
               Start curriculum <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <Link to="/setup">
+              <KeyRound className="mr-1 h-4 w-4" /> My setup
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">
@@ -48,8 +55,9 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-5xl gap-4 px-6 pb-10 sm:grid-cols-4">
+      <section className="mx-auto grid max-w-5xl gap-4 px-6 pb-10 sm:grid-cols-5">
         <Tile icon={<BookOpen className="h-5 w-5 text-neon" />} title={`${MODULES.length} modules`} subtitle={`${lessonCount} lessons`} href="/curriculum" />
+        <Tile icon={<KeyRound className="h-5 w-5 text-neon" />} title="My setup" subtitle={`${urgentSetupCount} do-now tasks`} href="/setup" />
         <Tile icon={<ClipboardCheck className="h-5 w-5 text-neon" />} title={`${SCENARIOS.length} scenarios`} subtitle="A-R-M + policy gates" href="/scenarios" />
         <Tile icon={<Layers className="h-5 w-5 text-neon" />} title={`${FLASHCARDS.length} flashcards`} subtitle="Flip mode + cheatsheet" href="/flashcards" />
         <Tile icon={<History className="h-5 w-5 text-neon" />} title="Weekly ledger" subtitle={week.dateRange} href="/corner" />
@@ -99,7 +107,7 @@ function Tile({
   icon: React.ReactNode;
   title: string;
   subtitle: string;
-  href: "/curriculum" | "/scenarios" | "/flashcards" | "/tutor" | "/corner";
+  href: "/curriculum" | "/setup" | "/scenarios" | "/flashcards" | "/tutor" | "/corner";
 }) {
   return (
     <Link to={href}>
