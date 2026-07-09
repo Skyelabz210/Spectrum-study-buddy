@@ -20,11 +20,13 @@ import {
   Lightbulb,
   ClipboardCheck,
   History,
+  KeyRound,
 } from "lucide-react";
 
 const items = [
   { title: "Home", url: "/", icon: Home },
   { title: "Curriculum", url: "/curriculum", icon: BookOpen },
+  { title: "My Setup", url: "/setup", icon: KeyRound },
   { title: "Scenarios", url: "/scenarios", icon: ClipboardCheck },
   { title: "Flashcards", url: "/flashcards", icon: Layers },
   { title: "Coach", url: "/tutor", icon: Sparkles },
