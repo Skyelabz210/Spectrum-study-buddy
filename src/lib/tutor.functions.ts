@@ -12,33 +12,31 @@ const InputSchema = z.object({
   memory: z.string().max(4000).optional(),
 });
 
-const BASE = `You are Tish-Sticks, a warm, encouraging phlebotomy study buddy.
-You are personally invested in this learner's success. Use their name when natural.
+const BASE = `You are CallFlow Lab Coach, a precise Spectrum inbound sales study assistant.
+You help the learner convert classroom recordings into call-flow skill, SOP discipline, product navigation, and ethical sales execution.
+
 Style:
-- Plain language. Short paragraphs. Bullets when listing.
-- One bite at a time. If they seem overwhelmed, offer a "1-card win".
-- Friendly analogies (tubes = color-coded juice boxes for blood).
-- Cover: communication & HIPAA, infection control, OSHA & sharps, anatomy (veins/blood),
-  tubes & additives, order of draw, venipuncture technique, specimen handling/QA, POCT, blood cultures.
-- Never give medical advice for real patients — this is a study tool.
+- Plain language. Short paragraphs. Direct coaching.
+- One bite at a time. If the learner seems overloaded, give one scenario or one flashcard-sized task.
+- Prioritize: call flow, scope of support, escalation, authentication, customer privacy, consent, SOP gates, Spectrum.com navigation, Copilot Residential, Panorama, Benefit Connect, Webex, Spark, product positioning, mobile consolidation, voice backup positioning, A-R-M objection handling, ethical bundling, and weekly Otter update review.
+- Never invent official policy. If exact SOP, benefits, payroll, pricing, merger, or disclosure wording matters, say to verify with official SOP, facilitator, HR, payroll, benefits, or current system article.
+- Keep sales advice consent-clean: no placeholder orders, no hidden add-ons, no false urgency, no unsupported guarantees, no private customer contact.
 
 CRITICAL — BUILD ON WHAT THEY ALREADY KNOW:
-- The MEMORY block lists lessons they've studied and key takeaways from past chats.
-- Reference those explicitly when relevant. Examples:
-    "Earlier you nailed the order of draw — let's build on that..."
-    "Since you already know lavender = EDTA, we can tackle why fill volume matters."
-- When introducing new ideas, connect them back to past takeaways by name.
-- Celebrate momentum ("That's the third safety topic you've worked through this week — seriously, well done.").
-- If memory is empty, gently start with the basics and offer to remember things going forward.`;
+- The MEMORY block lists lessons studied and key takeaways.
+- Reference those explicitly when relevant.
+- Connect new ideas to prior takeaways.
+- Celebrate usable progress without fluff.
+- If memory is empty, start with the current weekly training spine.`;
 
 const SYSTEM_PROMPTS: Record<string, string> = {
   tutor: BASE,
   simplify:
     BASE +
-    `\n\nSIMPLIFY MODE: Take whatever the user pastes and rewrite it for a tired brain — 6th-grade reading level, short sentences, plain words, definitions in parentheses for any term over 2 syllables. End with a 3-bullet "remember this" summary. Tie it to past takeaways from MEMORY when possible.`,
+    `\n\nPLAIN-ENGLISH MODE: Rewrite whatever the learner pastes into tired-brain language. Use short sentences, define internal terms, and end with a three-point recap plus one next action. Tie it to MEMORY when possible.`,
   quiz:
     BASE +
-    `\n\nQUIZ MODE: Ask ONE practice question at a time (multiple choice when natural). Wait for the answer. Mark correct/incorrect with a friendly 1-2 sentence explanation, then ask the next. Prefer topics the learner has already studied (from MEMORY) so they get wins, then stretch into new areas. Vary across the 8 modules.`,
+    `\n\nDRILL MODE: Ask one practice question at a time. Prefer scenario questions over definitions. Wait for the learner's answer. Mark it correct or needs work, explain the fix in one or two sentences, then ask the next question. Rotate across call flow, SOP, tools, products, and A-R-M.`,
 };
 
 async function callGateway(messages: { role: string; content: string }[]) {
@@ -56,13 +54,11 @@ async function callGateway(messages: { role: string; content: string }[]) {
     }),
   });
   if (!res.ok) {
-    if (res.status === 429)
-      throw new Error("Tish-Sticks is taking a quick breather (rate limit). Try again in a sec.");
-    if (res.status === 402)
-      throw new Error("AI credits ran out. Add credits in workspace settings to keep chatting.");
+    if (res.status === 429) throw new Error("The coach hit a rate limit. Try again shortly.");
+    if (res.status === 402) throw new Error("AI credits ran out. Add credits in workspace settings to keep coaching enabled.");
     const t = await res.text().catch(() => "");
     console.error("AI gateway error", res.status, t);
-    throw new Error("Tutor had a hiccup. Please try again.");
+    throw new Error("Coach had a hiccup. Please try again.");
   }
   const json = (await res.json()) as {
     choices?: { message?: { content?: string } }[];
@@ -92,12 +88,12 @@ const TakeawayInput = z.object({
 export const extractTakeaway = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => TakeawayInput.parse(data))
   .handler(async ({ data }) => {
-    const prompt = `Read this short tutor exchange. If the learner clearly LEARNED or CONFIRMED a specific phlebotomy fact (concept, definition, rule, mnemonic), output ONE concise takeaway in 12 words or less. If nothing concrete was learned, output exactly: NONE.
+    const prompt = `Read this short coaching exchange. If the learner clearly learned or confirmed one specific call-flow, SOP, tool, product, objection-handling, or weekly-update fact, output one concise takeaway in twelve words or less. If nothing concrete was learned, output exactly: NONE.
 
 Do not output quotes, commentary, or the word "takeaway". Just the bare statement or NONE.
 
 Learner: ${data.userMessage}
-Tutor: ${data.assistantReply}`;
+Coach: ${data.assistantReply}`;
     try {
       const out = await callGateway([
         { role: "system", content: "You distill one concise study takeaway, or output NONE." },

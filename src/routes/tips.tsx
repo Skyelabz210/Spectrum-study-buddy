@@ -6,8 +6,8 @@ export const Route = createFileRoute("/tips")({
   component: Tips,
   head: () => ({
     meta: [
-      { title: "Study tips · Tish-Sticks" },
-      { name: "description", content: "Tools and tricks for studying when your brain isn't always cooperative." },
+      { title: "Study tips · CallFlow Lab" },
+      { name: "description", content: "Practical study tactics for weekly sales training." },
     ],
   }),
 });
@@ -17,8 +17,7 @@ function Tips() {
     <div className="mx-auto max-w-3xl px-6 py-10">
       <h1 className="text-3xl font-bold tracking-tight">Study tips</h1>
       <p className="mt-2 text-muted-foreground">
-        Built for real brains on real days. No labels, no judgment — just things
-        that work.
+        Capture the rule, attach it to a scenario, and practice the line out loud.
       </p>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -31,39 +30,20 @@ function Tips() {
       </div>
 
       <Card className="card-elevated mt-8 border-border bg-card/60 p-6">
-        <h2 className="text-lg font-semibold">When everything feels like too much</h2>
+        <h2 className="text-lg font-semibold">One clean drill</h2>
         <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-foreground/90">
-          <li>Close every tab except this one.</li>
-          <li>Open <span className="text-neon">Flashcards → Flip mode</span>. Flip ONE card.</li>
-          <li>If that felt okay, flip one more. If not, you still won.</li>
-          <li>Tomorrow, repeat. Consistency &gt; intensity.</li>
+          <li>Open Scenario Trainer.</li>
+          <li>Pick one prompt.</li>
+          <li>Write the acknowledgement line.</li>
+          <li>Add the response line.</li>
+          <li>Add the move-forward line.</li>
         </ol>
       </Card>
 
       <Card className="card-elevated mt-4 border-border bg-card/60 p-6">
-        <h2 className="text-lg font-semibold">Helpful free resources</h2>
-        <ul className="mt-3 space-y-2 text-sm">
-          {[
-            ["NHA CPT Test Plan (free PDF)", "https://www.nhanow.com"],
-            ["CDC Hand Hygiene Guidelines", "https://www.cdc.gov/handhygiene/"],
-            ["OSHA Bloodborne Pathogens Standard", "https://www.osha.gov/bloodborne-pathogens"],
-            ["CLSI Order of Draw (overview articles)", "https://clsi.org/"],
-            ["Khan Academy — Circulatory System", "https://www.khanacademy.org/science/health-and-medicine/circulatory-system"],
-          ].map(([label, url]) => (
-            <li key={url}>
-              <a
-                href={url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-neon hover:underline"
-              >
-                {label} ↗
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-3 text-xs text-muted-foreground">
-          External sites — open in a new tab so you don't lose your spot.
+        <h2 className="text-lg font-semibold">Verification rule</h2>
+        <p className="mt-3 text-sm text-muted-foreground">
+          This app is a study shell. Use the current official system before live use.
         </p>
       </Card>
     </div>
