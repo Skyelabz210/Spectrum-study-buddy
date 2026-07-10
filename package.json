@@ -1,6 +1,6 @@
 {
   "name": "callflow-lab",
-  "version": "1.0.0-spectrum.2",
+  "version": "1.1.0-spectrum.3",
   "private": true,
   "sideEffects": false,
   "type": "module",
