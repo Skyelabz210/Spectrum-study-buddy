@@ -1,4 +1,5 @@
 import { FLASHCARDS, type Flashcard } from "@/data/curriculum";
+import { SPECTRUM_PRODUCT_UPDATE_FLASHCARDS } from "@/data/spectrumProductUpdate20260710";
 
 export const SUPPLEMENTAL_FLASHCARDS: Flashcard[] = [
   { id: "sfc1", module: 4, category: "Internet Plans", front: "Internet Advantage: what is the basic public-positioning note?", back: "Budget internet tier; public table reported up to 100 Mbps at $30/mo for 1 year. Verify address, current price, and availability before quoting." },
@@ -49,4 +50,8 @@ export const SUPPLEMENTAL_FLASHCARDS: Flashcard[] = [
   { id: "sfc46", module: 10, category: "Verification", front: "Universal quote rule for plans and competitors?", back: "All prices, speeds, benefits, promos, equipment, and eligibility must be verified by address/account/current official system before customer-facing use." },
 ];
 
-export const ALL_FLASHCARDS: Flashcard[] = [...FLASHCARDS, ...SUPPLEMENTAL_FLASHCARDS];
+export const ALL_FLASHCARDS: Flashcard[] = [
+  ...FLASHCARDS,
+  ...SUPPLEMENTAL_FLASHCARDS,
+  ...SPECTRUM_PRODUCT_UPDATE_FLASHCARDS,
+];

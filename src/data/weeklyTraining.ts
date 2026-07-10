@@ -21,7 +21,7 @@ export type WeeklyTrainingUpdate = {
   unresolvedQuestions: string[];
 };
 
-export const CURRENT_APP_VERSION = "1.0.0-spectrum.1";
+export const CURRENT_APP_VERSION = "1.0.0-spectrum.2";
 export const CURRENT_WEEK_ID = "2026-W28";
 
 export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
@@ -31,7 +31,7 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     dateRange: "2026-07-05 through 2026-07-11",
     source: "mixed",
     summary:
-      "Daily Gmail/GitHub ingestion started. The first ingestion found a private Lovable preview link sent to the work address and a Codex PR review warning that a real employee identity was hard-coded into setup data. The app now keeps the work email in a local browser profile field instead of committed source data.",
+      "Gmail and GitHub ingestion expanded from privacy/setup review into current Spectrum product training. The active deck now includes verified July material from PR223 Mobile, PR131 Internet, HOW7726 Invincible WiFi, BYOD, Phone Balance Buyout, trade-ins, and device-protection overview. Outlook-originated product messages that were forwarded into Gmail were included as provenance, while credentials, security codes, personal documents, and account-access material were deliberately excluded.",
     recordings: [
       {
         id: "gmail-2026-07-09-work-preview-link",
@@ -49,22 +49,88 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
         status: "ingested",
         focus: ["privacy", "PII", "setup page", "local profile", "code review"],
       },
+      {
+        id: "gmail-2026-07-09-mobile-device-notes",
+        title: "Gmail: BYOD, Phone Balance Buyout, trade-ins, RR/RRP overview",
+        recordedAt: "2026-07-09T19:07:01-05:00",
+        duration: "email",
+        status: "ingested",
+        focus: ["BYOD", "PBB", "trade-in", "device protection", "eligibility gates"],
+      },
+      {
+        id: "gmail-2026-07-08-pr223-mobile",
+        title: "Gmail: PR223 Spectrum Mobile Service Product Details",
+        recordedAt: "2026-07-08T18:38:17-05:00",
+        duration: "email",
+        status: "ingested",
+        focus: ["Mobile", "By the Gig", "roaming", "network wording", "plan verification"],
+      },
+      {
+        id: "gmail-2026-07-07-pr131-internet",
+        title: "Gmail: PR131 Spectrum Internet Product Details",
+        recordedAt: "2026-07-07T18:36:05-05:00",
+        duration: "email",
+        status: "ingested",
+        focus: ["Premier", "2 Gig", "7 Gig", "SPP4", "WiFi 7", "serviceability"],
+      },
+      {
+        id: "gmail-2026-07-07-how7726",
+        title: "Gmail: HOW7726 Supporting Invincible WiFi",
+        recordedAt: "2026-07-07T18:11:42-05:00",
+        duration: "email",
+        status: "ingested",
+        focus: ["Invincible WiFi", "5G backup", "battery", "WiFi 7 Extender", "order integrity"],
+      },
+      {
+        id: "gmail-2026-07-07-outlook-forward-bundle",
+        title: "Gmail attachment bundle: Outlook-originated product and operations messages",
+        recordedAt: "2026-07-07T18:09:25-05:00",
+        duration: "email bundle",
+        status: "ingested",
+        focus: ["2 Gig", "Invincible WiFi", "Mobile expectations", "launch updates", "incentives"],
+      },
     ],
-    modulesTouched: ["m5", "m6", "m10"],
-    newTerms: ["private local profile", "employee PII", "daily ingestion", "Codex review", "private preview"],
+    modulesTouched: ["m4", "m5", "m6", "m9", "m10"],
+    newTerms: [
+      "PR223",
+      "PR131",
+      "HOW7726",
+      "BYOD",
+      "Phone Balance Buyout",
+      "By the Gig shared data",
+      "RR",
+      "RRP",
+      "Invincible WiFi",
+      "WiFi 7 Extender",
+      "SPP4 2 Gig",
+      "SPP4 7 Gig",
+      "licensed MVNO",
+      "source-priority rule",
+    ],
     scenarioSeeds: [
-      "App review flags hard-coded employee identity before deployment.",
-      "User needs a personal sign-in checklist without exposing credentials or employee PII in shared source.",
+      "Customer wants to bring an unlocked phone but compatibility has not been checked.",
+      "Customer still owes on multiple devices and asks whether Spectrum will pay the balance.",
+      "Two By the Gig lines use a combined amount that crosses into the next whole GB.",
+      "Customer asks directly whose mobile network Spectrum uses.",
+      "Customer asks for 7 Gig at an address outside the listed FTTP market.",
+      "Customer wants to use Invincible WiFi away from the primary service location.",
+      "Agent removes Invincible WiFi equipment before the disconnect work order completes.",
+      "An older flashcard conflicts with a newly published internal article.",
     ],
     actionItems: [
       "Use the My Setup private profile field for the work email on the user's own device.",
-      "Keep SSNs, passwords, authenticator codes, and document images out of app source and app data.",
-      "Continue daily Gmail ingestion for work-email, GitHub/Codex, Lovable, benefits, training, and product-update material.",
-      "Run local build/lint after route tree regeneration before production deployment.",
+      "Keep SSNs, passwords, authenticator codes, account-access instructions, and document images out of app source and app data.",
+      "Use current official PR, HOW, GEN, biller, Agent OS, and SOP content for live customer work.",
+      "Do not repeat superseded Mobile throttling language; verify the current PR223 plan terms.",
+      "Check serviceability before positioning 2 Gig, 7 Gig, or Invincible WiFi pricing.",
+      "Run local lint and build validation before deployment.",
     ],
     unresolvedQuestions: [
+      "Direct Outlook mailbox access is not connected; only Outlook-originated messages forwarded into Gmail were available for this ingestion.",
       "Whether Lovable project write scope can be granted so the private editor preview can be overwritten directly from ChatGPT.",
-      "Whether the private Lovable preview URL should be replaced with a new private preview after the latest main-branch privacy patch.",
+      "Whether the private Lovable preview URL should be replaced after the product-ingestion branch is merged.",
+      "Exact current Unlimited and Unlimited Plus customer-facing feature table after the June 30 PR223 article revision.",
+      "Exact current RR and RRP coverage and deductible tiers from GEN9001.",
     ],
   },
   {
