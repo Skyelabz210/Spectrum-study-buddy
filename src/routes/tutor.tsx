@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
+import { z } from "zod";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Sparkles, Wand2, Brain, Send, Loader2, Trash2, PencilLine } from "lucide-react";
+import { Sparkles, Wand2, Brain, Search, Send, Loader2, Trash2, PencilLine } from "lucide-react";
 import { askTutor, extractTakeaway } from "@/lib/tutor.functions";
 import {
   loadMemory,
@@ -17,18 +18,24 @@ import {
 } from "@/lib/tutorMemory";
 import { toast } from "sonner";
 
+const TutorSearchSchema = z.object({
+  mode: z.enum(["tutor", "simplify", "quiz", "lookup"]).optional().catch(undefined),
+  q: z.string().max(120).optional().catch(undefined),
+});
+
 export const Route = createFileRoute("/tutor")({
   component: TutorPage,
+  validateSearch: (search) => TutorSearchSchema.parse(search),
   head: () => ({
     meta: [
       { title: "Coach · CallFlow Lab" },
-      { name: "description", content: "Chat, simplify, or drill with a weekly-updated call-flow coach." },
+      { name: "description", content: "Chat, simplify, drill, or retrieve exact Spectrum product records." },
     ],
   }),
 });
 
 type Msg = { role: "user" | "assistant"; content: string };
-type Mode = "tutor" | "simplify" | "quiz";
+type Mode = "tutor" | "simplify" | "quiz" | "lookup";
 
 const STARTERS: Record<Mode, (name: string, hasMem: boolean) => string> = {
   tutor: (name, hasMem) =>
@@ -41,16 +48,20 @@ const STARTERS: Record<Mode, (name: string, hasMem: boolean) => string> = {
     hasMem
       ? `Drill mode ready, ${name}. I will start near what you already touched, then stretch into weak spots. Type "go".`
       : `Drill mode ready, ${name}. Type "go" and I will send one call-flow question at a time.`,
+  lookup: (name) =>
+    `Quick Lookup ready, ${name}. Type one or a few words—"advantage", "2 gig", "unlimited plus", "PBB", or "RRP"—and I will return plan, speed, services, requirements, notes, and source status.`,
 };
 
 function TutorPage() {
+  const routeSearch = Route.useSearch();
+  const initialMode: Mode = routeSearch.mode ?? "tutor";
   const [mem, setMemState] = useState<TutorMemory>(() => loadMemory());
-  const [mode, setMode] = useState<Mode>("tutor");
+  const [mode, setMode] = useState<Mode>(initialMode);
   const [messages, setMessages] = useState<Msg[]>(() => {
     const m = loadMemory();
-    return [{ role: "assistant", content: STARTERS.tutor(m.name, m.takeaways.length > 0) }];
+    return [{ role: "assistant", content: STARTERS[initialMode](m.name, m.takeaways.length > 0) }];
   });
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(routeSearch.q ?? "");
   const [loading, setLoading] = useState(false);
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(mem.name);
@@ -109,17 +120,29 @@ function TutorPage() {
     toast.success(`Saved — ${nameInput.trim() || "Anthony"}.`);
   };
 
+  const placeholder =
+    mode === "simplify"
+      ? "Paste the confusing training note…"
+      : mode === "quiz"
+        ? "Type 'go' or pick a topic…"
+        : mode === "lookup"
+          ? "Type one or a few words: advantage, unlimited, BYOD…"
+          : "Ask about call flow, SOP, A-R-M, tools, or products…";
+
   return (
     <div className="mx-auto grid h-[calc(100vh-3rem)] max-w-6xl gap-4 px-4 py-6 sm:px-6 lg:grid-cols-[1fr_280px]">
       <div className="flex min-h-0 flex-col">
         <div className="flex items-center justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold tracking-tight">CallFlow Coach</h1>
-            <p className="text-xs text-muted-foreground">direct · scenario-first · remembers what you study</p>
+            <p className="text-xs text-muted-foreground">direct · scenario-first · exact-corpus lookup</p>
           </div>
           <div className="flex flex-wrap gap-1.5">
             <ModeBtn active={mode === "tutor"} onClick={() => switchMode("tutor")}>
               <Sparkles className="mr-1 h-3.5 w-3.5" /> Coach
+            </ModeBtn>
+            <ModeBtn active={mode === "lookup"} onClick={() => switchMode("lookup")}>
+              <Search className="mr-1 h-3.5 w-3.5" /> Quick Lookup
             </ModeBtn>
             <ModeBtn active={mode === "simplify"} onClick={() => switchMode("simplify")}>
               <Wand2 className="mr-1 h-3.5 w-3.5" /> Plain English
@@ -135,7 +158,7 @@ function TutorPage() {
             {messages.map((m, i) => (
               <Bubble key={i} role={m.role}>{m.content}</Bubble>
             ))}
-            {loading && <Bubble role="assistant"><Loader2 className="inline h-4 w-4 animate-spin" /> thinking…</Bubble>}
+            {loading && <Bubble role="assistant"><Loader2 className="inline h-4 w-4 animate-spin" /> retrieving…</Bubble>}
           </div>
         </Card>
 
@@ -149,7 +172,7 @@ function TutorPage() {
                 send();
               }
             }}
-            placeholder={mode === "simplify" ? "Paste the confusing training note…" : mode === "quiz" ? "Type 'go' or pick a topic…" : "Ask about call flow, SOP, A-R-M, tools, or products…"}
+            placeholder={placeholder}
             className="min-h-[52px] resize-none bg-card"
             rows={2}
           />
@@ -157,7 +180,7 @@ function TutorPage() {
             <Send className="h-4 w-4" />
           </Button>
         </div>
-        <p className="mt-2 text-[11px] text-muted-foreground">Study tool only — official SOP and current system articles control.</p>
+        <p className="mt-2 text-[11px] text-muted-foreground">Study tool only — current official article, biller, Agent OS, approved SOP, and live offer control.</p>
       </div>
 
       <aside className="hidden min-h-0 lg:block">
