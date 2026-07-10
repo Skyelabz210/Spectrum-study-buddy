@@ -21,13 +21,55 @@ export type WeeklyTrainingUpdate = {
   unresolvedQuestions: string[];
 };
 
-export const CURRENT_APP_VERSION = "1.0.0-spectrum.0";
-export const CURRENT_WEEK_ID = "2026-W27";
+export const CURRENT_APP_VERSION = "1.0.0-spectrum.1";
+export const CURRENT_WEEK_ID = "2026-W28";
 
 export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
   {
-    weekId: "2026-W27",
+    weekId: "2026-W28",
     appVersion: CURRENT_APP_VERSION,
+    dateRange: "2026-07-05 through 2026-07-11",
+    source: "mixed",
+    summary:
+      "Daily Gmail/GitHub ingestion started. The first ingestion found a private Lovable preview link sent to the work address and a Codex PR review warning that a real employee identity was hard-coded into setup data. The app now keeps the work email in a local browser profile field instead of committed source data.",
+    recordings: [
+      {
+        id: "gmail-2026-07-09-work-preview-link",
+        title: "Gmail: Spectrum Class study buddy preview link",
+        recordedAt: "2026-07-09T15:03:12-05:00",
+        duration: "email",
+        status: "ingested",
+        focus: ["Lovable preview", "work email", "study buddy access"],
+      },
+      {
+        id: "github-codex-review-2026-07-09-pii",
+        title: "GitHub/Codex review: remove hard-coded employee identity from setup data",
+        recordedAt: "2026-07-09T09:42:43-05:00",
+        duration: "email",
+        status: "ingested",
+        focus: ["privacy", "PII", "setup page", "local profile", "code review"],
+      },
+    ],
+    modulesTouched: ["m5", "m6", "m10"],
+    newTerms: ["private local profile", "employee PII", "daily ingestion", "Codex review", "private preview"],
+    scenarioSeeds: [
+      "App review flags hard-coded employee identity before deployment.",
+      "User needs a personal sign-in checklist without exposing credentials or employee PII in shared source.",
+    ],
+    actionItems: [
+      "Use the My Setup private profile field for the work email on the user's own device.",
+      "Keep SSNs, passwords, authenticator codes, and document images out of app source and app data.",
+      "Continue daily Gmail ingestion for work-email, GitHub/Codex, Lovable, benefits, training, and product-update material.",
+      "Run local build/lint after route tree regeneration before production deployment.",
+    ],
+    unresolvedQuestions: [
+      "Whether Lovable project write scope can be granted so the private editor preview can be overwritten directly from ChatGPT.",
+      "Whether the private Lovable preview URL should be replaced with a new private preview after the latest main-branch privacy patch.",
+    ],
+  },
+  {
+    weekId: "2026-W27",
+    appVersion: "1.0.0-spectrum.0",
     dateRange: "2026-06-27 through 2026-07-04",
     source: "otter",
     summary:
@@ -106,7 +148,7 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
         focus: [],
       },
       {
-        id: "L3VBvYz5VCapRSHH0kmEvO6Df9A",
+        id: "L3VBvYz5VCapRSHH0kmEvI",
         title: "Note fragment",
         recordedAt: "2026-07-03T04:58:14",
         duration: "2s",
