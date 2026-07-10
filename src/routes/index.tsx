@@ -27,15 +27,16 @@ function Home() {
       if (!raw) return;
       const parsed = JSON.parse(raw) as Partial<PrivateWorkProfile>;
       setProfile({
-        pid: typeof parsed.pid === "string" && parsed.pid.trim() ? parsed.pid : DEFAULT_PRIVATE_PROFILE.pid,
-        workEmail: typeof parsed.workEmail === "string" && parsed.workEmail.trim() ? parsed.workEmail : DEFAULT_PRIVATE_PROFILE.workEmail,
+        pid: typeof parsed.pid === "string" ? parsed.pid.trim() : "",
+        workEmail: typeof parsed.workEmail === "string" ? parsed.workEmail.trim() : "",
       });
     } catch {
-      // The isolated private default remains available.
+      // Landing remains usable without local storage.
     }
   }, []);
 
   const copyPid = async () => {
+    if (!profile.pid) return;
     try {
       await navigator.clipboard.writeText(profile.pid);
       toast.success("PID copied.");
@@ -50,15 +51,26 @@ function Home() {
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
           <span className="h-1.5 w-1.5 rounded-full bg-neon" /> {week.appVersion} · {week.weekId}
         </div>
-        <div className="mt-5 flex flex-wrap items-end gap-3">
-          <h1 className="text-balance text-5xl font-bold leading-none tracking-tight sm:text-7xl">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">{profile.pid}</span>
-          </h1>
-          <Button variant="outline" size="sm" onClick={copyPid} className="mb-1">
-            <Copy className="mr-1 h-3.5 w-3.5" /> Copy PID
-          </Button>
-        </div>
-        <p className="mt-3 text-sm text-neon">{profile.workEmail}</p>
+        {profile.pid ? (
+          <>
+            <div className="mt-5 flex flex-wrap items-end gap-3">
+              <h1 className="text-balance text-5xl font-bold leading-none tracking-tight sm:text-7xl">
+                <span className="bg-gradient-primary bg-clip-text text-transparent">{profile.pid}</span>
+              </h1>
+              <Button variant="outline" size="sm" onClick={copyPid} className="mb-1">
+                <Copy className="mr-1 h-3.5 w-3.5" /> Copy PID
+              </Button>
+            </div>
+            {profile.workEmail && <p className="mt-3 text-sm text-neon">{profile.workEmail}</p>}
+          </>
+        ) : (
+          <div className="mt-5">
+            <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
+              Put your PID here—<span className="bg-gradient-primary bg-clip-text text-transparent">locally.</span>
+            </h1>
+            <p className="mt-3 text-sm text-muted-foreground">Enter it once in My Setup. It becomes this landing title and stays only in this browser.</p>
+          </div>
+        )}
         <p className="mt-5 max-w-2xl text-balance text-base text-muted-foreground sm:text-lg">
           Spectrum Study Buddy: exact-source product lookup, call-flow training, flashcards, scenarios, setup, and AI coaching. Personal work identity stays isolated from the company product corpus.
         </p>
@@ -66,6 +78,7 @@ function Home() {
           <Button asChild size="lg" className="bg-gradient-primary text-primary-foreground glow hover:opacity-95">
             <Link to="/lookup"><Search className="mr-1 h-4 w-4" /> Quick lookup <ArrowRight className="ml-1 h-4 w-4" /></Link>
           </Button>
+          {!profile.pid && <Button asChild size="lg" variant="outline"><Link to="/setup"><KeyRound className="mr-1 h-4 w-4" /> Set PID</Link></Button>}
           <Button asChild size="lg" variant="outline"><Link to="/curriculum">Start curriculum</Link></Button>
           <Button asChild size="lg" variant="outline"><Link to="/setup"><KeyRound className="mr-1 h-4 w-4" /> My setup</Link></Button>
           <Button asChild size="lg" variant="outline"><Link to="/scenarios"><ClipboardCheck className="mr-1 h-4 w-4" /> Drill scenarios</Link></Button>
