@@ -4,9 +4,10 @@ export type PrivateWorkProfile = {
 };
 
 // PERSONAL_ADMIN_PRIVATE
-// Kept separate from the company product corpus. The app is private and the
-// user explicitly requested fast landing-page access to this PID.
+// Never commit a real employee identifier or corporate email into a client bundle.
+// The user enters these once in My Setup; the browser keeps them in localStorage
+// and the landing page then displays the PID for rapid access on that device.
 export const DEFAULT_PRIVATE_PROFILE: PrivateWorkProfile = {
-  pid: "P3390812",
-  workEmail: "Anthony.Diaz2@spectrum.com",
+  pid: "",
+  workEmail: "",
 };
