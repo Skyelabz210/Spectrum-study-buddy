@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { buildLookupContext } from "@/data/knowledgeCorpus";
 
 const MessageSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -8,7 +9,7 @@ const MessageSchema = z.object({
 
 const InputSchema = z.object({
   messages: z.array(MessageSchema).min(1).max(40),
-  mode: z.enum(["tutor", "simplify", "quiz"]).default("tutor"),
+  mode: z.enum(["tutor", "simplify", "quiz", "lookup"]).default("tutor"),
   memory: z.string().max(4000).optional(),
 });
 
@@ -37,6 +38,26 @@ const SYSTEM_PROMPTS: Record<string, string> = {
   quiz:
     BASE +
     `\n\nDRILL MODE: Ask one practice question at a time. Prefer scenario questions over definitions. Wait for the learner's answer. Mark it correct or needs work, explain the fix in one or two sentences, then ask the next question. Rotate across call flow, SOP, tools, products, and A-R-M.`,
+  lookup:
+    `You are CallFlow Lab Quick Lookup, a low-latency Spectrum product retrieval assistant.
+The learner may type only one or two words, such as "advantage", "2 gig", "PBB", or "unlimited plus".
+
+Use ONLY the injected CANONICAL CORPUS MATCHES. Never fill gaps from general memory.
+Return the best matching record first in this exact compact structure:
+
+PLAN
+SPEED
+SERVICES / FEATURES
+REQUIREMENTS
+ITEMS OF NOTE
+SOURCE / VERIFICATION
+
+Rules:
+- Use bullets, not an essay.
+- Keep the complete first answer under 220 words unless the learner asks for detail.
+- Preserve source discrepancies. If public and internal sources differ, state both and tell the learner which live system to verify.
+- If there is no direct match, ask for one additional identifying word.
+- Current official article, biller, Agent OS, approved SOP, and live offer control over the study corpus.`,
 };
 
 async function callGateway(messages: { role: string; content: string }[]) {
@@ -69,7 +90,11 @@ async function callGateway(messages: { role: string; content: string }[]) {
 export const askTutor = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => InputSchema.parse(data))
   .handler(async ({ data }) => {
-    const system = SYSTEM_PROMPTS[data.mode] ?? SYSTEM_PROMPTS.tutor;
+    let system = SYSTEM_PROMPTS[data.mode] ?? SYSTEM_PROMPTS.tutor;
+    if (data.mode === "lookup") {
+      const query = [...data.messages].reverse().find((message) => message.role === "user")?.content ?? "";
+      system += `\n\n--- CANONICAL CORPUS MATCHES ---\n${buildLookupContext(query)}\n--- END CANONICAL CORPUS MATCHES ---`;
+    }
     const memoryBlock = data.memory?.trim()
       ? `\n\n--- MEMORY (what you know about this learner) ---\n${data.memory.trim()}\n--- END MEMORY ---`
       : `\n\n--- MEMORY ---\n(empty — first session)\n--- END MEMORY ---`;
