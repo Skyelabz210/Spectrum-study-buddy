@@ -24,10 +24,11 @@ export type SpouseInfoItem = {
 
 export const WORK_PROFILE = {
   preferredNameLabel: "Your name",
+  pidLabel: "Spectrum PID",
   workEmailLabel: "Spectrum work email",
   localStorageKey: "callflowlab.privateProfile.v1",
   authorityNote:
-    "Use the exact IDM/onboarding login. Store personal work identity only in your private browser profile, not in committed app source.",
+    "Personal work identity is isolated from the company product corpus. Keep passwords, PINs, authenticator codes, SSNs, and document images out of this app.",
 };
 
 export const SETUP_TASKS: SetupTask[] = [
@@ -38,13 +39,12 @@ export const SETUP_TASKS: SetupTask[] = [
     priority: "now",
     steps: [
       "Confirm the exact work email from the IDM or onboarding email.",
-      "Enter the work email in the My Setup private profile field on this device only.",
-      "Confirm PID and keep it private.",
+      "Confirm PID and keep it in the private profile for rapid reference.",
       "Confirm the phone security-code/authenticator app still works.",
       "Open Webex from Start Menu and sign in.",
     ],
     needed: ["Work email", "PID", "phone authenticator/security-code app"],
-    warning: "Never share your Spectrum password, authenticator code, or employee system access.",
+    warning: "Never store or share your Spectrum password, activation PIN, authenticator code, or employee-system secret.",
   },
   {
     id: "employee-services",
@@ -87,7 +87,7 @@ export const SETUP_TASKS: SetupTask[] = [
       "Confirm employee mobile line pricing, eligible line count, device compatibility, and whether the discount applies to service only.",
     ],
     needed: ["active Spectrum internet account", "phones/tablets/watches to add", "unlock/BYOD status if bringing devices"],
-    warning: "The transcript says service discounts apply; do not assume special device purchase pricing unless official employee services confirms it.",
+    warning: "The transcript says service discounts apply; do not assume special device purchase pricing unless official Employee Services confirms it.",
   },
   {
     id: "benefit-connect",
@@ -154,10 +154,17 @@ export const SETUP_TASKS: SetupTask[] = [
 
 export const SIGN_IN_ITEMS: SignInItem[] = [
   {
+    id: "pid",
+    label: "PID",
+    path: "Private profile on this device",
+    useFor: "Fast employee-login reference. This is personal/admin data, not a Spectrum product fact.",
+    credentialNote: "A PID is an identifier, not a password. Never pair it with a password, activation PIN, or authenticator code in the app.",
+  },
+  {
     id: "work-email",
     label: "Work email",
-    path: "Private profile field on this device",
-    useFor: "Primary work sign-in identity from IDM/onboarding. Keep the value local to your browser/device.",
+    path: "Private profile on this device",
+    useFor: "Primary work sign-in identity from IDM/onboarding. It remains separate from the product corpus.",
     credentialNote: "Store password only in a password manager or private secure note.",
   },
   {
