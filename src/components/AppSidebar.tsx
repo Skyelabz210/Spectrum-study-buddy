@@ -21,15 +21,17 @@ import {
   ClipboardCheck,
   History,
   KeyRound,
+  Search,
 } from "lucide-react";
 
 const items = [
   { title: "Home", url: "/", icon: Home },
+  { title: "Quick Lookup", url: "/lookup", icon: Search },
   { title: "Curriculum", url: "/curriculum", icon: BookOpen },
   { title: "My Setup", url: "/setup", icon: KeyRound },
   { title: "Scenarios", url: "/scenarios", icon: ClipboardCheck },
   { title: "Flashcards", url: "/flashcards", icon: Layers },
-  { title: "Coach", url: "/tutor", icon: Sparkles },
+  { title: "Sales Coach", url: "/tutor", icon: Sparkles },
   { title: "Plan", url: "/plan", icon: CalendarDays },
   { title: "Tips", url: "/tips", icon: Lightbulb },
   { title: "Weekly Ledger", url: "/corner", icon: History },
@@ -51,12 +53,8 @@ export function AppSidebar() {
           </div>
           {!collapsed && (
             <div className="leading-tight">
-              <div className="text-sm font-bold tracking-tight">
-                CallFlow Lab
-              </div>
-              <div className="text-[11px] text-muted-foreground">
-                weekly sales study
-              </div>
+              <div className="text-sm font-bold tracking-tight">CallFlow Lab</div>
+              <div className="text-[11px] text-muted-foreground">Spectrum Study Buddy</div>
             </div>
           )}
         </Link>
