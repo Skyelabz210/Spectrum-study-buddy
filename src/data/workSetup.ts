@@ -23,10 +23,11 @@ export type SpouseInfoItem = {
 };
 
 export const WORK_PROFILE = {
-  preferredName: "Anthony Diaz",
-  workEmail: "Anthony.Diaz2@spectrum.com",
+  preferredNameLabel: "Your name",
+  workEmailLabel: "Spectrum work email",
+  localStorageKey: "callflowlab.privateProfile.v1",
   authorityNote:
-    "Use the exact IDM/onboarding email if it shows a different login. Do not store passwords or authenticator codes in this app.",
+    "Use the exact IDM/onboarding login. Store personal work identity only in your private browser profile, not in committed app source.",
 };
 
 export const SETUP_TASKS: SetupTask[] = [
@@ -37,7 +38,7 @@ export const SETUP_TASKS: SetupTask[] = [
     priority: "now",
     steps: [
       "Confirm the exact work email from the IDM or onboarding email.",
-      "Use Anthony.Diaz2@spectrum.com unless IDM shows a different assigned login.",
+      "Enter the work email in the My Setup private profile field on this device only.",
       "Confirm PID and keep it private.",
       "Confirm the phone security-code/authenticator app still works.",
       "Open Webex from Start Menu and sign in.",
@@ -155,8 +156,8 @@ export const SIGN_IN_ITEMS: SignInItem[] = [
   {
     id: "work-email",
     label: "Work email",
-    path: "Anthony.Diaz2@spectrum.com",
-    useFor: "Primary work sign-in identity unless IDM assigns a different exact login.",
+    path: "Private profile field on this device",
+    useFor: "Primary work sign-in identity from IDM/onboarding. Keep the value local to your browser/device.",
     credentialNote: "Store password only in a password manager or private secure note.",
   },
   {
