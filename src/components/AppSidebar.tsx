@@ -22,6 +22,7 @@ import {
   History,
   KeyRound,
   Search,
+  PhoneCall,
 } from "lucide-react";
 
 const items = [
@@ -29,6 +30,7 @@ const items = [
   { title: "Quick Lookup", url: "/lookup", icon: Search },
   { title: "Curriculum", url: "/curriculum", icon: BookOpen },
   { title: "My Setup", url: "/setup", icon: KeyRound },
+  { title: "Across the Spectrum", url: "/across-spectrum", icon: PhoneCall },
   { title: "Scenarios", url: "/scenarios", icon: ClipboardCheck },
   { title: "Flashcards", url: "/flashcards", icon: Layers },
   { title: "Sales Coach", url: "/tutor", icon: Sparkles },
