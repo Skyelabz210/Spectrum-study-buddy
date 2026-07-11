@@ -10,6 +10,7 @@ import { Route as PlanRouteImport } from './routes/plan'
 import { Route as LookupRouteImport } from './routes/lookup'
 import { Route as FlashcardsRouteImport } from './routes/flashcards'
 import { Route as CornerRouteImport } from './routes/corner'
+import { Route as AcrossSpectrumRouteImport } from './routes/across-spectrum'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CurriculumIndexRouteImport } from './routes/curriculum.index'
 import { Route as CurriculumModuleIdRouteImport } from './routes/curriculum.$moduleId'
@@ -22,12 +23,14 @@ const PlanRoute = PlanRouteImport.update({ id: '/plan', path: '/plan', getParent
 const LookupRoute = LookupRouteImport.update({ id: '/lookup', path: '/lookup', getParentRoute: () => rootRouteImport } as any)
 const FlashcardsRoute = FlashcardsRouteImport.update({ id: '/flashcards', path: '/flashcards', getParentRoute: () => rootRouteImport } as any)
 const CornerRoute = CornerRouteImport.update({ id: '/corner', path: '/corner', getParentRoute: () => rootRouteImport } as any)
+const AcrossSpectrumRoute = AcrossSpectrumRouteImport.update({ id: '/across-spectrum', path: '/across-spectrum', getParentRoute: () => rootRouteImport } as any)
 const IndexRoute = IndexRouteImport.update({ id: '/', path: '/', getParentRoute: () => rootRouteImport } as any)
 const CurriculumIndexRoute = CurriculumIndexRouteImport.update({ id: '/curriculum/', path: '/curriculum/', getParentRoute: () => rootRouteImport } as any)
 const CurriculumModuleIdRoute = CurriculumModuleIdRouteImport.update({ id: '/curriculum/$moduleId', path: '/curriculum/$moduleId', getParentRoute: () => rootRouteImport } as any)
 
 const rootRouteChildren = {
   IndexRoute,
+  AcrossSpectrumRoute,
   CornerRoute,
   FlashcardsRoute,
   LookupRoute,
