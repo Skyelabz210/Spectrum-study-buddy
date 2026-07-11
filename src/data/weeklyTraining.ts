@@ -21,7 +21,7 @@ export type WeeklyTrainingUpdate = {
   unresolvedQuestions: string[];
 };
 
-export const CURRENT_APP_VERSION = "1.1.0-spectrum.3";
+export const CURRENT_APP_VERSION = "1.1.0-spectrum.4";
 export const CURRENT_WEEK_ID = "2026-W28";
 
 export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
@@ -31,8 +31,16 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     dateRange: "2026-07-05 through 2026-07-11",
     source: "mixed",
     summary:
-      "Direct Outlook and Gmail ingestion were reconciled by canonical KB/article ID instead of duplicating forwarded copies. The active corpus now includes PR223 Mobile, PR131 Internet, HOW7726 Invincible WiFi, GEN7777 BYOD, GEN9023 Phone Balance Buyout, GEN8761 trade-in, HOW7449 Anytime Upgrade references, and GEN9001 RR/RRP details. The app adds deterministic one-word Quick Lookup plus a corpus-grounded AI lookup mode. Personal PID/work-email data remain isolated from customer product records; credentials, security codes, payroll documents, SSNs, activation PINs, and document images are excluded.",
+      "Direct Outlook and Gmail ingestion were reconciled by canonical KB/article ID instead of duplicating forwarded copies. The active corpus now includes PR223 Mobile, PR131 Internet, HOW7726 Invincible WiFi, GEN7777 BYOD, GEN9023 Phone Balance Buyout, GEN8761 trade-in, HOW7449 Anytime Upgrade references, and GEN9001 RR/RRP details. The app adds deterministic one-word Quick Lookup, corpus-grounded AI lookup mode, and Spectrum Across the Spectrum, a live mock-call simulator with caller personas, start beep, call timer, QA achievement markers, difficulty-based rebuttal support, and wrap-up coaching. Personal PID/work-email data remain isolated from customer product records; credentials, security codes, payroll documents, SSNs, activation PINs, and document images are excluded.",
     recordings: [
+      {
+        id: "manual-2026-07-11-across-spectrum-simulator",
+        title: "Manual feature spec: Spectrum Across the Spectrum live call simulator",
+        recordedAt: "2026-07-11T00:00:00-05:00",
+        duration: "feature design",
+        status: "ingested",
+        focus: ["live call simulator", "caller personas", "QA markers", "difficulty coaching", "wrap-up"],
+      },
       {
         id: "outlook-direct-2026-07-10-corpus-reconcile",
         title: "Direct Outlook: canonical work-email corpus reconciliation",
@@ -98,7 +106,7 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
         focus: ["2 Gig", "Invincible WiFi", "Mobile expectations", "launch updates", "incentives", "privacy filtering"],
       },
     ],
-    modulesTouched: ["m4", "m5", "m6", "m9", "m10"],
+    modulesTouched: ["m4", "m5", "m6", "m7", "m8", "m9", "m10"],
     newTerms: [
       "PR223",
       "PR131",
@@ -111,6 +119,10 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "GEN6633",
       "GEN9008",
       "Quick Lookup",
+      "Spectrum Across the Spectrum",
+      "QA achievement marker",
+      "caller persona",
+      "wrap-up coaching",
       "source discrepancy",
       "canonical KB deduplication",
       "Repair and Replacement",
@@ -128,9 +140,13 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "Customer wants to use Invincible WiFi away from the primary service location.",
       "Agent removes Invincible WiFi equipment before the disconnect work order completes.",
       "A live public plan page and current internal article use different threshold wording.",
+      "Live simulator caller compares Spectrum against fiber and expects a real comparison.",
+      "Live simulator caller needs a spouse decision path without a placeholder order.",
+      "Live simulator caller wants lower cost but resists anything that sounds like an upsell.",
     ],
     actionItems: [
       "Use Quick Lookup for one-word plan/spec retrieval before opening a longer Coach conversation.",
+      "Use Across the Spectrum to practice caller personalities, QA marker completion, and wrap-up coaching before live reps.",
       "Use the isolated private profile for PID/work email; never mix personal admin records into product search results.",
       "Keep SSNs, passwords, authenticator codes, activation PINs, account-access secrets, payroll documents, and document images out of app source/data.",
       "Use current official PR, HOW, GEN, biller, Agent OS, approved SOP, and live offer content for customer actions.",
@@ -143,6 +159,7 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "Exact current PBB caps, eligible line-count range, submission and exclusion rules from the complete GEN9023 article.",
       "Whether the Multiple Internet Instances launch has moved beyond the July 6 delayed status.",
       "Whether Lovable project write scope can be granted so the private editor preview can be overwritten directly from ChatGPT.",
+      "Whether the simulator should later connect to a voice/LLM runtime for spoken live caller turns instead of the current deterministic local practice engine.",
     ],
   },
   {
