@@ -378,6 +378,7 @@ function formatTime(totalSeconds: number) {
 function playStartBeep() {
   try {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
     const ctx = new AudioContextClass();
     const oscillator = ctx.createOscillator();
     const gain = ctx.createGain();
