@@ -2,7 +2,7 @@
 
 ## v1.1.0-spectrum.4 — 2026-07-11
 
-AI-assisted selling workbench release.
+AI-assisted selling workbench release with CRAM exact-state refinement completed 2026-07-12.
 
 Changed:
 
@@ -14,7 +14,16 @@ Changed:
 - Added adaptive discovery, OARS listening, A-R-M objection handling, need–proof–benefit bridges, and autonomy-safe assumptive closing.
 - Added conversion-integrity gates against fabricated scarcity, hidden conditions, unsupported claims, pressure based on vulnerability, and customer/account identifiers in the local app.
 - Added the Prompt Engineer to the sidebar and landing dashboard without replacing Quick Lookup, Sales Coach, Across the Spectrum, or any existing study route.
-- Bumped the app version to `1.1.0-spectrum.4`.
+- Added `src/data/cramSalesCompiler.ts`, an integer-state CRAM compiler using the bounded prime pair `M=36`, `A=37`, and five binary invariants per lane.
+- Added a four-level winding tower: observed value, need winding, strategy meta-winding, and transaction meta-meta-winding.
+- Added exact lane masks bounded by 31 so every valid lane satisfies `mask mod 37 = mask` exactly.
+- Added a second exact five-bit risk mask for missing customer language, unknown current services, possible protected identifiers, coercive instructions, and unsupported persuasion methods.
+- Added an evidence-grade system: A for direct sales or strong operational evidence, B for replicated/convergent evidence, C for bounded adjacent-domain hypotheses, and HOLD for unsupported or autonomy-threatening tactics.
+- Added active timing order: verified credibility and discovery early, reflection and value reasoning in the middle, procedural clarity and choice-preserving close late.
+- Added hold blocks for embedded commands, personality targeting, hidden steering, fabricated scarcity, and unverified social proof.
+- Added a visible exact-state certificate, winding-tower cards, active strategy ledger, risk recovery carries, and hold ledger to the Prompt Engineer UI.
+- Added `docs/resources/cram-exact-state-sales-compiler-2026-07-12.md` as the operational specification.
+- Kept the app version at `1.1.0-spectrum.4` so package and weekly-ledger versions remain aligned during the same workbench release.
 
 Mailbox findings integrated:
 
@@ -29,6 +38,9 @@ Research basis:
 - Adaptive selling has the strongest direct sales-performance support in the reviewed meta-analysis.
 - Open questions, reflective listening, affirmations, and summaries are used to improve relevance and reduce conversational resistance.
 - Choice-preserving wording is used to reduce reactance; the assumptive close is permitted only after need, fit, eligibility, and complete disclosure are established.
+- Procedural clarity is retained as a bounded Grade C hypothesis because the supplied corpus identifies a cross-domain pattern but does not establish a universal telecom-sales mechanism.
+- Consumer-steering results are used as a risk signal, not as a recipe for concealed influence.
+- NLP embedded-command claims remain on HOLD because no controlled trial isolating the claimed mechanism was located in the supplied corpus.
 
 ## v1.1.0-spectrum.3 — 2026-07-10
 
