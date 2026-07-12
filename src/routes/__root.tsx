@@ -4,17 +4,20 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { Search } from "lucide-react";
 
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
+      <div className="surface-panel max-w-md rounded-2xl p-8 text-center">
+        <div className="eyebrow text-neon">Navigation</div>
+        <h1 className="mt-3 text-7xl font-bold text-gradient-primary">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you are looking for does not exist or has moved.
@@ -22,7 +25,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-xl bg-gradient-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-95"
           >
             Go home
           </Link>
@@ -38,8 +41,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+      <div className="surface-panel max-w-md rounded-2xl p-8 text-center">
+        <div className="eyebrow text-neon">Recovery</div>
+        <h1 className="mt-3 text-xl font-semibold tracking-tight text-foreground">
           This page did not load
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -51,13 +55,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-xl bg-gradient-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-95"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-xl border border-input bg-background/70 px-4 py-2 text-sm font-medium text-foreground hover:bg-accent"
           >
             Go home
           </a>
@@ -112,22 +116,57 @@ function RootShell({ children }: { children: React.ReactNode }) {
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 
+const routeContext = [
+  { match: "/lookup", workspace: "Live Call", label: "Quick Lookup" },
+  { match: "/sales-prompts", workspace: "Live Call", label: "AI Sales Specialist" },
+  { match: "/tutor", workspace: "Live Call", label: "Sales Coach" },
+  { match: "/across-spectrum", workspace: "Practice", label: "Across the Spectrum" },
+  { match: "/scenarios", workspace: "Practice", label: "Scenario Trainer" },
+  { match: "/flashcards", workspace: "Practice", label: "Flashcards" },
+  { match: "/curriculum", workspace: "Learn", label: "Curriculum" },
+  { match: "/plan", workspace: "Learn", label: "Study Plan" },
+  { match: "/tips", workspace: "Learn", label: "Tips" },
+  { match: "/setup", workspace: "System", label: "My Setup" },
+  { match: "/corner", workspace: "System", label: "Weekly Ledger" },
+] as const;
+
+function resolveRouteContext(pathname: string) {
+  return routeContext.find((item) => pathname.startsWith(item.match)) ?? {
+    workspace: "Today",
+    label: "Home",
+  };
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const context = resolveRouteContext(pathname);
 
   return (
     <QueryClientProvider client={queryClient}>
       <SidebarProvider>
-        <div className="flex min-h-screen w-full bg-background text-foreground">
+        <div className="flex min-h-screen w-full bg-background/20 text-foreground">
           <AppSidebar />
-          <div className="flex flex-1 flex-col">
-            <header className="sticky top-0 z-30 flex h-12 items-center gap-2 border-b border-border bg-background/80 px-3 backdrop-blur">
-              <SidebarTrigger />
-              <span className="text-sm font-semibold tracking-tight">
-                CallFlow Lab <span className="text-muted-foreground font-normal">· weekly sales study</span>
-              </span>
+          <div className="flex min-w-0 flex-1 flex-col">
+            <header className="shell-bar sticky top-0 z-30 flex h-14 items-center justify-between gap-3 border-b px-3 sm:px-4">
+              <div className="flex min-w-0 items-center gap-3">
+                <SidebarTrigger className="rounded-xl border border-border/70 bg-card/60 hover:bg-secondary" />
+                <div className="hidden h-6 w-px bg-border/80 sm:block" />
+                <div className="min-w-0 leading-tight">
+                  <div className="eyebrow truncate">{context.workspace}</div>
+                  <div className="truncate text-sm font-semibold tracking-tight">{context.label}</div>
+                </div>
+              </div>
+
+              <Link
+                to="/lookup"
+                className="inline-flex h-9 items-center gap-2 rounded-xl border border-border/80 bg-card/70 px-3 text-xs font-semibold text-foreground shadow-sm hover:border-neon/40 hover:bg-secondary"
+              >
+                <Search className="h-3.5 w-3.5 text-neon" />
+                <span className="hidden sm:inline">Quick Lookup</span>
+              </Link>
             </header>
-            <main className="flex-1">
+            <main className="app-main flex-1">
               <Outlet />
             </main>
           </div>
