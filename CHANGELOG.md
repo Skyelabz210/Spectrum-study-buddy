@@ -2,7 +2,7 @@
 
 ## v1.1.0-spectrum.4 — 2026-07-11
 
-AI-assisted selling workbench release with CRAM exact-state refinement completed 2026-07-12.
+AI-assisted selling workbench release with CRAM exact-state refinement and week-two UI architecture planning completed 2026-07-12.
 
 Changed:
 
@@ -23,6 +23,10 @@ Changed:
 - Added hold blocks for embedded commands, personality targeting, hidden steering, fabricated scarcity, and unverified social proof.
 - Added a visible exact-state certificate, winding-tower cards, active strategy ledger, risk recovery carries, and hold ledger to the Prompt Engineer UI.
 - Added `docs/resources/cram-exact-state-sales-compiler-2026-07-12.md` as the operational specification.
+- Added `docs/UI_REFINEMENT_PLAN_2026-07-12.md`, covering scalable information architecture, grouped navigation, mobile behavior, shared workspaces, route-specific improvements, and phased implementation.
+- Removed the repository lint command and deleted the ESLint configuration.
+- Confirmed that no GitHub Actions workflow files are configured and recorded the no-workflow policy in `.github/WORKFLOWS_DISABLED.md`.
+- Kept `main` as the canonical development and default branch.
 - Kept the app version at `1.1.0-spectrum.4` so package and weekly-ledger versions remain aligned during the same workbench release.
 
 Mailbox findings integrated:
@@ -85,7 +89,7 @@ Changed:
 Verification gates:
 
 - Current official PR, HOW, GEN, biller, Agent OS, and SOP content control over study cards.
-- Run `npm run lint` and `npm run build` before deployment.
+- Run `npm run build` manually when a browser/build smoke check is useful.
 
 ## v1.0.0-spectrum.0 — 2026-07-04
 
@@ -99,7 +103,7 @@ Changed:
 - Added A-R-M and policy-gate scenario data in `src/data/scenarios.ts`.
 - Added `/scenarios` route for call-response practice.
 - Rebranded root shell, home dashboard, sidebar, curriculum pages, flashcards, plan, coach, and weekly ledger.
-- Retargeted the AI tutor prompt to CallFlow Lab coaching.
+- Retargeted the AI tutor prompt into CallFlow Coach.
 - Rekeyed local memory to `callflowlab.memory.v1`.
 - Replaced floating speech-rate controls with integer percentage controls.
 - Replaced the former developer corner with a weekly training ledger.
@@ -107,6 +111,6 @@ Changed:
 
 Known follow-up:
 
-- Regenerate `src/routeTree.gen.ts` locally with the TanStack router plugin during the next dev run.
-- Run `npm run lint` and `npm run build` locally before merge.
+- Regenerate `src/routeTree.gen.ts` locally with the TanStack router plugin during the next local dev/build run.
+- Use manual build and browser smoke checks when needed; no repository lint or GitHub Actions enforcement is configured.
 - Add future Otter batches as new weekly ledger entries before modifying the curriculum spine.
