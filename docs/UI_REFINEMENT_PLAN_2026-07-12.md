@@ -21,6 +21,8 @@ The next interface should behave like an agent workspace rather than a collectio
 
 The interface should make the answer available in one or two actions.
 
+The structural plan is paired with `docs/UI_AESTHETIC_SYSTEM_2026-07-12.md`. Navigation, workspace composition, and visual polish are one program: hierarchy must be reinforced through layout, typography, spacing, surfaces, restrained color, and motion.
+
 ## 2. Current UI inventory
 
 ### Existing routes
@@ -104,7 +106,7 @@ Labels should reflect user intent and route aliases should remain stable for bac
 
 ### 3.6 The shell does not expose context
 
-The top bar always says `CallFlow Lab · weekly sales study`. It does not display:
+The old top bar always said `CallFlow Lab · weekly sales study`. It did not display:
 
 - current workspace
 - current module or selected product
@@ -113,13 +115,15 @@ The top bar always says `CallFlow Lab · weekly sales study`. It does not displa
 - recent item
 - quick return path
 
+The first polish pass now exposes workspace and page context and keeps Quick Lookup globally available. Later phases will add active tool state and recent-item context.
+
 ### 3.7 Mobile loses important secondary context
 
 The Coach hides its memory panel on small screens. Other large routes stack all controls above or below the main work area. Future mobile behavior should use drawers, sheets, and tabs so secondary information remains available without displacing the primary task.
 
 ### 3.8 Visual tokens retain legacy naming
 
-The stylesheet still contains old Tish-Sticks comments and variables such as `blood`. The current pink-neon visual language is consistent, but naming and semantic tokens should be cleaned so future components use product-purpose tokens rather than inherited project terminology.
+The initial stylesheet inherited comments and tokens from the original application. The first aesthetic pass replaced those comments with CallFlow Lab terminology and introduced semantic success, warning, information, danger, surface, border, and depth roles.
 
 ## 4. Target information architecture
 
@@ -444,13 +448,13 @@ Keep customer account identifiers and protected information out of persistent lo
 
 ## 12. Visual-system refinement
 
+The detailed visual contract lives in `docs/UI_AESTHETIC_SYSTEM_2026-07-12.md`.
+
 ### Token cleanup
 
-Rename legacy semantic variables:
-
-- `blood` → `danger-accent` or remove when unused
-- legacy Tish-Sticks comments → CallFlow Lab terminology
-- define explicit tokens for success, warning, source-verified, needs-check, active-call, and coaching
+- maintain semantic success, warning, information, danger, source, and active-state roles
+- keep legacy compatibility aliases only where current classes still depend on them
+- keep all new naming specific to CallFlow Lab
 
 ### Hierarchy
 
@@ -466,6 +470,21 @@ Rename legacy semantic variables:
 - preserve large page titles for landing and major workspaces
 - use smaller contextual headers inside operational tools
 - standardize eyebrow, title, description, and status spacing
+- keep generated scripts and exact-source output readable at live-call speed
+
+### Surface and depth
+
+- canvas, shell, primary surface, secondary panel, and transient emphasis remain visibly distinct
+- borders establish hierarchy before shadows
+- hover lift applies only to interactive cards
+- active call, verified success, warning, and blocking risk use separate semantic states
+
+### Motion
+
+- motion explains state change
+- active-call pulse, QA-marker appearance, drawer transitions, and result reveal are permitted
+- ambient animation and repeated decorative pulsing remain excluded
+- reduced-motion preferences disable nonessential movement
 
 ## 13. Accessibility and interaction requirements
 
@@ -481,7 +500,7 @@ Rename legacy semantic variables:
 
 ### Phase 0 — Repository and architecture cleanup
 
-Status: started
+Status: complete
 
 - Keep `main` as canonical
 - Remove lint command and ESLint configuration
@@ -489,13 +508,31 @@ Status: started
 - Record automation policy
 - Add this refinement plan
 
+### Phase 0.5 — Aesthetic foundation
+
+Status: first pass complete
+
+- replace inherited visual terminology
+- establish semantic color and surface tokens
+- refine application canvas, shell, depth, focus, and typography
+- add reduced-motion behavior
+- refine sidebar branding and active state
+- make the top bar contextual
+- keep Quick Lookup globally visible
+- document the aesthetic contract
+
+Acceptance:
+
+- the application reads as one related system rather than separate template pages
+- the current workspace and page are visible in the shell
+- focus, active, warning, verified, and blocked states remain distinguishable
+- the polish does not remove or relocate existing features
+
 ### Phase 1 — Navigation foundation
 
 - Add typed navigation registry
 - Group desktop sidebar by intent
-- Add collapsed-mode tooltips
 - Add mobile bottom navigation and route sheet
-- Add contextual top bar
 - Preserve every existing route
 
 Acceptance:
@@ -566,16 +603,16 @@ Acceptance:
 
 ## 15. Immediate implementation order
 
-The first UI implementation pass should contain only the following low-risk foundation changes:
+The next UI implementation pass should contain:
 
 1. Create the typed navigation registry
 2. Replace the flat sidebar with grouped navigation
-3. Add tooltips for collapsed icons
-4. Add a contextual page title to the top bar
-5. Introduce a persistent Quick Lookup action
-6. Clean legacy stylesheet naming and comments
+3. Add mobile bottom navigation and route directory sheet
+4. Apply shared page-header and workspace-surface primitives to the highest-use routes
+5. Redesign Today around one dominant action
+6. Continue route-specific aesthetic cleanup without changing feature behavior
 
-The landing-page redesign and route-specific work should follow after the navigation foundation is stable.
+The route-specific work should follow after the navigation foundation is stable.
 
 ## 16. Completion definition
 
@@ -588,3 +625,4 @@ The interface is ready for continued weekly expansion when:
 - mobile retains access to secondary context through drawers or sheets
 - the primary task remains visible while details are progressively revealed
 - every route has a clear next action and related-tool path
+- new pages inherit the same visual tokens and component hierarchy without one-off styling
