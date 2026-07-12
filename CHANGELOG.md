@@ -1,12 +1,42 @@
 # Changelog
 
+## v1.1.0-spectrum.4 — 2026-07-11
+
+AI-assisted selling workbench release.
+
+Changed:
+
+- Added `/sales-prompts`, a deterministic AI Sales Specialist Prompt Engineer designed for the browser-based internal Spectrum AI agent.
+- Added ten common call-driver presets covering new Internet, premium-tier upgrades, Mobile pitching, additional lines, device savings, Invincible WiFi, Voice, price objections, competitor switching, and total household connectivity.
+- Added a minimum-input workflow that can build a complete paste-ready prompt from one customer sentence.
+- Added Rapid, Standard, and Full Strategy output depths plus direct, consultative, reassuring, and energetic delivery tones.
+- Added source-discipline instructions requiring the internal AI to verify current KBase, biller, Agent OS, approved offers, serviceability, equipment, device compatibility, and Competitive Edge content instead of inventing missing facts.
+- Added adaptive discovery, OARS listening, A-R-M objection handling, need–proof–benefit bridges, and autonomy-safe assumptive closing.
+- Added conversion-integrity gates against fabricated scarcity, hidden conditions, unsupported claims, pressure based on vulnerability, and customer/account identifiers in the local app.
+- Added the Prompt Engineer to the sidebar and landing dashboard without replacing Quick Lookup, Sales Coach, Across the Spectrum, or any existing study route.
+- Bumped the app version to `1.1.0-spectrum.4`.
+
+Mailbox findings integrated:
+
+- Meaningful Mobile presentations should include pricing, plan, feature, and benefit and should be introduced as a real conversation rather than a late mention.
+- Internet and premium-tier positioning should begin with household users, device count, simultaneous activities, performance expectations, and serviceability.
+- Invincible WiFi discovery should cover people, devices, dead zones, buffering, work from home, gaming, streaming, and outage-continuity need.
+- Device-saving prompts preserve BYOD, Phone Balance Buyout, trade-in, activation, documentation, compatibility, and current-offer verification gates.
+- Temporary incentive amounts, individual performance data, employee names, and confidential mailbox content were not committed to the app.
+
+Research basis:
+
+- Adaptive selling has the strongest direct sales-performance support in the reviewed meta-analysis.
+- Open questions, reflective listening, affirmations, and summaries are used to improve relevance and reduce conversational resistance.
+- Choice-preserving wording is used to reduce reactance; the assumptive close is permitted only after need, fit, eligibility, and complete disclosure are established.
+
 ## v1.1.0-spectrum.3 — 2026-07-10
 
 Direct Outlook/Gmail corpus reconciliation and rapid retrieval release.
 
 Changed:
 
-- Connected direct Outlook ingestion for `Anthony.Diaz2@spectrum.com` and reconciled it with forwarded Gmail copies.
+- Connected direct Outlook ingestion for the work mailbox and reconciled it with forwarded Gmail copies.
 - Canonicalized duplicate product messages by KB/article ID rather than creating duplicate facts.
 - Added `src/data/knowledgeCorpus.ts` with exact-source records for PR131, PR223, HOW7726, GEN7777, GEN9023, GEN8761, HOW7449, GEN9001, referenced SIA articles, public Mobile plan context, and source-pointer alerts.
 - Added `/lookup`: type one or a few words such as `advantage`, `2 gig`, `unlimited plus`, `PBB`, or `RRP` to retrieve plan, speed, services/features, requirements, notes, and source status.
