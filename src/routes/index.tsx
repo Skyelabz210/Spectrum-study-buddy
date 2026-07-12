@@ -6,10 +6,11 @@ import { getCurrentWeek } from "@/data/weeklyTraining";
 import { SCENARIOS } from "@/data/scenarios";
 import { SETUP_TASKS, WORK_PROFILE } from "@/data/workSetup";
 import { CALLER_PERSONAS } from "@/data/acrossSpectrum";
+import { SALES_CALL_DRIVERS } from "@/data/salesPromptEngineer";
 import { DEFAULT_PRIVATE_PROFILE, type PrivateWorkProfile } from "@/data/privateProfile";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Layers, BookOpen, ArrowRight, ClipboardCheck, History, KeyRound, Search, Copy, PhoneCall } from "lucide-react";
+import { Sparkles, Layers, BookOpen, ArrowRight, ClipboardCheck, History, KeyRound, Search, Copy, PhoneCall, WandSparkles } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
@@ -73,12 +74,13 @@ function Home() {
           </div>
         )}
         <p className="mt-5 max-w-2xl text-balance text-base text-muted-foreground sm:text-lg">
-          Spectrum Study Buddy: exact-source product lookup, live call simulation, call-flow training, flashcards, scenarios, setup, and AI coaching. Personal work identity stays isolated from the company product corpus.
+          Spectrum Study Buddy: exact-source product lookup, AI prompt engineering, live call simulation, call-flow training, flashcards, scenarios, setup, and AI coaching. Personal work identity stays isolated from the company product corpus.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
           <Button asChild size="lg" className="bg-gradient-primary text-primary-foreground glow hover:opacity-95">
             <Link to="/lookup"><Search className="mr-1 h-4 w-4" /> Quick lookup <ArrowRight className="ml-1 h-4 w-4" /></Link>
           </Button>
+          <Button asChild size="lg" variant="outline"><Link to="/sales-prompts"><WandSparkles className="mr-1 h-4 w-4" /> Prompt engineer</Link></Button>
           <Button asChild size="lg" variant="outline"><Link to="/across-spectrum"><PhoneCall className="mr-1 h-4 w-4" /> Across the Spectrum</Link></Button>
           {!profile.pid && <Button asChild size="lg" variant="outline"><Link to="/setup"><KeyRound className="mr-1 h-4 w-4" /> Set PID</Link></Button>}
           <Button asChild size="lg" variant="outline"><Link to="/curriculum">Start curriculum</Link></Button>
@@ -88,8 +90,9 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-5xl gap-4 px-6 pb-10 sm:grid-cols-2 lg:grid-cols-7">
+      <section className="mx-auto grid max-w-5xl gap-4 px-6 pb-10 sm:grid-cols-2 lg:grid-cols-8">
         <Tile icon={<Search className="h-5 w-5 text-neon" />} title="Quick lookup" subtitle="One-word exact specs" href="/lookup" />
+        <Tile icon={<WandSparkles className="h-5 w-5 text-neon" />} title="Prompt engineer" subtitle={`${SALES_CALL_DRIVERS.length} call drivers`} href="/sales-prompts" />
         <Tile icon={<PhoneCall className="h-5 w-5 text-neon" />} title="Across" subtitle={`${CALLER_PERSONAS.length} caller types`} href="/across-spectrum" />
         <Tile icon={<BookOpen className="h-5 w-5 text-neon" />} title={`${MODULES.length} modules`} subtitle={`${lessonCount} lessons`} href="/curriculum" />
         <Tile icon={<KeyRound className="h-5 w-5 text-neon" />} title="My setup" subtitle={`${urgentSetupCount} do-now tasks`} href="/setup" />
@@ -125,7 +128,7 @@ function Home() {
   );
 }
 
-function Tile({ icon, title, subtitle, href }: { icon: React.ReactNode; title: string; subtitle: string; href: "/lookup" | "/across-spectrum" | "/curriculum" | "/setup" | "/scenarios" | "/flashcards" | "/tutor" | "/corner" }) {
+function Tile({ icon, title, subtitle, href }: { icon: React.ReactNode; title: string; subtitle: string; href: "/lookup" | "/sales-prompts" | "/across-spectrum" | "/curriculum" | "/setup" | "/scenarios" | "/flashcards" | "/tutor" | "/corner" }) {
   return (
     <Link to={href}>
       <Card className="card-elevated flex h-full items-center gap-3 border-border bg-card/70 p-4 transition hover:border-neon/40 hover:bg-card">
