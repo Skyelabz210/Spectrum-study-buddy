@@ -4,6 +4,10 @@ Date: 2026-07-12
 Stage: Week 2 growth architecture  
 Canonical branch: `main`
 
+## Branch note
+
+`main` is the only canonical development line. The temporary `master` reference exists only because branch deletion is not exposed by the current connector and must not receive independent work.
+
 ## 1. Executive direction
 
 CallFlow Lab has already expanded from a study shell into four distinct operating systems inside one app:
