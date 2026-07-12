@@ -1,0 +1,313 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useMemo, useState, type ChangeEvent } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  METHOD_STACK,
+  PROMPT_DEPTH_COPY,
+  SALES_CALL_DRIVERS,
+  SALES_PROMPT_GUARDRAILS,
+  SALES_TONE_COPY,
+  buildSalesSpecialistPrompt,
+  getSalesCallDriver,
+  type PromptDepth,
+  type SalesTone,
+} from "@/data/salesPromptEngineer";
+import { CheckCircle2, Clipboard, Database, ShieldCheck, Sparkles, WandSparkles } from "lucide-react";
+import { toast } from "sonner";
+
+export const Route = createFileRoute("/sales-prompts")({
+  component: SalesPromptEngineerPage,
+  head: () => ({
+    meta: [
+      { title: "AI Sales Specialist Prompt Engineer · CallFlow Lab" },
+      {
+        name: "description",
+        content:
+          "Generate source-grounded Spectrum sales prompts, discovery questions, objection branches, and choice-preserving positive closes for the internal AI agent.",
+      },
+    ],
+  }),
+});
+
+function SalesPromptEngineerPage() {
+  const [driverId, setDriverId] = useState(SALES_CALL_DRIVERS[0]?.id ?? "new-internet");
+  const [customerWords, setCustomerWords] = useState("");
+  const [knownServices, setKnownServices] = useState("");
+  const [desiredOutcome, setDesiredOutcome] = useState("");
+  const [objection, setObjection] = useState("");
+  const [tone, setTone] = useState<SalesTone>("consultative");
+  const [depth, setDepth] = useState<PromptDepth>("standard");
+  const driver = getSalesCallDriver(driverId);
+
+  const prompt = useMemo(
+    () =>
+      buildSalesSpecialistPrompt({
+        driverId,
+        customerWords,
+        knownServices,
+        desiredOutcome,
+        objection,
+        tone,
+        depth,
+      }),
+    [customerWords, depth, desiredOutcome, driverId, knownServices, objection, tone]
+  );
+
+  const copyPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(prompt);
+      toast.success("Sales prompt copied. Paste it into the internal Spectrum AI agent.");
+    } catch {
+      toast.error("Could not copy the prompt.");
+    }
+  };
+
+  const loadExample = () => {
+    setCustomerWords("I only called for internet. I work from home and the kids game, but I do not want a huge bill.");
+    setKnownServices("New customer; address and offer eligibility not yet confirmed.");
+    setDesiredOutcome("Right-size Internet, check WiFi continuity need, and introduce Mobile early enough for a meaningful comparison.");
+    setObjection("I do not want to be upsold.");
+    setDriverId("total-connectivity");
+    setTone("reassuring");
+    setDepth("full");
+  };
+
+  return (
+    <main className="mx-auto max-w-7xl px-6 py-10">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-neon" /> Internal-AI prompt workbench
+          </div>
+          <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">AI Sales Specialist Prompt Engineer</h1>
+          <p className="mt-3 max-w-3xl text-muted-foreground">
+            Give it one customer sentence and a call driver. It produces a paste-ready prompt that makes the Spectrum AI return a live script, discovery path, verified value bridge, objection branches, source checks, and a positive close.
+          </p>
+        </div>
+        <Badge variant="secondary" className="text-sm">
+          Source-grounded · live-call ready
+        </Badge>
+      </div>
+
+      <section className="mt-8 grid gap-4 xl:grid-cols-[330px_1fr]">
+        <aside className="space-y-4">
+          <Card className="border-border bg-card/70 p-4">
+            <div className="flex items-center gap-2">
+              <WandSparkles className="h-5 w-5 text-neon" />
+              <h2 className="font-semibold">Common call drivers</h2>
+            </div>
+            <div className="mt-3 space-y-2">
+              {SALES_CALL_DRIVERS.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setDriverId(item.id)}
+                  className={`w-full rounded-lg border px-3 py-3 text-left text-sm transition ${
+                    item.id === driverId
+                      ? "border-neon bg-secondary text-foreground"
+                      : "border-border bg-background/40 text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                  }`}
+                >
+                  <div className="font-semibold">{item.shortLabel}</div>
+                  <div className="mt-1 text-xs opacity-80">{item.objective}</div>
+                </button>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="border-border bg-card/70 p-4">
+            <div className="flex items-center gap-2">
+              <Database className="h-5 w-5 text-neon" />
+              <h2 className="font-semibold">Likely controlling sources</h2>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {driver.sourceHints.map((source) => (
+                <Badge key={source} variant="outline">
+                  {source}
+                </Badge>
+              ))}
+            </div>
+            <p className="mt-3 text-xs text-muted-foreground">
+              The generated prompt makes the internal AI verify live pricing, eligibility, serviceability, equipment, and promotions instead of filling gaps from memory.
+            </p>
+          </Card>
+        </aside>
+
+        <section className="space-y-4">
+          <Card className="card-elevated border-border bg-card/75 p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h2 className="text-lg font-semibold">Minimum-input builder</h2>
+                <p className="mt-1 text-sm text-muted-foreground">The customer’s own sentence is the highest-value input. Everything else can be added only when known.</p>
+              </div>
+              <Button variant="outline" onClick={loadExample}>Load example</Button>
+            </div>
+
+            <div className="mt-5 grid gap-4 lg:grid-cols-2">
+              <Field label="Customer’s exact words" helper="Paste one sentence or a few keywords from the live call." wide>
+                <Textarea
+                  value={customerWords}
+                  onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setCustomerWords(event.target.value)}
+                  rows={4}
+                  placeholder="Example: I work from home, my kids game, and the back room buffers."
+                  className="bg-card"
+                />
+              </Field>
+
+              <Field label="Known/current services" helper="Leave blank when unknown; the AI will create a verification step.">
+                <Input
+                  value={knownServices}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => setKnownServices(event.target.value)}
+                  placeholder="Example: Existing Premier + Advanced WiFi"
+                  className="bg-card"
+                />
+              </Field>
+
+              <Field label="Desired outcome" helper="The sale or next step the agent is trying to earn.">
+                <Input
+                  value={desiredOutcome}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => setDesiredOutcome(event.target.value)}
+                  placeholder="Example: Verify 2 Gig fit and add Mobile comparison"
+                  className="bg-card"
+                />
+              </Field>
+
+              <Field label="Objection or hesitation" helper="Use the customer’s wording when possible." wide>
+                <Textarea
+                  value={objection}
+                  onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setObjection(event.target.value)}
+                  rows={3}
+                  placeholder="Example: I only want the cheapest internet and I do not want an upsell."
+                  className="bg-card"
+                />
+              </Field>
+            </div>
+
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <ChoiceGroup
+                label="Delivery tone"
+                values={Object.keys(SALES_TONE_COPY) as SalesTone[]}
+                selected={tone}
+                renderLabel={(value) => value[0].toUpperCase() + value.slice(1)}
+                onSelect={setTone}
+              />
+              <ChoiceGroup
+                label="Output depth"
+                values={Object.keys(PROMPT_DEPTH_COPY) as PromptDepth[]}
+                selected={depth}
+                renderLabel={(value) => PROMPT_DEPTH_COPY[value].label}
+                onSelect={setDepth}
+              />
+            </div>
+          </Card>
+
+          <Card className="card-elevated border-neon/30 bg-card/80 p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-neon" />
+                <div>
+                  <h2 className="font-semibold">Paste-ready engineered prompt</h2>
+                  <p className="text-xs text-muted-foreground">Generated locally; customer/account identifiers should remain out of this app.</p>
+                </div>
+              </div>
+              <Button onClick={copyPrompt} className="bg-gradient-primary text-primary-foreground hover:opacity-95">
+                <Clipboard className="mr-1 h-4 w-4" /> Copy prompt
+              </Button>
+            </div>
+            <Textarea value={prompt} readOnly rows={24} className="mt-4 bg-background font-mono text-xs leading-relaxed" />
+          </Card>
+        </section>
+      </section>
+
+      <section className="mt-6 grid gap-4 lg:grid-cols-2">
+        <Card className="border-border bg-card/70 p-5">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="h-5 w-5 text-neon" />
+            <h2 className="font-semibold">Method stack</h2>
+          </div>
+          <div className="mt-4 space-y-3">
+            {METHOD_STACK.map((method) => (
+              <div key={method.name} className="rounded-xl border border-border bg-background/40 p-3">
+                <div className="text-sm font-semibold">{method.name}</div>
+                <p className="mt-1 text-xs text-muted-foreground">{method.use}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <Card className="border-border bg-card/70 p-5">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="h-5 w-5 text-neon" />
+            <h2 className="font-semibold">Conversion and integrity gates</h2>
+          </div>
+          <div className="mt-4 space-y-3">
+            {SALES_PROMPT_GUARDRAILS.map((guardrail) => (
+              <div key={guardrail} className="flex gap-3 rounded-xl border border-border bg-background/40 p-3 text-sm">
+                <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-neon" />
+                <span>{guardrail}</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </section>
+    </main>
+  );
+}
+
+function Field({
+  label,
+  helper,
+  wide = false,
+  children,
+}: {
+  label: string;
+  helper: string;
+  wide?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className={wide ? "lg:col-span-2" : ""}>
+      <span className="text-sm font-semibold">{label}</span>
+      <span className="mt-1 block text-xs text-muted-foreground">{helper}</span>
+      <span className="mt-2 block">{children}</span>
+    </label>
+  );
+}
+
+function ChoiceGroup<T extends string>({
+  label,
+  values,
+  selected,
+  renderLabel,
+  onSelect,
+}: {
+  label: string;
+  values: T[];
+  selected: T;
+  renderLabel: (value: T) => string;
+  onSelect: (value: T) => void;
+}) {
+  return (
+    <div>
+      <div className="text-sm font-semibold">{label}</div>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {values.map((value) => (
+          <button
+            key={value}
+            onClick={() => onSelect(value)}
+            className={`rounded-lg border px-3 py-2 text-sm transition ${
+              value === selected
+                ? "border-neon bg-secondary text-foreground"
+                : "border-border bg-background/40 text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {renderLabel(value)}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
