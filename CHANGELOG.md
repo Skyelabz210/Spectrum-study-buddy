@@ -24,6 +24,12 @@ Changed:
 - Added a visible exact-state certificate, winding-tower cards, active strategy ledger, risk recovery carries, and hold ledger to the Prompt Engineer UI.
 - Added `docs/resources/cram-exact-state-sales-compiler-2026-07-12.md` as the operational specification.
 - Added `docs/UI_REFINEMENT_PLAN_2026-07-12.md`, covering scalable information architecture, grouped navigation, mobile behavior, shared workspaces, route-specific improvements, and phased implementation.
+- Added `docs/UI_AESTHETIC_SYSTEM_2026-07-12.md`, defining color discipline, typography, surface hierarchy, component polish, motion, mobile behavior, and acceptance criteria.
+- Rebuilt the global visual tokens around a focused dark operational canvas with restrained magenta emphasis, semantic success/warning/info states, three surface levels, refined borders, softer glow, and more deliberate depth.
+- Added improved font rendering, focus treatment, scrollbars, reduced-motion behavior, reusable shell/surface utilities, and mobile radius adjustments.
+- Refined the top shell with contextual workspace/page labels and persistent Quick Lookup access.
+- Refined sidebar branding, spacing, active-state emphasis, and collapsed-mode tooltips.
+- Polished error and missing-route surfaces to match the workbench visual system.
 - Removed the repository lint command and deleted the ESLint configuration.
 - Confirmed that no GitHub Actions workflow files are configured and recorded the no-workflow policy in `.github/WORKFLOWS_DISABLED.md`.
 - Kept `main` as the canonical development and default branch.
