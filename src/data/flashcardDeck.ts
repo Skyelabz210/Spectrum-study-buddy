@@ -1,5 +1,6 @@
 import { FLASHCARDS, type Flashcard } from "@/data/curriculum";
 import { SPECTRUM_PRODUCT_UPDATE_FLASHCARDS } from "@/data/spectrumProductUpdate20260710";
+import { OTTER_CORPUS_FLASHCARDS_20260712 } from "@/data/otterCorpusFlashcards20260712";
 
 export const SUPPLEMENTAL_FLASHCARDS: Flashcard[] = [
   { id: "sfc1", module: 4, category: "Internet Plans", front: "PR131: Internet Advantage speed and eligibility?", back: "100×20 Mbps. Display only for approved addresses flagged in ESE/CSG or Agent OS. Verify the biller; do not quote it as generally available." },
@@ -54,4 +55,5 @@ export const ALL_FLASHCARDS: Flashcard[] = [
   ...FLASHCARDS,
   ...SUPPLEMENTAL_FLASHCARDS,
   ...SPECTRUM_PRODUCT_UPDATE_FLASHCARDS,
+  ...OTTER_CORPUS_FLASHCARDS_20260712,
 ];
