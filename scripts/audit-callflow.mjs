@@ -31,6 +31,7 @@ function assertUnique(label, entries) {
 
 const requiredFiles = [
   "src/routes/index.tsx",
+  "src/routes/full-spectrum.tsx",
   "src/routes/lookup.tsx",
   "src/routes/curriculum.index.tsx",
   "src/routes/curriculum.$moduleId.tsx",
@@ -43,6 +44,7 @@ const requiredFiles = [
   "src/routes/plan.tsx",
   "src/routes/tips.tsx",
   "src/routes/corner.tsx",
+  "src/data/fullSpectrumCorporate.ts",
   "src/data/knowledgeCorpus.ts",
   "src/data/fullCurriculum.ts",
   "src/data/otterCurriculum20260712.ts",
@@ -58,6 +60,7 @@ requiredFiles.forEach(requireFile);
 if (failures.length === 0) {
   const routeTree = read("src/routeTree.gen.ts");
   const requiredRoutes = [
+    "/full-spectrum",
     "/lookup",
     "/curriculum/",
     "/curriculum/$moduleId",
@@ -109,6 +112,22 @@ if (failures.length === 0) {
   }
   notes.push("CRAM masks: exhaustive 0–31 modulo-37 recovery checked");
 
+  const corporate = read("src/data/fullSpectrumCorporate.ts");
+  const corporateRequired = [
+    "Connecting People to What Matters Most",
+    "FCC approved · closing not confirmed in reviewed sources",
+    "CUSTOMER_COMMITMENT_PILLARS",
+    "AGENTIC_APPLICATIONS",
+    "COMPETITOR_VECTORS",
+    "CORPORATE_SOURCES",
+  ];
+  for (const value of corporateRequired) {
+    if (!corporate.includes(value)) failures.push(`Full Spectrum corporate dataset missing required marker: ${value}`);
+  }
+  if (!read("src/components/AppSidebar.tsx").includes("/full-spectrum")) failures.push("Full Spectrum is not wired into the sidebar");
+  if (!read("src/routes/index.tsx").includes("/full-spectrum")) failures.push("Full Spectrum is not wired into the home workspace");
+  notes.push("Full Spectrum: mission, transaction-status, strategy, source and navigation markers checked");
+
   const productionSrcFiles = [
     "src/data/workSetup.ts",
     "src/data/privateProfile.ts",
@@ -124,6 +143,7 @@ if (failures.length === 0) {
 
   const activeSurfaceFiles = [
     "src/routes/index.tsx",
+    "src/routes/full-spectrum.tsx",
     "src/routes/curriculum.index.tsx",
     "src/routes/flashcards.tsx",
     "src/components/AppSidebar.tsx",
