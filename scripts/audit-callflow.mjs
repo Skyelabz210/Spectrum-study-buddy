@@ -35,6 +35,7 @@ const requiredFiles = [
   "src/routes/lookup.tsx",
   "src/routes/curriculum.index.tsx",
   "src/routes/curriculum.$moduleId.tsx",
+  "src/routes/prompt-academy.tsx",
   "src/routes/setup.tsx",
   "src/routes/across-spectrum.tsx",
   "src/routes/sales-prompts.tsx",
@@ -45,6 +46,7 @@ const requiredFiles = [
   "src/routes/tips.tsx",
   "src/routes/corner.tsx",
   "src/data/fullSpectrumCorporate.ts",
+  "src/data/promptEngineeringAcademy.ts",
   "src/data/knowledgeCorpus.ts",
   "src/data/fullCurriculum.ts",
   "src/data/otterCurriculum20260712.ts",
@@ -69,6 +71,7 @@ if (failures.length === 0) {
     "/lookup",
     "/curriculum/",
     "/curriculum/$moduleId",
+    "/prompt-academy",
     "/setup",
     "/across-spectrum",
     "/sales-prompts",
@@ -80,7 +83,7 @@ if (failures.length === 0) {
     "/corner",
   ];
   for (const route of requiredRoutes) {
-    if (!routeTree.includes(`path: '${route}'`) && !routeTree.includes(`path: \"${route}\"`)) {
+    if (!routeTree.includes(`path: '${route}'`) && !routeTree.includes(`path: "${route}"`)) {
       failures.push(`Route tree missing path: ${route}`);
     }
   }
@@ -94,6 +97,38 @@ if (failures.length === 0) {
     failures.push("Route tree is missing its generated route manifest");
   }
   notes.push(`Route tree: generated ownership and ${requiredRoutes.length} required paths checked`);
+
+  const academy = read("src/data/promptEngineeringAcademy.ts");
+  const academyRoute = read("src/routes/prompt-academy.tsx");
+  const academyRequired = [
+    "TASK + FACTS + LIMITS + FORMAT + VERIFY",
+    "PRICING_SAFE_PROMPT",
+    "ACADEMY_LESSONS",
+    "PROMPT_TEMPLATES",
+    "OUTPUT_RECIPES",
+    "ACADEMY_WORKFLOWS",
+    "ADVANCED_DEEP_DIVE",
+    "DSPy",
+    "TextGrad",
+    "OPRO",
+    "NOT PROVIDED",
+    "Do not request customer identifiers",
+  ];
+  for (const value of academyRequired) {
+    if (!academy.includes(value)) failures.push(`Prompt Academy dataset missing required marker: ${value}`);
+  }
+  const academyLessonIds = collectMatches(["src/data/promptEngineeringAcademy.ts"], /\bid:\s*["'](pa-[^"']+)["']/g);
+  const academyTemplateIds = collectMatches(["src/data/promptEngineeringAcademy.ts"], /\bid:\s*["'](tpl-[^"']+)["']/g);
+  assertUnique("Prompt Academy lesson IDs", academyLessonIds);
+  assertUnique("Prompt Academy template IDs", academyTemplateIds);
+  if (academyLessonIds.length < 20) failures.push(`Prompt Academy expected at least 20 lessons; found ${academyLessonIds.length}`);
+  if (academyTemplateIds.length < 10) failures.push(`Prompt Academy expected at least 10 templates; found ${academyTemplateIds.length}`);
+  for (const marker of ["Prompt blueprint builder", "Pricing-safe master template", "Advanced deep dive", "Learning progress"]) {
+    if (!academyRoute.includes(marker)) failures.push(`Prompt Academy route missing interface marker: ${marker}`);
+  }
+  if (!read("src/components/AppSidebar.tsx").includes("/prompt-academy")) failures.push("Prompt Academy is not wired into the sidebar");
+  if (!read("src/routes/index.tsx").includes("/prompt-academy")) failures.push("Prompt Academy is not wired into the home workspace");
+  notes.push("Prompt Academy: lessons, templates, formatting, workflows, advanced topics, privacy and navigation checked");
 
   const flashcardFiles = [
     "src/data/curriculum.ts",
@@ -133,7 +168,7 @@ if (failures.length === 0) {
   }
   const voiceProfiles = read("src/data/acrossSpectrumVoice.ts");
   for (const entry of personaIds) {
-    if (!voiceProfiles.includes(`\"${entry.value}\"`)) failures.push(`Missing voice profile for persona: ${entry.value}`);
+    if (!voiceProfiles.includes(`"${entry.value}"`)) failures.push(`Missing voice profile for persona: ${entry.value}`);
   }
   const offerBoard = read("src/data/acrossSpectrumOffers.ts");
   for (const label of ["Capability ceiling", "Most logical", "Value alternative"]) {
@@ -172,6 +207,8 @@ if (failures.length === 0) {
     "src/routes/setup.tsx",
     "src/routes/index.tsx",
     "src/routes/across-spectrum.tsx",
+    "src/routes/prompt-academy.tsx",
+    "src/data/promptEngineeringAcademy.ts",
     "src/data/flashcardDeck.ts",
     "src/data/otterCorpusFlashcards20260712.ts",
   ];
@@ -184,6 +221,7 @@ if (failures.length === 0) {
     "src/routes/index.tsx",
     "src/routes/full-spectrum.tsx",
     "src/routes/across-spectrum.tsx",
+    "src/routes/prompt-academy.tsx",
     "src/routes/curriculum.index.tsx",
     "src/routes/flashcards.tsx",
     "src/components/AppSidebar.tsx",
