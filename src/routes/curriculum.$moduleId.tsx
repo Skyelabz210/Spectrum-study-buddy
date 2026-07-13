@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MODULES, type Module } from "@/data/curriculum";
+import { MODULES, type Module } from "@/data/fullCurriculum";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Sparkles, BookmarkPlus, Play, Pause, SkipForward } from "lucide-react";
