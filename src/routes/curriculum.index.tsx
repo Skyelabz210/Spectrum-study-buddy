@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MODULES } from "@/data/curriculum";
+import { MODULES } from "@/data/fullCurriculum";
 import { Card } from "@/components/ui/card";
 
 export const Route = createFileRoute("/curriculum/")({
@@ -7,7 +7,7 @@ export const Route = createFileRoute("/curriculum/")({
   head: () => ({
     meta: [
       { title: "Curriculum · CallFlow Lab" },
-      { name: "description", content: "The weekly Spectrum sales training spine in plain language." },
+      { name: "description", content: "The complete Spectrum sales training spine, including products, tools, QA, prompt engineering, benefits and floor-readiness practice." },
     ],
   }),
 });
@@ -17,7 +17,7 @@ function CurriculumIndex() {
     <div className="mx-auto max-w-4xl px-6 py-10">
       <h1 className="text-3xl font-bold tracking-tight">Curriculum</h1>
       <p className="mt-2 text-muted-foreground">
-        The training spine is broken into modules: call flow, SOP gates, tools, products, objections, and weekly update practice. Tap any module and take one bite at a time.
+        The training spine covers call flow, SOP gates, tools, products, objections, technical fluency, AI prompting, QA metrics, benefits, practice and weekly source review. Tap any module and take one bite at a time.
       </p>
       <div className="mt-8 space-y-3">
         {MODULES.map((m) => {
