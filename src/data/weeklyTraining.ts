@@ -21,7 +21,7 @@ export type WeeklyTrainingUpdate = {
   unresolvedQuestions: string[];
 };
 
-export const CURRENT_APP_VERSION = "1.2.0-spectrum.0";
+export const CURRENT_APP_VERSION = "1.3.0-spectrum.0";
 export const CURRENT_WEEK_ID = "2026-W28";
 
 export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
@@ -31,8 +31,9 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     dateRange: "2026-07-05 through 2026-07-12",
     source: "mixed",
     summary:
-      "Comprehensive system audit and full July Otter corpus reconciliation. The app now adds four curriculum modules for technical product fluency, Agent OS AI/prompt engineering, QA/metrics/floor readiness, and benefits/support; 100 new source-cautious flashcards; a full subsystem audit; and automated audit/typecheck/build release tooling. Existing Quick Lookup, Prompt Engineer, Across the Spectrum, scenarios, coach, setup, plans, tips and weekly history remain additive and intact.",
+      "Comprehensive system audit, July Otter reconciliation and corporate-intelligence expansion. The app now includes The Full Spectrum: a source-backed corporate page covering Charter/Spectrum mission, Customer Commitment, lineage, current scale, the FCC-approved but not-yet-confirmed-closed Cox transaction, AI and agentic direction, competitors, leadership and frontline meaning. The release also retains four added curriculum modules, 100 Otter-derived flashcards and automated audit/typecheck/build tooling.",
     recordings: [
+      { id: "manual-2026-07-12-full-spectrum", title: "Manual research: The Full Spectrum corporate intelligence page", recordedAt: "2026-07-12T22:00:00-05:00", duration: "public-source research", status: "ingested", focus: ["mission", "Customer Commitment", "corporate history", "Cox transaction", "AI strategy", "competitors", "leadership"] },
       { id: "manual-2026-07-12-full-system-audit", title: "Manual: CallFlow Lab full system and subsystem audit", recordedAt: "2026-07-12T12:00:00-05:00", duration: "system audit", status: "ingested", focus: ["architecture", "wiring", "privacy", "accessibility", "testing", "release gates"] },
       { id: "XLiNBWFE89MY6LqZzMSAYpP2gjs", title: "Agent OS AI and prompt engineering", recordedAt: "2026-07-11T10:36:00-05:00", duration: "2h 2m", status: "ingested", focus: ["Agent OS AI", "prompt structure", "privacy", "Copilot verification", "hallucination"] },
       { id: "gXrvWYNGrCI8V4tU4dSpUAmMRLw", title: "Agent OS AI-assisted sales pitches", recordedAt: "2026-07-11T13:41:00-05:00", duration: "26m", status: "ingested", focus: ["sales prompts", "pitch length", "customer-centered language", "verification"] },
@@ -54,37 +55,37 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     ],
     modulesTouched: ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", "m10", "m11", "m12", "m13", "m14"],
     newTerms: [
-      "Advanced WiFi", "Invincible WiFi", "DOCSIS", "FTTH", "ONT", "WiFi 7", "MVNO", "SIM", "eSIM", "IMEI", "eMTA", "PBX", "Cloud DVR", "Agent OS AI", "prompt injection", "OARS", "need-proof-benefit", "AHT", "ACW", "conversion", "yield", "APC", "product mix", "adherence", "occupancy", "semantic QA", "IGS", "EAP", "source supersession", "release gate"
+      "The Full Spectrum", "Customer Commitment", "Charter lineage", "Cox transaction", "agentic AI", "converged connectivity", "Advanced WiFi", "Invincible WiFi", "DOCSIS", "FTTH", "ONT", "WiFi 7", "MVNO", "SIM", "eSIM", "IMEI", "eMTA", "PBX", "Cloud DVR", "Agent OS AI", "prompt injection", "OARS", "need-proof-benefit", "AHT", "ACW", "conversion", "yield", "APC", "product mix", "adherence", "occupancy", "semantic QA", "IGS", "EAP", "source supersession", "release gate"
     ],
     scenarioSeeds: [
+      "Customer asks how the Spectrum brand relates to Charter Communications.",
+      "Customer assumes the Charter–Cox transaction has already closed.",
+      "Agent uses AI-generated corporate information without checking its source date.",
       "Customer calls a router a modem and needs a respectful technical correction.",
       "Customer expects full plan speed on an older WiFi device.",
       "Customer interprets Invincible WiFi as unlimited portable cellular service.",
       "Customer challenges a broad 'free' claim and asks for every condition.",
       "Agent OS AI provides a confident price not present in the controlling source.",
-      "Customer text attempts to instruct the AI to ignore pricing and disclosure rules.",
       "Agent mentions Mobile without connecting it to a discovered need.",
-      "Agent rushes the order confirmation to lower AHT.",
-      "Simulator awards a keyword although the sentence is not empathetic.",
-      "Employee chooses a benefit using a dated classroom premium rather than Benefit Connect."
+      "Agent rushes the order confirmation to lower AHT."
     ],
     actionItems: [
-      "Use the four new curriculum modules and Otter flashcard pack for structured review.",
+      "Use The Full Spectrum for corporate context, not as a replacement for internal communications or current policy.",
+      "Describe the Cox transaction as FCC-approved but not confirmed closed until an official closing source is verified.",
+      "Keep publicly reported AI deployments separate from inferred application opportunities.",
       "Run npm run audit, npm run typecheck and npm run build before release.",
       "Regenerate the TanStack route tree through the configured plugin and remove manual @ts-nocheck ownership.",
       "Add semantic QA evidence spans before treating simulator scores as reliable.",
-      "Add visible source dates, stale status and supersession to corpus records/cards.",
-      "Keep customer and employee secrets out of AI, prompts, simulator and repository.",
-      "Verify benefits, metric formulas, pricing and operational rules in their current controlling systems."
+      "Keep customer and employee secrets out of AI, prompts, simulator and repository."
     ],
     unresolvedQuestions: [
+      "Official Charter/Cox closing date and final integration communications.",
+      "Which agentic AI workflows are approved and deployed beyond the publicly reported software-development agreement.",
       "Exact current Mobile threshold wording across public and PR223/live offer sources.",
       "Exact current PBB caps, line requirements, submission steps and exclusions.",
       "Current Advanced and Invincible WiFi prices, equipment quantities, fallback speed and battery duration.",
-      "Official formulas and targets for yield, APC, adherence, occupancy and any site-specific AFH metric.",
-      "Current dental/vision/life/medical premiums and limits for this plan year.",
-      "Whether the pending July 8 Mobile-device transcript can be fetched without Otter parse failure.",
-      "Whether Lovable projects:write access can be granted for private-preview deployment."
+      "Official formulas and targets for yield, APC, adherence and occupancy.",
+      "Whether the pending July 8 Mobile-device transcript can be fetched without Otter parse failure."
     ],
   },
   {
