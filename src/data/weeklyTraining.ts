@@ -21,17 +21,111 @@ export type WeeklyTrainingUpdate = {
   unresolvedQuestions: string[];
 };
 
-export const CURRENT_APP_VERSION = "1.4.0-spectrum.0";
-export const CURRENT_WEEK_ID = "2026-W28";
+export const CURRENT_APP_VERSION = "1.5.0-spectrum.0";
+export const CURRENT_WEEK_ID = "2026-W29";
 
 export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
   {
-    weekId: "2026-W28",
+    weekId: "2026-W29",
     appVersion: CURRENT_APP_VERSION,
+    dateRange: "2026-07-13 through 2026-07-19",
+    source: "manual",
+    summary:
+      "Prompt Engineering Academy release. A new beginner-to-professional tutorial now teaches Spectrum inbound sales agents how to frame prompts, abstract call context, request useful output formats, build pricing-safe plan comparisons, use source packets, practice A-R-M, chain workflows, audit outputs and understand advanced retrieval, tool, security, evaluation and prompt-optimization concepts. The attached Prompt Engineering Mastery report was adapted into a clearly labeled advanced deep-dive track.",
+    recordings: [
+      {
+        id: "manual-2026-07-13-prompt-academy",
+        title: "Manual implementation: Spectrum Prompt Engineering Academy",
+        recordedAt: "2026-07-13T00:00:00-05:00",
+        duration: "feature engineering and tutorial design",
+        status: "ingested",
+        focus: [
+          "beginner prompt education",
+          "Spectrum inbound sales",
+          "pricing-safe plan comparison",
+          "output formatting",
+          "prompt templates",
+          "workflow design",
+          "RAG",
+          "tool use",
+          "prompt security",
+          "evaluation",
+          "DSPy",
+          "TextGrad",
+          "OPRO",
+        ],
+      },
+      {
+        id: "attachment-2026-07-13-prompt-engineering-mastery",
+        title: "User-provided deep dive: Prompt Engineering Mastery",
+        recordedAt: "2026-07-13T00:00:00-05:00",
+        duration: "advanced reference",
+        status: "ingested",
+        focus: [
+          "tokenization",
+          "structural control",
+          "structured outputs",
+          "reasoning topologies",
+          "retrieval",
+          "agent orchestration",
+          "security",
+          "caching",
+          "LLM evaluation",
+          "programmatic prompt optimization",
+        ],
+      },
+    ],
+    modulesTouched: ["m5", "m8", "m9", "m12", "m13"],
+    newTerms: [
+      "Prompt Engineering Academy",
+      "task-facts-limits-format-verify",
+      "zero-shot",
+      "few-shot",
+      "delimiter",
+      "structured output",
+      "pricing-safe source packet",
+      "prompt chain",
+      "RAG",
+      "prompt injection",
+      "tool call",
+      "decision record",
+      "evaluation set",
+      "prompt regression",
+      "DSPy",
+      "TextGrad",
+      "OPRO",
+    ],
+    scenarioSeeds: [
+      "Agent asks AI to recommend a plan but supplies no approved price or offer source.",
+      "AI returns a plausible price for a field absent from the source packet.",
+      "A long prompt buries the controlling disclosure in unrelated call notes.",
+      "Pasted competitor text contains instructions that attempt to override the task.",
+      "Agent requests a high-pressure close instead of a consent-clean A-R-M response.",
+      "Two dated sources disagree on pricing or eligibility and must remain visibly conflicted.",
+      "A new prompt performs well on one example but fails the regression scenario set.",
+    ],
+    actionItems: [
+      "Run the Prompt Academy beginner path before relying on the advanced deep-dive material.",
+      "Use the pricing-safe master template only with current approved source facts.",
+      "Test the academy prompt blueprint, copy controls, lesson progress and route navigation in the private preview.",
+      "Run npm run check and verify the TanStack generator preserves /prompt-academy.",
+      "Keep customer and employee identifiers out of prompts, examples, screenshots and source packets.",
+      "Treat Prompt Engineer as live assistance and Prompt Academy as the education and practice surface.",
+    ],
+    unresolvedQuestions: [
+      "Successful executable typecheck and production-build result for v1.5.0-spectrum.0.",
+      "Which exact prompting features and output formats are available in the approved internal Agent OS interface.",
+      "Whether an approved internal retrieval source can automatically attach current source IDs and effective dates.",
+      "Which evaluation metrics should become formal prompt-release gates after classroom and floor testing.",
+    ],
+  },
+  {
+    weekId: "2026-W28",
+    appVersion: "1.4.0-spectrum.0",
     dateRange: "2026-07-05 through 2026-07-12",
     source: "mixed",
     summary:
-      "Comprehensive system audit, July Otter reconciliation, corporate-intelligence expansion and voice-practice release. Across the Spectrum is now a voice-first turn-taking simulator with audible fictional callers, microphone transcription, private AI caller turns with deterministic fallback, exact QA evidence, live coaching and a source-gated offer board. The TanStack route tree has also been returned to generated-file structure and is expected to be regenerated by the configured plugin during development and build.",
+      "Comprehensive system audit, July Otter reconciliation, corporate-intelligence expansion and voice-practice release. Across the Spectrum became a voice-first turn-taking simulator with audible fictional callers, microphone transcription, private AI caller turns with deterministic fallback, exact QA evidence, live coaching and a source-gated offer board. The TanStack route tree was returned to generated-file structure.",
     recordings: [
       { id: "manual-2026-07-12-voice-simulator", title: "Manual implementation: Across the Spectrum voice-first simulator", recordedAt: "2026-07-12T23:00:00-05:00", duration: "feature engineering", status: "ingested", focus: ["speech synthesis", "speech recognition", "live transcription", "AI caller", "deterministic fallback", "QA evidence", "offer board", "privacy"] },
       { id: "manual-2026-07-12-generated-routing", title: "Manual engineering: restore TanStack generated route-tree ownership", recordedAt: "2026-07-12T22:45:00-05:00", duration: "routing repair", status: "ingested", focus: ["TanStack Router", "generated route types", "route manifest", "Vite build ownership"] },
@@ -56,39 +150,10 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       { id: "outlook-gmail-2026-07-07-how7726", title: "Outlook/Gmail: HOW7726 Supporting Invincible WiFi", recordedAt: "2026-07-07T18:11:42-05:00", duration: "email", status: "ingested", focus: ["Invincible WiFi", "5G backup", "battery", "WiFi 7 Extender", "order integrity"] },
     ],
     modulesTouched: ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", "m10", "m11", "m12", "m13", "m14"],
-    newTerms: [
-      "voice-first simulator", "speech synthesis", "speech recognition", "interim transcription", "caller voice profile", "AI caller", "deterministic caller fallback", "QA evidence span", "capability ceiling", "most logical offer", "value alternative", "generated route tree", "The Full Spectrum", "Customer Commitment", "Charter lineage", "Cox transaction", "agentic AI", "converged connectivity", "Advanced WiFi", "Invincible WiFi", "DOCSIS", "FTTH", "ONT", "WiFi 7", "MVNO", "SIM", "eSIM", "IMEI", "eMTA", "PBX", "Cloud DVR", "Agent OS AI", "prompt injection", "OARS", "need-proof-benefit", "AHT", "ACW", "conversion", "yield", "APC", "product mix", "adherence", "occupancy", "semantic QA", "IGS", "EAP", "source supersession", "release gate"
-    ],
-    scenarioSeeds: [
-      "Voice recognition mishears a product name and the agent uses typing to correct the turn.",
-      "The private AI caller is unavailable and the simulator continues through deterministic persona responses.",
-      "A capability-ceiling plan appears on screen but the agent must verify address, eligibility and actual need before recommending it.",
-      "Customer asks how the Spectrum brand relates to Charter Communications.",
-      "Customer assumes the Charter–Cox transaction has already closed.",
-      "Agent uses AI-generated corporate information without checking its source date.",
-      "Customer expects full plan speed on an older WiFi device.",
-      "Customer interprets Invincible WiFi as unlimited portable cellular service.",
-      "Agent OS AI provides a confident price not present in the controlling source.",
-      "Agent rushes the order confirmation to lower AHT."
-    ],
-    actionItems: [
-      "Run npm run check and verify that the TanStack plugin reproduces the generated route tree during a clean build.",
-      "Test Across the Spectrum in the private preview with microphone permission on Android Chrome and a desktop Chromium browser.",
-      "Confirm caller audio, live interim transcript, manual microphone control, typing fallback and AI-to-script fallback.",
-      "Keep the offer board advisory only; current biller, Agent OS, serviceability and approved offers control.",
-      "Replace deterministic QA rules with a second semantic evidence grader only after privacy, latency and evaluation gates are defined.",
-      "Use The Full Spectrum for corporate context, not as a replacement for internal communications or current policy.",
-      "Keep customer and employee secrets out of AI, prompts, simulator and repository."
-    ],
-    unresolvedQuestions: [
-      "Successful executable typecheck and production-build result for v1.4.0-spectrum.0.",
-      "Browser and device compatibility matrix for SpeechRecognition in the private preview environment.",
-      "Whether on-device English recognition and language-pack installation are available on target devices.",
-      "Optimal semantic QA model, rubric and evidence-threshold configuration after deterministic baseline testing.",
-      "Official Charter/Cox closing date and final integration communications.",
-      "Exact current Mobile threshold wording across public and PR223/live offer sources.",
-      "Whether the pending July 8 Mobile-device transcript can be fetched without Otter parse failure."
-    ],
+    newTerms: ["voice-first simulator", "speech synthesis", "speech recognition", "interim transcription", "caller voice profile", "AI caller", "deterministic caller fallback", "QA evidence span", "capability ceiling", "most logical offer", "value alternative", "generated route tree", "The Full Spectrum", "Customer Commitment", "Charter lineage", "Cox transaction", "agentic AI", "converged connectivity", "Advanced WiFi", "Invincible WiFi", "DOCSIS", "FTTH", "ONT", "WiFi 7", "MVNO", "SIM", "eSIM", "IMEI", "eMTA", "PBX", "Cloud DVR", "Agent OS AI", "prompt injection", "OARS", "need-proof-benefit", "AHT", "ACW", "conversion", "yield", "APC", "product mix", "adherence", "occupancy", "semantic QA", "IGS", "EAP", "source supersession", "release gate"],
+    scenarioSeeds: ["Voice recognition mishears a product name and the agent uses typing to correct the turn.", "The private AI caller is unavailable and the simulator continues through deterministic persona responses.", "A capability-ceiling plan appears on screen but the agent must verify address, eligibility and actual need before recommending it.", "Customer asks how the Spectrum brand relates to Charter Communications.", "Customer assumes the Charter–Cox transaction has already closed.", "Agent uses AI-generated corporate information without checking its source date.", "Customer expects full plan speed on an older WiFi device.", "Customer interprets Invincible WiFi as unlimited portable cellular service.", "Agent OS AI provides a confident price not present in the controlling source.", "Agent rushes the order confirmation to lower AHT."],
+    actionItems: ["Run npm run check and verify that the TanStack plugin reproduces the generated route tree during a clean build.", "Test Across the Spectrum in the private preview with microphone permission on Android Chrome and a desktop Chromium browser.", "Confirm caller audio, live interim transcript, manual microphone control, typing fallback and AI-to-script fallback.", "Keep the offer board advisory only; current biller, Agent OS, serviceability and approved offers control.", "Replace deterministic QA rules with a second semantic evidence grader only after privacy, latency and evaluation gates are defined.", "Use The Full Spectrum for corporate context, not as a replacement for internal communications or current policy.", "Keep customer and employee secrets out of AI, prompts, simulator and repository."],
+    unresolvedQuestions: ["Successful executable typecheck and production-build result for v1.4.0-spectrum.0.", "Browser and device compatibility matrix for SpeechRecognition in the private preview environment.", "Whether on-device English recognition and language-pack installation are available on target devices.", "Optimal semantic QA model, rubric and evidence-threshold configuration after deterministic baseline testing.", "Official Charter/Cox closing date and final integration communications.", "Exact current Mobile threshold wording across public and PR223/live offer sources.", "Whether the pending July 8 Mobile-device transcript can be fetched without Otter parse failure."],
   },
   {
     weekId: "2026-W27",
