@@ -24,10 +24,12 @@ import {
   Search,
   PhoneCall,
   WandSparkles,
+  Building2,
 } from "lucide-react";
 
 const items = [
   { title: "Home", url: "/", icon: Home },
+  { title: "The Full Spectrum", url: "/full-spectrum", icon: Building2 },
   { title: "Quick Lookup", url: "/lookup", icon: Search },
   { title: "Curriculum", url: "/curriculum", icon: BookOpen },
   { title: "My Setup", url: "/setup", icon: KeyRound },
