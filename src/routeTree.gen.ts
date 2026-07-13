@@ -19,6 +19,7 @@ import { Route as FullSpectrumRouteImport } from './routes/full-spectrum'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LookupRouteImport } from './routes/lookup'
 import { Route as PlanRouteImport } from './routes/plan'
+import { Route as PromptAcademyRouteImport } from './routes/prompt-academy'
 import { Route as SalesPromptsRouteImport } from './routes/sales-prompts'
 import { Route as ScenariosRouteImport } from './routes/scenarios'
 import { Route as SetupRouteImport } from './routes/setup'
@@ -68,6 +69,11 @@ const LookupRoute = LookupRouteImport.update({
 const PlanRoute = PlanRouteImport.update({
   id: '/plan',
   path: '/plan',
+  getParentRoute: () => rootRoute,
+} as any)
+const PromptAcademyRoute = PromptAcademyRouteImport.update({
+  id: '/prompt-academy',
+  path: '/prompt-academy',
   getParentRoute: () => rootRoute,
 } as any)
 const SalesPromptsRoute = SalesPromptsRouteImport.update({
@@ -161,6 +167,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanRouteImport
       parentRoute: typeof rootRoute
     }
+    '/prompt-academy': {
+      id: '/prompt-academy'
+      path: '/prompt-academy'
+      fullPath: '/prompt-academy'
+      preLoaderRoute: typeof PromptAcademyRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/sales-prompts': {
       id: '/sales-prompts'
       path: '/sales-prompts'
@@ -226,6 +239,9 @@ declare module './routes/lookup' {
 declare module './routes/plan' {
   const createFileRoute: CreateFileRoute<'/plan', FileRoutesByPath['/plan']['parentRoute'], FileRoutesByPath['/plan']['id'], FileRoutesByPath['/plan']['path'], FileRoutesByPath['/plan']['fullPath']>
 }
+declare module './routes/prompt-academy' {
+  const createFileRoute: CreateFileRoute<'/prompt-academy', FileRoutesByPath['/prompt-academy']['parentRoute'], FileRoutesByPath['/prompt-academy']['id'], FileRoutesByPath['/prompt-academy']['path'], FileRoutesByPath['/prompt-academy']['fullPath']>
+}
 declare module './routes/sales-prompts' {
   const createFileRoute: CreateFileRoute<'/sales-prompts', FileRoutesByPath['/sales-prompts']['parentRoute'], FileRoutesByPath['/sales-prompts']['id'], FileRoutesByPath['/sales-prompts']['path'], FileRoutesByPath['/sales-prompts']['fullPath']>
 }
@@ -252,6 +268,7 @@ export interface FileRoutesByFullPath {
   '/full-spectrum': typeof FullSpectrumRoute
   '/lookup': typeof LookupRoute
   '/plan': typeof PlanRoute
+  '/prompt-academy': typeof PromptAcademyRoute
   '/sales-prompts': typeof SalesPromptsRoute
   '/scenarios': typeof ScenariosRoute
   '/setup': typeof SetupRoute
@@ -269,6 +286,7 @@ export interface FileRoutesByTo {
   '/full-spectrum': typeof FullSpectrumRoute
   '/lookup': typeof LookupRoute
   '/plan': typeof PlanRoute
+  '/prompt-academy': typeof PromptAcademyRoute
   '/sales-prompts': typeof SalesPromptsRoute
   '/scenarios': typeof ScenariosRoute
   '/setup': typeof SetupRoute
@@ -287,6 +305,7 @@ export interface FileRoutesById {
   '/full-spectrum': typeof FullSpectrumRoute
   '/lookup': typeof LookupRoute
   '/plan': typeof PlanRoute
+  '/prompt-academy': typeof PromptAcademyRoute
   '/sales-prompts': typeof SalesPromptsRoute
   '/scenarios': typeof ScenariosRoute
   '/setup': typeof SetupRoute
@@ -296,10 +315,10 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/across-spectrum' | '/corner' | '/curriculum/' | '/curriculum/$moduleId' | '/flashcards' | '/full-spectrum' | '/lookup' | '/plan' | '/sales-prompts' | '/scenarios' | '/setup' | '/tips' | '/tutor'
+  fullPaths: '/' | '/across-spectrum' | '/corner' | '/curriculum/' | '/curriculum/$moduleId' | '/flashcards' | '/full-spectrum' | '/lookup' | '/plan' | '/prompt-academy' | '/sales-prompts' | '/scenarios' | '/setup' | '/tips' | '/tutor'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/across-spectrum' | '/corner' | '/curriculum' | '/curriculum/$moduleId' | '/flashcards' | '/full-spectrum' | '/lookup' | '/plan' | '/sales-prompts' | '/scenarios' | '/setup' | '/tips' | '/tutor'
-  id: '__root__' | '/' | '/across-spectrum' | '/corner' | '/curriculum/' | '/curriculum/$moduleId' | '/flashcards' | '/full-spectrum' | '/lookup' | '/plan' | '/sales-prompts' | '/scenarios' | '/setup' | '/tips' | '/tutor'
+  to: '/' | '/across-spectrum' | '/corner' | '/curriculum' | '/curriculum/$moduleId' | '/flashcards' | '/full-spectrum' | '/lookup' | '/plan' | '/prompt-academy' | '/sales-prompts' | '/scenarios' | '/setup' | '/tips' | '/tutor'
+  id: '__root__' | '/' | '/across-spectrum' | '/corner' | '/curriculum/' | '/curriculum/$moduleId' | '/flashcards' | '/full-spectrum' | '/lookup' | '/plan' | '/prompt-academy' | '/sales-prompts' | '/scenarios' | '/setup' | '/tips' | '/tutor'
   fileRoutesById: FileRoutesById
 }
 
@@ -313,6 +332,7 @@ export interface RootRouteChildren {
   FullSpectrumRoute: typeof FullSpectrumRoute
   LookupRoute: typeof LookupRoute
   PlanRoute: typeof PlanRoute
+  PromptAcademyRoute: typeof PromptAcademyRoute
   SalesPromptsRoute: typeof SalesPromptsRoute
   ScenariosRoute: typeof ScenariosRoute
   SetupRoute: typeof SetupRoute
@@ -330,6 +350,7 @@ const rootRouteChildren: RootRouteChildren = {
   FullSpectrumRoute,
   LookupRoute,
   PlanRoute,
+  PromptAcademyRoute,
   SalesPromptsRoute,
   ScenariosRoute,
   SetupRoute,
@@ -346,7 +367,7 @@ export const routeTree = rootRoute
   "routes": {
     "__root__": {
       "filePath": "__root.tsx",
-      "children": ["/", "/across-spectrum", "/corner", "/curriculum/", "/curriculum/$moduleId", "/flashcards", "/full-spectrum", "/lookup", "/plan", "/sales-prompts", "/scenarios", "/setup", "/tips", "/tutor"]
+      "children": ["/", "/across-spectrum", "/corner", "/curriculum/", "/curriculum/$moduleId", "/flashcards", "/full-spectrum", "/lookup", "/plan", "/prompt-academy", "/sales-prompts", "/scenarios", "/setup", "/tips", "/tutor"]
     },
     "/": { "filePath": "index.tsx" },
     "/across-spectrum": { "filePath": "across-spectrum.tsx" },
@@ -357,6 +378,7 @@ export const routeTree = rootRoute
     "/full-spectrum": { "filePath": "full-spectrum.tsx" },
     "/lookup": { "filePath": "lookup.tsx" },
     "/plan": { "filePath": "plan.tsx" },
+    "/prompt-academy": { "filePath": "prompt-academy.tsx" },
     "/sales-prompts": { "filePath": "sales-prompts.tsx" },
     "/scenarios": { "filePath": "scenarios.tsx" },
     "/setup": { "filePath": "setup.tsx" },
