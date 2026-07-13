@@ -44,7 +44,11 @@ export const simulateCallerTurn = createServerFn({ method: "POST" })
     const persona = CALLER_PERSONAS.find((item) => item.id === data.personaId);
     if (!persona) throw new Error("Unknown simulator persona");
 
-    const history = data.transcript
+    const deduplicatedTranscript = data.transcript.filter((line, index, lines) => {
+      const previous = lines[index - 1];
+      return !previous || previous.speaker !== line.speaker || previous.text !== line.text;
+    });
+    const history = deduplicatedTranscript
       .map((line) => `${line.speaker.toUpperCase()}: ${line.text}`)
       .join("\n");
     const offerContext = data.offerTitles.length
