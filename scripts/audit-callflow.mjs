@@ -112,7 +112,7 @@ if (failures.length === 0) {
     "TextGrad",
     "OPRO",
     "NOT PROVIDED",
-    "Do not request customer identifiers",
+    "Do not request or reproduce names",
   ];
   for (const value of academyRequired) {
     if (!academy.includes(value)) failures.push(`Prompt Academy dataset missing required marker: ${value}`);
