@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { MODULES } from "@/data/curriculum";
+import { MODULES } from "@/data/fullCurriculum";
 import { ALL_FLASHCARDS } from "@/data/flashcardDeck";
 import { getCurrentWeek } from "@/data/weeklyTraining";
 import { SCENARIOS } from "@/data/scenarios";
