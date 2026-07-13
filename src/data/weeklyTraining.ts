@@ -21,7 +21,7 @@ export type WeeklyTrainingUpdate = {
   unresolvedQuestions: string[];
 };
 
-export const CURRENT_APP_VERSION = "1.5.0-spectrum.0";
+export const CURRENT_APP_VERSION = "1.6.0-spectrum.0";
 export const CURRENT_WEEK_ID = "2026-W29";
 
 export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
@@ -31,8 +31,28 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     dateRange: "2026-07-13 through 2026-07-19",
     source: "manual",
     summary:
-      "Prompt Engineering Academy release. A new beginner-to-professional tutorial now teaches Spectrum inbound sales agents how to frame prompts, abstract call context, request useful output formats, build pricing-safe plan comparisons, use source packets, practice A-R-M, chain workflows, audit outputs and understand advanced retrieval, tool, security, evaluation and prompt-optimization concepts. The attached Prompt Engineering Mastery report was adapted into a clearly labeled advanced deep-dive track.",
+      "Mobile-first workspace and Prompt Engineering Academy release. The landing page is now a compact Today workspace; navigation is grouped by intent, closes after mobile selection, and includes a five-action bottom dock. Spectrum blue and navy tokens replace the inherited magenta scheme. Speech playback now distinguishes completion, cancellation, unsupported browsers, and errors so flashcard and module autoplay cannot race through silent content. Across the Spectrum includes a guide reader, primary-first mobile ordering, and expandable setup and coaching panels. Content-heavy reference pages use progressive disclosure while preserving every route, source record, learning mode, and simulator control.",
     recordings: [
+      {
+        id: "manual-2026-07-13-mobile-ux-overhaul",
+        title: "Manual implementation: mobile UX, navigation and reader reliability overhaul",
+        recordedAt: "2026-07-13T09:00:00-05:00",
+        duration: "interface engineering and regression testing",
+        status: "ingested",
+        focus: [
+          "mobile web",
+          "Spectrum color system",
+          "Today workspace",
+          "grouped navigation",
+          "bottom navigation",
+          "menu dismissal",
+          "speech synthesis lifecycle",
+          "reader controls",
+          "progressive disclosure",
+          "touch targets",
+          "bundle splitting",
+        ],
+      },
       {
         id: "manual-2026-07-13-prompt-academy",
         title: "Manual implementation: Spectrum Prompt Engineering Academy",
@@ -105,6 +125,8 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "A new prompt performs well on one example but fails the regression scenario set.",
     ],
     actionItems: [
+      "Use the mobile bottom dock for Today, Live, Practice and Learn; use More for the complete grouped route directory.",
+      "When browser audio is blocked, tap Read card or the page reader again after confirming text-to-speech permissions.",
       "Run the Prompt Academy beginner path before relying on the advanced deep-dive material.",
       "Use the pricing-safe master template only with current approved source facts.",
       "Test the academy prompt blueprint, copy controls, lesson progress and route navigation in the private preview.",
@@ -113,7 +135,7 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "Treat Prompt Engineer as live assistance and Prompt Academy as the education and practice surface.",
     ],
     unresolvedQuestions: [
-      "Successful executable typecheck and production-build result for v1.5.0-spectrum.0.",
+      "Physical Android-device confirmation of installed voice selection, browser audio permission and microphone permission behavior.",
       "Which exact prompting features and output formats are available in the approved internal Agent OS interface.",
       "Whether an approved internal retrieval source can automatically attach current source IDs and effective dates.",
       "Which evaluation metrics should become formal prompt-release gates after classroom and floor testing.",

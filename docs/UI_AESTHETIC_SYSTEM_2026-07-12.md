@@ -17,7 +17,7 @@ The target expression is:
 - readable during a live call
 - equally intentional on desktop and mobile
 
-The visual identity keeps the existing deep navy canvas and magenta accent, but uses the accent more selectively. The strongest color and glow belong to the primary action, active call state, selected navigation item, or verified success state.
+The visual identity uses a deep navy canvas with Spectrum-blue primary actions and a controlled cyan focus accent. The strongest color and glow belong to the primary action, active call state, selected navigation item, or verified success state.
 
 ## 2. Aesthetic hierarchy
 
@@ -37,8 +37,8 @@ This prevents every card from appearing equally important.
 
 - Background: deep navy-black.
 - Foreground: cool near-white.
-- Primary accent: controlled magenta.
-- Secondary accent: muted violet-blue.
+- Primary accent: Spectrum blue.
+- Secondary accent: bright cyan for focus, reader state, active navigation and verified interaction.
 - Success: green used for completed QA, verified status, and positive completion.
 - Warning: amber used for unresolved checks and required verification.
 - Destructive: red reserved for actual blocking or sensitive-data risk.
@@ -179,6 +179,14 @@ Completed in the initial polish pass:
 - Added globally available Quick Lookup access.
 - Refined sidebar brand treatment, vertical rhythm, active state, and collapsed tooltips.
 - Polished error and missing-route surfaces.
+
+Completed in the mobile-first v1.6.0 pass:
+
+- Replaced the inherited magenta token set with deep navy, Spectrum blue, cyan and cool-white roles.
+- Added a compact Today workspace and grouped intent navigation.
+- Added labeled mobile menu controls, automatic menu dismissal and a safe-area-aware bottom dock.
+- Added progressive disclosure and primary-first stacking to dense mobile workspaces.
+- Added shared reader controls and explicit speech error/cancellation states.
 
 ## 10. Next visual passes
 

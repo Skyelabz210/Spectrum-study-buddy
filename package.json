@@ -1,6 +1,6 @@
 {
   "name": "callflow-lab",
-  "version": "1.5.0-spectrum.0",
+  "version": "1.6.0-spectrum.0",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -12,7 +12,9 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "audit": "node scripts/audit-callflow.mjs",
-    "check": "npm run audit && npm run typecheck && npm run build"
+    "test:ux": "python3 scripts/test-mobile-ux.py",
+    "test:speech": "node scripts/test-speech.mjs",
+    "check": "npm run audit && npm run test:ux && npm run test:speech && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",

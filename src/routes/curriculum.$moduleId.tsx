@@ -3,9 +3,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { MODULES, type Module } from "@/data/fullCurriculum";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Sparkles, BookmarkPlus, Play, Pause, SkipForward } from "lucide-react";
+import {
+  ArrowLeft,
+  Sparkles,
+  BookmarkPlus,
+  Play,
+  Pause,
+  SkipForward,
+} from "lucide-react";
 import { trackLesson, trackModule, addTakeaway } from "@/lib/tutorMemory";
-import { speak, stopSpeaking } from "@/lib/speak";
+import { speakAndWait, stopSpeaking } from "@/lib/speak";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/curriculum/$moduleId")({
@@ -17,7 +24,9 @@ export const Route = createFileRoute("/curriculum/$moduleId")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData ? `${loaderData.mod.title} · CallFlow Lab` : "Module" },
+      {
+        title: loaderData ? `${loaderData.mod.title} · CallFlow Lab` : "Module",
+      },
     ],
   }),
 });
@@ -27,23 +36,16 @@ function ModulePage() {
   const [auto, setAuto] = useState(false);
   const [ratePercent, setRatePercent] = useState(100);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [audioMessage, setAudioMessage] = useState("");
   const cancelRef = useRef(false);
 
-  const playlist = useMemo(
-    () => mod.sections.flatMap((s) => s.lessons),
-    [mod]
-  );
+  const playlist = useMemo(() => mod.sections.flatMap((s) => s.lessons), [mod]);
 
   useEffect(() => {
     trackModule(mod.id);
   }, [mod.id]);
 
   useEffect(() => () => stopSpeaking(), []);
-
-  const speakAsync = (text: string) =>
-    new Promise<void>((resolve) => {
-      speak(text, { ratePercent, onend: () => resolve() });
-    });
 
   const playFrom = async (startIndex: number) => {
     cancelRef.current = false;
@@ -55,12 +57,28 @@ function ModulePage() {
       const el = document.getElementById(`lesson-${l.id}`);
       el?.scrollIntoView({ behavior: "smooth", block: "center" });
       const tipsText = l.tips?.length ? ` Tips: ${l.tips.join(". ")}.` : "";
-      await speakAsync(`${l.title}. Why it matters: ${l.why}. ${l.body}${tipsText}`);
+      setAudioMessage(`Reading ${l.title}.`);
+      const result = await speakAndWait(
+        `${l.title}. Why it matters: ${l.why}. ${l.body}${tipsText}`,
+        {
+          ratePercent,
+        },
+      );
       if (cancelRef.current) break;
+      if (result !== "ended" && result !== "cancelled") {
+        setAudioMessage(
+          "Audio could not start. Check browser text-to-speech permissions, then tap Autoplay module again.",
+        );
+        break;
+      }
       await new Promise((r) => setTimeout(r, 500));
     }
     setAuto(false);
     setActiveId(null);
+    if (!cancelRef.current)
+      setAudioMessage((current) =>
+        current.startsWith("Audio could not") ? current : "Reader finished.",
+      );
   };
 
   const stop = () => {
@@ -68,20 +86,25 @@ function ModulePage() {
     stopSpeaking();
     setAuto(false);
     setActiveId(null);
+    setAudioMessage("Reader stopped.");
   };
 
   const skip = () => {
     stopSpeaking();
   };
 
-  const remember = (lessonId: string, lessonTitle: string, takeaway: string) => {
+  const remember = (
+    lessonId: string,
+    lessonTitle: string,
+    takeaway: string,
+  ) => {
     trackLesson(lessonId, lessonTitle, mod.title);
     addTakeaway(takeaway);
     toast.success("Saved to coach memory ✓");
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-10">
+    <div className="page-frame mx-auto max-w-3xl py-6 sm:py-10">
       <Link
         to="/curriculum"
         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
@@ -96,18 +119,28 @@ function ModulePage() {
           <div className="text-xs font-semibold uppercase tracking-wider text-neon">
             Module {mod.number} · {mod.tag}
           </div>
-          <h1 className="mt-1 text-3xl font-bold tracking-tight">{mod.title}</h1>
+          <h1 className="mt-1 text-3xl font-bold tracking-tight">
+            {mod.title}
+          </h1>
           <p className="mt-2 text-muted-foreground">{mod.summary}</p>
         </div>
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card/60 p-3">
         {auto ? (
-          <Button size="sm" onClick={stop} className="bg-gradient-primary text-primary-foreground">
+          <Button
+            size="sm"
+            onClick={stop}
+            className="bg-gradient-primary text-primary-foreground"
+          >
             <Pause className="mr-1 h-3.5 w-3.5" /> Stop
           </Button>
         ) : (
-          <Button size="sm" onClick={() => playFrom(0)} className="bg-gradient-primary text-primary-foreground">
+          <Button
+            size="sm"
+            onClick={() => playFrom(0)}
+            className="bg-gradient-primary text-primary-foreground"
+          >
             <Play className="mr-1 h-3.5 w-3.5" /> Autoplay module
           </Button>
         )}
@@ -128,7 +161,16 @@ function ModulePage() {
           <option value={130}>130%</option>
         </select>
         <span className="text-xs text-muted-foreground">
-          {auto ? "Reading aloud — tap any lesson's ▶ to jump" : "Plays each lesson aloud, in order"}
+          {auto
+            ? "Reading aloud — tap any lesson's ▶ to jump"
+            : "Plays each lesson aloud, in order"}
+        </span>
+        <span
+          role="status"
+          aria-live="polite"
+          className="w-full text-xs text-muted-foreground"
+        >
+          {audioMessage}
         </span>
       </div>
 
@@ -149,9 +191,12 @@ function ModulePage() {
                 >
                   <h3 className="text-lg font-semibold">{l.title}</h3>
                   <p className="mt-2 text-sm text-neon/90">
-                    <span className="font-semibold">Why it matters:</span> {l.why}
+                    <span className="font-semibold">Why it matters:</span>{" "}
+                    {l.why}
                   </p>
-                  <p className="mt-3 text-sm leading-relaxed text-foreground/90">{l.body}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/90">
+                    {l.body}
+                  </p>
                   {l.tips && l.tips.length > 0 && (
                     <ul className="mt-3 space-y-1 rounded-lg border border-border bg-secondary/50 p-3 text-sm">
                       {l.tips.map((t, i) => (
@@ -177,10 +222,11 @@ function ModulePage() {
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => remember(l.id, l.title, `${l.title} — ${l.why}`)}
+                      onClick={() =>
+                        remember(l.id, l.title, `${l.title} — ${l.why}`)
+                      }
                     >
-                      <BookmarkPlus className="mr-1 h-3.5 w-3.5" />
-                      I got this
+                      <BookmarkPlus className="mr-1 h-3.5 w-3.5" />I got this
                     </Button>
                   </div>
                 </Card>
@@ -196,9 +242,13 @@ function ModulePage() {
           <div>
             <div className="font-semibold">Stuck on something here?</div>
             <p className="mt-1 text-sm text-muted-foreground">
-              Open the coach and paste any line — CallFlow Lab will simplify it, quiz you on it, or turn it into a scenario.
+              Open the coach and paste any line — CallFlow Lab will simplify it,
+              quiz you on it, or turn it into a scenario.
             </p>
-            <Button asChild className="mt-3 bg-gradient-primary text-primary-foreground hover:opacity-95">
+            <Button
+              asChild
+              className="mt-3 bg-gradient-primary text-primary-foreground hover:opacity-95"
+            >
               <Link to="/tutor">Ask the coach</Link>
             </Button>
           </div>

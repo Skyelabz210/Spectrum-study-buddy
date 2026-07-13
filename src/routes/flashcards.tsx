@@ -5,26 +5,39 @@ import { ALL_FLASHCARDS } from "@/data/flashcardDeck";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ChevronLeft, ChevronRight, Shuffle, RotateCcw, Play, Pause } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Shuffle,
+  RotateCcw,
+  Play,
+  Pause,
+  Volume2,
+} from "lucide-react";
 import { trackFlashcard } from "@/lib/tutorMemory";
-import { speak, stopSpeaking } from "@/lib/speak";
+import { speakAndWait, stopSpeaking } from "@/lib/speak";
 
 export const Route = createFileRoute("/flashcards")({
   component: Flashcards,
   head: () => ({
     meta: [
       { title: "Flashcards · CallFlow Lab" },
-      { name: "description", content: "Quick-flip flashcards and cheatsheets for call flow, SOP, tools, sales scenarios, Spectrum plans, competitor intel, and personal setup." },
+      {
+        name: "description",
+        content:
+          "Quick-flip flashcards and cheatsheets for call flow, SOP, tools, sales scenarios, Spectrum plans, competitor intel, and personal setup.",
+      },
     ],
   }),
 });
 
 function Flashcards() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10">
+    <div className="page-frame mx-auto max-w-4xl py-6 sm:py-10">
       <h1 className="text-3xl font-bold tracking-tight">Flashcards</h1>
       <p className="mt-2 text-muted-foreground">
-        Flip cards one at a time, or open the cheatsheet for a fast scan before a scenario drill. One-card wins count.
+        Flip cards one at a time, or open the cheatsheet for a fast scan before
+        a scenario drill. One-card wins count.
       </p>
 
       <Tabs defaultValue="flip" className="mt-6">
@@ -65,6 +78,7 @@ function FlipDeck() {
   const [flipped, setFlipped] = useState(false);
   const [auto, setAuto] = useState(false);
   const [ratePercent, setRatePercent] = useState(100);
+  const [audioMessage, setAudioMessage] = useState("");
   const card = order[i];
 
   useEffect(() => {
@@ -75,21 +89,41 @@ function FlipDeck() {
     if (!auto || !card) return;
     let cancelled = false;
     const pause = (ms: number) =>
-      new Promise<void>((r) => setTimeout(() => !cancelled && r(), ms));
+      new Promise<void>((resolve) => window.setTimeout(resolve, ms));
 
     const run = async () => {
       setFlipped(false);
-      await new Promise<void>((resolve) => {
-        speak(`Question. ${card.front}`, { ratePercent, onend: () => resolve() });
+      setAudioMessage("Reading the question.");
+      const questionResult = await speakAndWait(`Question. ${card.front}`, {
+        ratePercent,
       });
+      if (questionResult !== "ended") {
+        if (!cancelled) {
+          setAuto(false);
+          setAudioMessage(
+            "Audio could not start. Check browser text-to-speech permissions, then tap Read card.",
+          );
+        }
+        return;
+      }
       if (cancelled) return;
       await pause(400);
       if (cancelled) return;
       setFlipped(true);
       await pause(300);
-      await new Promise<void>((resolve) => {
-        speak(`Answer. ${card.back}`, { ratePercent, onend: () => resolve() });
+      setAudioMessage("Reading the answer.");
+      const answerResult = await speakAndWait(`Answer. ${card.back}`, {
+        ratePercent,
       });
+      if (answerResult !== "ended") {
+        if (!cancelled) {
+          setAuto(false);
+          setAudioMessage(
+            "Audio stopped before the answer finished. Tap Read card to retry.",
+          );
+        }
+        return;
+      }
       if (cancelled) return;
       await pause(800);
       if (cancelled) return;
@@ -106,40 +140,80 @@ function FlipDeck() {
   useEffect(() => () => stopSpeaking(), []);
 
   const next = () => {
+    setAuto(false);
+    stopSpeaking();
     setFlipped(false);
     setI((x) => (x + 1) % order.length);
   };
   const prev = () => {
+    setAuto(false);
+    stopSpeaking();
     setFlipped(false);
     setI((x) => (x - 1 + order.length) % order.length);
   };
   const shuffle = () => {
+    setAuto(false);
+    stopSpeaking();
     setOrder(integerShuffle(order, Date.now()));
     setI(0);
     setFlipped(false);
   };
   const reset = () => {
+    setAuto(false);
+    stopSpeaking();
     setOrder(ALL_FLASHCARDS);
     setI(0);
     setFlipped(false);
+  };
+
+  const readCard = async () => {
+    setAuto(false);
+    stopSpeaking();
+    setAudioMessage(flipped ? "Reading the answer." : "Reading the question.");
+    const result = await speakAndWait(
+      flipped ? `Answer. ${card.back}` : `Question. ${card.front}`,
+      {
+        ratePercent,
+      },
+    );
+    setAudioMessage(
+      result === "ended"
+        ? "Reader finished."
+        : "Audio could not start. Check browser text-to-speech permissions and try again.",
+    );
   };
 
   return (
     <div>
       <div className="flex items-center justify-between text-sm text-muted-foreground">
         <span>
-          Card {i + 1} of {order.length} · <span className="text-neon">{card.category}</span>
+          Card {i + 1} of {order.length} ·{" "}
+          <span className="text-neon">{card.category}</span>
         </span>
         <div className="flex flex-wrap items-center gap-1">
           <Button
             size="sm"
             variant={auto ? "default" : "outline"}
             onClick={() => setAuto((a) => !a)}
-            className={auto ? "bg-gradient-primary text-primary-foreground" : ""}
+            className={
+              auto ? "bg-gradient-primary text-primary-foreground" : ""
+            }
             title="Autoplay reads each card aloud and advances"
           >
-            {auto ? <Pause className="mr-1 h-3.5 w-3.5" /> : <Play className="mr-1 h-3.5 w-3.5" />}
+            {auto ? (
+              <Pause className="mr-1 h-3.5 w-3.5" />
+            ) : (
+              <Play className="mr-1 h-3.5 w-3.5" />
+            )}
             {auto ? "Pause" : "Autoplay"}
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => void readCard()}
+            disabled={auto}
+          >
+            <Volume2 className="mr-1 h-3.5 w-3.5" /> Read card
           </Button>
           <select
             value={ratePercent}
@@ -161,10 +235,24 @@ function FlipDeck() {
         </div>
       </div>
 
-      <button onClick={() => setFlipped((f) => !f)} className="mt-3 block w-full" aria-label="Flip card">
+      <p
+        role="status"
+        aria-live="polite"
+        className="mt-2 min-h-5 text-xs text-muted-foreground"
+      >
+        {auto ? audioMessage || "Autoplay is active." : audioMessage}
+      </p>
+
+      <button
+        onClick={() => setFlipped((f) => !f)}
+        className="mt-3 block w-full"
+        aria-label="Flip card"
+      >
         <Card
-          className={`card-elevated min-h-[260px] cursor-pointer border-border p-8 text-left transition ${
-            flipped ? "bg-gradient-primary text-primary-foreground glow" : "bg-card/70"
+          className={`card-elevated min-h-[230px] cursor-pointer border-border p-5 text-left transition sm:min-h-[260px] sm:p-8 ${
+            flipped
+              ? "bg-gradient-primary text-primary-foreground glow"
+              : "bg-card/70"
           }`}
         >
           <div className="text-[10px] font-semibold uppercase tracking-wider opacity-70">
@@ -180,7 +268,10 @@ function FlipDeck() {
         <Button variant="outline" onClick={prev}>
           <ChevronLeft className="mr-1 h-4 w-4" /> Prev
         </Button>
-        <Button onClick={next} className="bg-gradient-primary text-primary-foreground hover:opacity-95">
+        <Button
+          onClick={next}
+          className="bg-gradient-primary text-primary-foreground hover:opacity-95"
+        >
           Next <ChevronRight className="ml-1 h-4 w-4" />
         </Button>
       </div>
@@ -210,7 +301,9 @@ function Cheatsheet() {
             {cards.map((c) => (
               <Card key={c.id} className="border-border bg-card/60 p-3">
                 <div className="text-sm font-semibold">{c.front}</div>
-                <div className="mt-1 text-sm text-muted-foreground">{c.back}</div>
+                <div className="mt-1 text-sm text-muted-foreground">
+                  {c.back}
+                </div>
               </Card>
             ))}
           </div>

@@ -5,7 +5,16 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Sparkles, Wand2, Brain, Search, Send, Loader2, Trash2, PencilLine } from "lucide-react";
+import {
+  Sparkles,
+  Wand2,
+  Brain,
+  Search,
+  Send,
+  Loader2,
+  Trash2,
+  PencilLine,
+} from "lucide-react";
 import { askTutor, extractTakeaway } from "@/lib/tutor.functions";
 import {
   loadMemory,
@@ -19,7 +28,10 @@ import {
 import { toast } from "sonner";
 
 const TutorSearchSchema = z.object({
-  mode: z.enum(["tutor", "simplify", "quiz", "lookup"]).optional().catch(undefined),
+  mode: z
+    .enum(["tutor", "simplify", "quiz", "lookup"])
+    .optional()
+    .catch(undefined),
   q: z.string().max(120).optional().catch(undefined),
 });
 
@@ -29,7 +41,11 @@ export const Route = createFileRoute("/tutor")({
   head: () => ({
     meta: [
       { title: "Coach · CallFlow Lab" },
-      { name: "description", content: "Chat, simplify, drill, or retrieve exact Spectrum product records." },
+      {
+        name: "description",
+        content:
+          "Chat, simplify, drill, or retrieve exact Spectrum product records.",
+      },
     ],
   }),
 });
@@ -59,7 +75,12 @@ function TutorPage() {
   const [mode, setMode] = useState<Mode>(initialMode);
   const [messages, setMessages] = useState<Msg[]>(() => {
     const m = loadMemory();
-    return [{ role: "assistant", content: STARTERS[initialMode](m.name, m.takeaways.length > 0) }];
+    return [
+      {
+        role: "assistant",
+        content: STARTERS[initialMode](m.name, m.takeaways.length > 0),
+      },
+    ];
   });
   const [input, setInput] = useState(routeSearch.q ?? "");
   const [loading, setLoading] = useState(false);
@@ -74,13 +95,21 @@ function TutorPage() {
   }, []);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages, loading]);
 
   const switchMode = (m: Mode) => {
     setMode(m);
     const memory = loadMemory();
-    setMessages([{ role: "assistant", content: STARTERS[m](memory.name, memory.takeaways.length > 0) }]);
+    setMessages([
+      {
+        role: "assistant",
+        content: STARTERS[m](memory.name, memory.takeaways.length > 0),
+      },
+    ]);
   };
 
   const send = async () => {
@@ -130,35 +159,90 @@ function TutorPage() {
           : "Ask about call flow, SOP, A-R-M, tools, or products…";
 
   return (
-    <div className="mx-auto grid h-[calc(100vh-3rem)] max-w-6xl gap-4 px-4 py-6 sm:px-6 lg:grid-cols-[1fr_280px]">
+    <div className="page-frame mx-auto grid h-[calc(100dvh-7.5rem)] max-w-6xl gap-4 py-4 md:h-[calc(100dvh-3.5rem)] md:py-6 lg:grid-cols-[1fr_280px]">
       <div className="flex min-h-0 flex-col">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">CallFlow Coach</h1>
-            <p className="text-xs text-muted-foreground">direct · scenario-first · exact-corpus lookup</p>
+            <h1 className="text-2xl font-bold tracking-tight">
+              CallFlow Coach
+            </h1>
+            <p className="text-xs text-muted-foreground">
+              direct · scenario-first · exact-corpus lookup
+            </p>
           </div>
-          <div className="flex flex-wrap gap-1.5">
-            <ModeBtn active={mode === "tutor"} onClick={() => switchMode("tutor")}>
+          <div className="flex max-w-full gap-1.5 overflow-x-auto pb-1">
+            <ModeBtn
+              active={mode === "tutor"}
+              onClick={() => switchMode("tutor")}
+            >
               <Sparkles className="mr-1 h-3.5 w-3.5" /> Coach
             </ModeBtn>
-            <ModeBtn active={mode === "lookup"} onClick={() => switchMode("lookup")}>
+            <ModeBtn
+              active={mode === "lookup"}
+              onClick={() => switchMode("lookup")}
+            >
               <Search className="mr-1 h-3.5 w-3.5" /> Quick Lookup
             </ModeBtn>
-            <ModeBtn active={mode === "simplify"} onClick={() => switchMode("simplify")}>
+            <ModeBtn
+              active={mode === "simplify"}
+              onClick={() => switchMode("simplify")}
+            >
               <Wand2 className="mr-1 h-3.5 w-3.5" /> Plain English
             </ModeBtn>
-            <ModeBtn active={mode === "quiz"} onClick={() => switchMode("quiz")}>
+            <ModeBtn
+              active={mode === "quiz"}
+              onClick={() => switchMode("quiz")}
+            >
               <Brain className="mr-1 h-3.5 w-3.5" /> Drill
             </ModeBtn>
           </div>
         </div>
 
-        <Card ref={scrollRef as never} className="card-elevated mt-4 flex-1 overflow-y-auto border-border bg-card/40 p-4">
+        <details className="tool-details mt-3 lg:hidden">
+          <summary>
+            <span>Coach memory</span>
+            <span className="text-xs text-muted-foreground">
+              {mem.takeaways.length} wins
+            </span>
+          </summary>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <Stat label="Lessons" value={mem.visitedLessons.length} />
+            <Stat label="Cards" value={mem.flashcardsSeen.length} />
+            <Stat label="Wins" value={mem.takeaways.length} />
+          </div>
+          {mem.takeaways.length > 0 && (
+            <ul className="mt-3 space-y-1.5">
+              {mem.takeaways
+                .slice()
+                .reverse()
+                .slice(0, 4)
+                .map((takeaway, index) => (
+                  <li
+                    key={index}
+                    className="rounded-lg border border-border bg-secondary/40 p-2 text-xs"
+                  >
+                    {takeaway.text}
+                  </li>
+                ))}
+            </ul>
+          )}
+        </details>
+
+        <Card
+          ref={scrollRef as never}
+          className="card-elevated mt-4 flex-1 overflow-y-auto border-border bg-card/40 p-4"
+        >
           <div className="space-y-4">
             {messages.map((m, i) => (
-              <Bubble key={i} role={m.role}>{m.content}</Bubble>
+              <Bubble key={i} role={m.role}>
+                {m.content}
+              </Bubble>
             ))}
-            {loading && <Bubble role="assistant"><Loader2 className="inline h-4 w-4 animate-spin" /> retrieving…</Bubble>}
+            {loading && (
+              <Bubble role="assistant">
+                <Loader2 className="inline h-4 w-4 animate-spin" /> retrieving…
+              </Bubble>
+            )}
           </div>
         </Card>
 
@@ -176,32 +260,64 @@ function TutorPage() {
             className="min-h-[52px] resize-none bg-card"
             rows={2}
           />
-          <Button onClick={send} disabled={loading || !input.trim()} className="bg-gradient-primary text-primary-foreground hover:opacity-95">
+          <Button
+            onClick={send}
+            disabled={loading || !input.trim()}
+            className="bg-gradient-primary text-primary-foreground hover:opacity-95"
+          >
             <Send className="h-4 w-4" />
           </Button>
         </div>
-        <p className="mt-2 text-[11px] text-muted-foreground">Study tool only — current official article, biller, Agent OS, approved SOP, and live offer control.</p>
+        <p className="mt-2 text-[11px] text-muted-foreground">
+          Study tool only — current official article, biller, Agent OS, approved
+          SOP, and live offer control.
+        </p>
       </div>
 
       <aside className="hidden min-h-0 lg:block">
         <Card className="card-elevated h-full overflow-y-auto border-border bg-card/40 p-4">
           <div className="flex items-center justify-between">
-            <div className="text-xs font-semibold uppercase tracking-wider text-neon">What I remember</div>
-            <Button size="sm" variant="ghost" className="h-7 px-2 text-xs" onClick={() => { if (confirm("Clear all coach memory?")) { clearMemory(); toast.success("Memory cleared."); } }} title="Clear memory">
+            <div className="text-xs font-semibold uppercase tracking-wider text-neon">
+              What I remember
+            </div>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="h-7 px-2 text-xs"
+              onClick={() => {
+                if (confirm("Clear all coach memory?")) {
+                  clearMemory();
+                  toast.success("Memory cleared.");
+                }
+              }}
+              title="Clear memory"
+            >
               <Trash2 className="h-3.5 w-3.5" />
             </Button>
           </div>
 
           <div className="mt-3">
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Name</div>
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+              Name
+            </div>
             {editingName ? (
               <div className="mt-1 flex gap-1">
-                <Input value={nameInput} onChange={(e) => setNameInput(e.target.value)} className="h-8 bg-card text-sm" />
-                <Button size="sm" className="h-8" onClick={saveName}>Save</Button>
+                <Input
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                  className="h-8 bg-card text-sm"
+                />
+                <Button size="sm" className="h-8" onClick={saveName}>
+                  Save
+                </Button>
               </div>
             ) : (
-              <button onClick={() => setEditingName(true)} className="mt-1 flex items-center gap-1 text-sm hover:text-neon">
-                {mem.name}<PencilLine className="h-3 w-3 opacity-60" />
+              <button
+                onClick={() => setEditingName(true)}
+                className="mt-1 flex items-center gap-1 text-sm hover:text-neon"
+              >
+                {mem.name}
+                <PencilLine className="h-3 w-3 opacity-60" />
               </button>
             )}
           </div>
@@ -214,30 +330,52 @@ function TutorPage() {
 
           {mem.takeaways.length > 0 && (
             <div className="mt-5">
-              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Things learned</div>
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                Things learned
+              </div>
               <ul className="mt-2 space-y-1.5">
-                {mem.takeaways.slice().reverse().slice(0, 8).map((t, i) => (
-                  <li key={i} className="flex gap-2 rounded-md border border-border bg-secondary/40 p-2 text-xs">
-                    <span className="text-neon">✓</span><span className="text-foreground/90">{t.text}</span>
-                  </li>
-                ))}
+                {mem.takeaways
+                  .slice()
+                  .reverse()
+                  .slice(0, 8)
+                  .map((t, i) => (
+                    <li
+                      key={i}
+                      className="flex gap-2 rounded-md border border-border bg-secondary/40 p-2 text-xs"
+                    >
+                      <span className="text-neon">✓</span>
+                      <span className="text-foreground/90">{t.text}</span>
+                    </li>
+                  ))}
               </ul>
             </div>
           )}
 
           {mem.visitedLessons.length > 0 && (
             <div className="mt-5">
-              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Recent lessons</div>
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                Recent lessons
+              </div>
               <ul className="mt-2 space-y-1">
-                {mem.visitedLessons.slice().reverse().slice(0, 6).map((l) => (
-                  <li key={l.id} className="text-xs text-muted-foreground"><span className="text-foreground/80">{l.title}</span> <span className="opacity-60">· {l.module}</span></li>
-                ))}
+                {mem.visitedLessons
+                  .slice()
+                  .reverse()
+                  .slice(0, 6)
+                  .map((l) => (
+                    <li key={l.id} className="text-xs text-muted-foreground">
+                      <span className="text-foreground/80">{l.title}</span>{" "}
+                      <span className="opacity-60">· {l.module}</span>
+                    </li>
+                  ))}
               </ul>
             </div>
           )}
 
           {mem.takeaways.length === 0 && mem.visitedLessons.length === 0 && (
-            <p className="mt-6 text-xs text-muted-foreground">As you study lessons, flip cards, and drill scenarios, I will remember the key wins here and weave them into future coaching.</p>
+            <p className="mt-6 text-xs text-muted-foreground">
+              As you study lessons, flip cards, and drill scenarios, I will
+              remember the key wins here and weave them into future coaching.
+            </p>
           )}
         </Card>
       </aside>
@@ -249,20 +387,47 @@ function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div className="rounded-md border border-border bg-secondary/40 p-2">
       <div className="text-lg font-semibold text-neon">{value}</div>
-      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div>
+      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+        {label}
+      </div>
     </div>
   );
 }
 
-function ModeBtn({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
-  return <Button size="sm" variant={active ? "default" : "outline"} onClick={onClick} className={active ? "bg-gradient-primary text-primary-foreground" : ""}>{children}</Button>;
+function ModeBtn({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <Button
+      size="sm"
+      variant={active ? "default" : "outline"}
+      onClick={onClick}
+      className={active ? "bg-gradient-primary text-primary-foreground" : ""}
+    >
+      {children}
+    </Button>
+  );
 }
 
-function Bubble({ role, children }: { role: "user" | "assistant"; children: React.ReactNode }) {
+function Bubble({
+  role,
+  children,
+}: {
+  role: "user" | "assistant";
+  children: React.ReactNode;
+}) {
   const isUser = role === "user";
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-      <div className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${isUser ? "bg-gradient-primary text-primary-foreground" : "border border-border bg-card text-foreground"}`}>
+      <div
+        className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${isUser ? "bg-gradient-primary text-primary-foreground" : "border border-border bg-card text-foreground"}`}
+      >
         {children}
       </div>
     </div>

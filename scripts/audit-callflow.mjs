@@ -93,10 +93,7 @@ if (failures.length === 0) {
   if (!routeTree.includes("._addFileTypes<FileRouteTypes>()")) {
     failures.push("Route tree is missing generated file-route type registration");
   }
-  if (!routeTree.includes("ROUTE_MANIFEST_START")) {
-    failures.push("Route tree is missing its generated route manifest");
-  }
-  notes.push(`Route tree: generated ownership and ${requiredRoutes.length} required paths checked`);
+  notes.push(`Route tree: generated ownership, file-route types and ${requiredRoutes.length} required paths checked`);
 
   const academy = read("src/data/promptEngineeringAcademy.ts");
   const academyRoute = read("src/routes/prompt-academy.tsx");

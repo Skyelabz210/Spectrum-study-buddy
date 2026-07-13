@@ -1,5 +1,33 @@
 # Changelog
 
+## v1.6.0-spectrum.0 — 2026-07-13
+
+Mobile-first UX, navigation, reader reliability and Spectrum visual-system release.
+
+Changed:
+
+- Replaced the long landing dashboard and full curriculum spine with a compact Today workspace organized into Live Call, Practice, Learn and secondary utilities.
+- Reorganized the sidebar into Today, Live Call, Practice, Learn and System groups.
+- Added an explicit labeled mobile Menu control, an in-menu close control, automatic menu dismissal after every route selection, and a fixed five-action mobile bottom dock.
+- Replaced the inherited magenta palette with a Spectrum-aligned blue, cyan, deep-navy and cool-white token system.
+- Added mobile-safe touch targets, safe-area padding, horizontally scrollable tab bars, compact route spacing and consistent page frames.
+- Repaired the speech lifecycle so unsupported, cancelled, blocked and completed utterances have distinct results.
+- Prevented flashcard and module autoplay from advancing when audio fails or is blocked; added visible audio status and a manual Read card action.
+- Added a chunked Page Reader and exposed it in Across the Spectrum, Prompt Academy and The Full Spectrum.
+- Reordered Across the Spectrum so Ready and the live work surface precede setup on mobile; moved setup and coaching inspectors into expandable panels.
+- Added mobile selectors to Scenario Trainer and Prompt Engineer so the primary work surface appears before long desktop rails.
+- Added progressive disclosure to Prompt Engineer compiler evidence, Full Spectrum reference sections and secondary Setup sections.
+- Restored Coach memory visibility on mobile and changed the Coach height calculation to dynamic viewport units.
+- Replaced deprecated TanStack server-function validators and split large client bundles into smaller cacheable chunks.
+- Added Python mobile-UX regression gates and executable speech lifecycle tests to `npm run check`.
+
+Verification:
+
+- Domain audit passed for all routes, 226 flashcards, 14 modules, 81 lessons, 6 caller personas, 8 QA markers, privacy scans and exact CRAM mask recovery.
+- Python mobile-UX regression gates passed.
+- Speech lifecycle tests passed for success, cancellation, unsupported-browser and blocked-audio paths.
+- TypeScript typecheck and production client/SSR builds passed.
+
 ## v1.1.0-spectrum.4 — 2026-07-11
 
 AI-assisted selling workbench release with CRAM exact-state refinement and week-two UI architecture planning completed 2026-07-12.
