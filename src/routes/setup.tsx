@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { SpectrumCalendarBrief } from "@/components/SpectrumCalendarBrief";
 import {
   WORK_PROFILE,
   SETUP_TASKS,
@@ -87,6 +88,8 @@ function SetupPage() {
           separate from the customer product corpus.
         </p>
       </div>
+
+      <SpectrumCalendarBrief variant="setup" />
 
       <section className="grid gap-4 lg:grid-cols-[1.1fr_.9fr]">
         <Card className="card-elevated border-border bg-card/75 p-5">

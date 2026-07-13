@@ -13,6 +13,7 @@ import {
 } from "@/data/privateProfile";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { SpectrumCalendarBrief } from "@/components/SpectrumCalendarBrief";
 import {
   ArrowRight,
   BookOpen,
@@ -126,6 +127,7 @@ function Home() {
               Pull an exact answer during a call, practice a live caller, or
               continue one focused lesson. Everything else stays one level down.
             </p>
+            <SpectrumCalendarBrief variant="compact" />
           </div>
           <div className="grid gap-2 sm:grid-cols-2 lg:w-64 lg:grid-cols-1">
             <Button

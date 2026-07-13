@@ -75,6 +75,32 @@ require(
 )
 
 require(
+    "src/data/outlookCalendarSpectrum.ts",
+    [
+        "Spectrum New Hire Orientation — First Day",
+        "Tuesday, August 11, 2026",
+        "9:45 AM",
+        "acceptable I-9 documents",
+        "Personal contact details",
+    ],
+)
+
+require(
+    "src/components/SpectrumCalendarBrief.tsx",
+    [
+        'variant: "compact" | "plan" | "setup"',
+        "Next calendar milestone",
+        "Outlook calendar brief",
+        "First-day readiness",
+        "sm:grid-cols-2",
+    ],
+)
+
+require("src/routes/index.tsx", ['<SpectrumCalendarBrief variant="compact" />'])
+require("src/routes/plan.tsx", ['<SpectrumCalendarBrief variant="plan" />'])
+require("src/routes/setup.tsx", ['<SpectrumCalendarBrief variant="setup" />'])
+
+require(
     "src/styles.css",
     [
         "--primary: #0073d1;",

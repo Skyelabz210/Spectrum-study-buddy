@@ -1,5 +1,24 @@
 # Changelog
 
+## v1.7.0-spectrum.0 — 2026-07-13
+
+Outlook Calendar onboarding ingestion and cross-app schedule release.
+
+Changed:
+
+- Read the connected primary Outlook calendar and found one Spectrum item: the Tuesday, August 11, 2026 new-hire orientation.
+- Added a sanitized, source-dated calendar dataset with the verified arrival target, training window, location, days-off note, I-9 readiness, attire, security check-in, and email-confirmation instruction.
+- Added a compact next-calendar-milestone cue to Today without restoring the former long landing-page stack.
+- Added the complete calendar brief to Study Plan and a focused first-day checklist to My Setup.
+- Recorded the ingestion in the Weekly Ledger and bumped the app and ledger version to `1.7.0-spectrum.0`.
+- Kept calendar onboarding content out of customer-product lookup, sales scripts, and simulations because it is employee/admin context rather than product authority.
+- Excluded the recruiter contact, mailbox address, Outlook event ID, Outlook item URL, and other connector identifiers from the app bundle.
+
+Verification:
+
+- Added calendar-content, three-surface wiring, mobile-layout, privacy, phone-pattern, and live-link regression gates.
+- Ran the full repository audit, mobile UX tests, speech tests, TypeScript typecheck, and production build.
+
 ## v1.6.0-spectrum.0 — 2026-07-13
 
 Mobile-first UX, navigation, reader reliability and Spectrum visual-system release.
