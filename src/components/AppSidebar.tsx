@@ -25,6 +25,7 @@ import {
   PhoneCall,
   WandSparkles,
   Building2,
+  GraduationCap,
 } from "lucide-react";
 
 const items = [
@@ -32,6 +33,7 @@ const items = [
   { title: "The Full Spectrum", url: "/full-spectrum", icon: Building2 },
   { title: "Quick Lookup", url: "/lookup", icon: Search },
   { title: "Curriculum", url: "/curriculum", icon: BookOpen },
+  { title: "Prompt Academy", url: "/prompt-academy", icon: GraduationCap },
   { title: "My Setup", url: "/setup", icon: KeyRound },
   { title: "Across the Spectrum", url: "/across-spectrum", icon: PhoneCall },
   { title: "Prompt Engineer", url: "/sales-prompts", icon: WandSparkles },
