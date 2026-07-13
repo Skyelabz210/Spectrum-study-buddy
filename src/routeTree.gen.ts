@@ -9,6 +9,7 @@ import { Route as ScenariosRouteImport } from './routes/scenarios'
 import { Route as SalesPromptsRouteImport } from './routes/sales-prompts'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as LookupRouteImport } from './routes/lookup'
+import { Route as FullSpectrumRouteImport } from './routes/full-spectrum'
 import { Route as FlashcardsRouteImport } from './routes/flashcards'
 import { Route as CornerRouteImport } from './routes/corner'
 import { Route as AcrossSpectrumRouteImport } from './routes/across-spectrum'
@@ -23,6 +24,7 @@ const ScenariosRoute = ScenariosRouteImport.update({ id: '/scenarios', path: '/s
 const SalesPromptsRoute = SalesPromptsRouteImport.update({ id: '/sales-prompts', path: '/sales-prompts', getParentRoute: () => rootRouteImport } as any)
 const PlanRoute = PlanRouteImport.update({ id: '/plan', path: '/plan', getParentRoute: () => rootRouteImport } as any)
 const LookupRoute = LookupRouteImport.update({ id: '/lookup', path: '/lookup', getParentRoute: () => rootRouteImport } as any)
+const FullSpectrumRoute = FullSpectrumRouteImport.update({ id: '/full-spectrum', path: '/full-spectrum', getParentRoute: () => rootRouteImport } as any)
 const FlashcardsRoute = FlashcardsRouteImport.update({ id: '/flashcards', path: '/flashcards', getParentRoute: () => rootRouteImport } as any)
 const CornerRoute = CornerRouteImport.update({ id: '/corner', path: '/corner', getParentRoute: () => rootRouteImport } as any)
 const AcrossSpectrumRoute = AcrossSpectrumRouteImport.update({ id: '/across-spectrum', path: '/across-spectrum', getParentRoute: () => rootRouteImport } as any)
@@ -35,6 +37,7 @@ const rootRouteChildren = {
   AcrossSpectrumRoute,
   CornerRoute,
   FlashcardsRoute,
+  FullSpectrumRoute,
   LookupRoute,
   PlanRoute,
   SalesPromptsRoute,
