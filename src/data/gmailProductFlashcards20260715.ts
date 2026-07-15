@@ -166,6 +166,38 @@ export const GMAIL_SOURCE_FLASHCARDS_20260715: Flashcard[] = [
     "What limitations apply to the Visa reward card?",
     "It can make most Visa purchases and a one-time Spectrum payment, but not Auto Pay; it has no cash value and cannot be transferred to a bank, PayPal, Venmo or Zelle or used to pay a credit-card bill.",
   ),
+  sourced(
+    "pbb-readback-trigger",
+    "GEN9023",
+    "Spectrum Mobile Phone Balance Buyout (PBB) Overview",
+    "Phone Balance Buyout",
+    "When must the mandatory PBB eligibility read-back occur and who must hear it?",
+    "Read it to every PBB-eligible customer before any order-confirmation talking points and before submitting the Spectrum Mobile order. Ask the customer to confirm understanding before submission.",
+  ),
+  sourced(
+    "pbb-readback-sequence",
+    "GEN9023",
+    "Spectrum Mobile Phone Balance Buyout (PBB) Overview",
+    "Phone Balance Buyout",
+    "What complete eligibility sequence must the agent cover in the pre-submission PBB read-back?",
+    "Confirm: prior-carrier and Spectrum accounts are in good standing at claim time; the customer was active with the prior carrier; the most recent bill shows total balance and payments remaining; at least three payments were made on each device; an active payment plan exists or the devices were paid off within seven days; final reimbursement depends on credit approval and the balances on ported lines; all ordered lines must activate and documents must be submitted and approved before a non-reloadable Visa Reward Card is issued; and disconnecting reimbursed lines within 12 months causes the buyout amount to be charged back.",
+  ),
+  sourced(
+    "pr223-throttling-update",
+    "PR223",
+    "Spectrum Mobile Service Product Details",
+    "Mobile Source Control",
+    "What did the June 30, 2026 PR223 version update remove?",
+    "It removed throttling references for both Unlimited and Unlimited Plus. Keep the internal article change distinct from any customer-facing public wording and use the current approved sales source for live quotes.",
+  ),
+  sourced(
+    "pr223-hotspot-update",
+    "PR223",
+    "Spectrum Mobile Service Product Details",
+    "Mobile Source Control",
+    "What did the July 7, 2026 PR223 version update remove?",
+    "It removed the phrase stating that residential Spectrum Mobile plans include up to 5 GB of mobile-hotspot usage. The version note confirms the internal edit; current approved customer-facing guidance still controls.",
+  ),
 
   sourced(
     "upgrade-eligibility",
@@ -409,14 +441,8 @@ export const GMAIL_NEXT_INGESTION_QUEUE_20260715 = [
   },
   {
     id: "gmail-next-plan-conflict",
-    title: "PR223 plan-threshold reconciliation",
+    title: "Customer-facing Mobile threshold reconciliation",
     detail:
-      "The internal article and public plan wording remain different. Capture the current approved sales source and effective date before converting thresholds into exam answers.",
-  },
-  {
-    id: "gmail-next-pbb-readback",
-    title: "GEN9023 required read-back language",
-    detail:
-      "Capture the complete current talking points and disclosures used immediately before order submission so the PBB workflow can be drilled verbatim.",
+      "PR223’s June 30 and July 7 removal notes are now captured. The internal article and public plan wording still differ, so capture the current approved customer-facing sales source and effective date before converting thresholds into exam answers.",
   },
 ] as const;

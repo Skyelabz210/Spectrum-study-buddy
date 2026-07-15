@@ -235,17 +235,17 @@ if (failures.length === 0) {
     failures.push(
       `Daily Kahoot recovery expected 6 cards; found ${dailyKahootCards.length}`,
     );
-  if (gmailArticleCards.length !== 28)
+  if (gmailArticleCards.length !== 32)
     failures.push(
-      `Gmail article-derived deck expected 28 cards; found ${gmailArticleCards.length}`,
+      `Gmail article-derived deck expected 32 cards; found ${gmailArticleCards.length}`,
     );
   if (gmailMasteryCards.length !== 10)
     failures.push(
       `Gmail optional mastery deck expected 10 cards; found ${gmailMasteryCards.length}`,
     );
-  if (flashcards.length !== 325)
+  if (flashcards.length !== 329)
     failures.push(
-      `Flashcard preservation gate expected 325 total cards; found ${flashcards.length}`,
+      `Flashcard preservation gate expected 329 total cards; found ${flashcards.length}`,
     );
   const flashcardDeck = read("src/data/flashcardDeck.ts");
   const flashcardRoute = read("src/routes/flashcards.tsx");

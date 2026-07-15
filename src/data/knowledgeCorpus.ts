@@ -160,7 +160,7 @@ export const KNOWLEDGE_CORPUS: KnowledgeRecord[] = [
     ],
     sourceIds: ["PR131"],
     verification: "verified-internal",
-    lastVerified: "2026-07-10",
+    lastVerified: "2026-07-15",
     businessDepth: "residential",
   },
   {
@@ -180,7 +180,7 @@ export const KNOWLEDGE_CORPUS: KnowledgeRecord[] = [
     ],
     sourceIds: ["PR131"],
     verification: "verified-internal",
-    lastVerified: "2026-07-10",
+    lastVerified: "2026-07-15",
     businessDepth: "residential",
   },
   {
@@ -461,7 +461,7 @@ export const KNOWLEDGE_CORPUS: KnowledgeRecord[] = [
     ],
     sourceIds: ["PR223", "PUBLIC-MOBILE-2026-07-10"],
     verification: "source-discrepancy",
-    lastVerified: "2026-07-10",
+    lastVerified: "2026-07-15",
     businessDepth: "residential",
   },
   {
@@ -490,7 +490,7 @@ export const KNOWLEDGE_CORPUS: KnowledgeRecord[] = [
     ],
     sourceIds: ["PR223", "PUBLIC-MOBILE-2026-07-10"],
     verification: "source-discrepancy",
-    lastVerified: "2026-07-10",
+    lastVerified: "2026-07-15",
     businessDepth: "residential",
   },
   {
@@ -567,6 +567,7 @@ export const KNOWLEDGE_CORPUS: KnowledgeRecord[] = [
       "Current prior-carrier bill must show balance and payment history",
       "Prior-carrier and Spectrum accounts must remain in good standing during the claim",
       "Keep at least one line active for 12 months from payout",
+      "Read the mandatory eligibility confirmation to every eligible customer before order-confirmation talking points and order submission",
     ],
     notes: [
       "Captured maximum is a one-time reward of up to $2,500 per account; current live rules control.",
@@ -575,6 +576,7 @@ export const KNOWLEDGE_CORPUS: KnowledgeRecord[] = [
       "Spectrum employees and standalone Mobile accounts are excluded in the captured article.",
       "Only eligible ported lines are reimbursed; up to 20 lines may be brought, but wearables and accessories do not count.",
       "Early line cancellation can require repayment.",
+      "The pre-submission read-back confirms that all ordered lines must activate and required documents must be submitted and approved before a non-reloadable Visa Reward Card is issued.",
       "The Visa reward card is not usable for Auto Pay, cash transfer, bank transfer, peer-to-peer transfer or credit-card payment.",
     ],
     sourceIds: ["GEN9023"],

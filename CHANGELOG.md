@@ -1,5 +1,23 @@
 # Changelog
 
+## v1.10.1-spectrum.0 — 2026-07-15
+
+Targeted Gmail source-closure release.
+
+Changed:
+
+- Captured the complete mandatory GEN9023 eligibility read-back that must occur before order-confirmation talking points and Spectrum Mobile order submission.
+- Added a sequence card covering account standing, prior-carrier activity, the recent bill, three device payments, the seven-day payoff window, reimbursement calculation, activation/document approval, the non-reloadable reward card and the 12-month charge-back rule.
+- Added PR223 source-control cards for the June 30 throttling-reference removal and July 7 residential hotspot-wording removal.
+- Preserved all 325 prior cards and expanded the library to 329 without adding duplicate Gmail copies.
+- Reduced the Gmail next-ingestion queue from four targets to three; full GEN8761, missing exact Milestone/Kahoot wording and customer-facing Mobile threshold reconciliation remain open.
+
+Verification:
+
+- Enforced 226 legacy cards, 103 ingestion cards, 329 total cards, 32 Gmail article-derived cards and ten optional Gmail mastery cards.
+- Confirmed unique IDs and zero exact duplicate fronts or question-and-answer pairs.
+- Ran repository audit, deck analysis, mobile UX tests, speech tests, TypeScript typecheck and production build.
+
 ## v1.10.0-spectrum.0 — 2026-07-15
 
 Gmail product-ingestion, exam-deck separation and mastery-routing release.

@@ -21,7 +21,7 @@ export type WeeklyTrainingUpdate = {
   unresolvedQuestions: string[];
 };
 
-export const CURRENT_APP_VERSION = "1.10.0-spectrum.0";
+export const CURRENT_APP_VERSION = "1.10.1-spectrum.0";
 export const CURRENT_WEEK_ID = "2026-W29";
 
 export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
@@ -31,8 +31,25 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     dateRange: "2026-07-13 through 2026-07-19",
     source: "mixed",
     summary:
-      "Completed Gmail product-ingestion and deck-separation release. The 287-card prior library remains intact. Twenty-eight article-derived cards and ten optional generated mastery drills expand the library to 325 unique cards. Milestone Questions, Milestone Prep and Kahoot are isolated for verbatim final-exam cramming; Article-linked Review and Mastery Lab remain independently selectable. Gmail verified BYOD, PBB, Anytime Upgrade, RR/RRP, Invincible WiFi, Mobile positioning and Internet/TV bundle details, while duplicate Outlook copies were canonicalized instead of added again. A privacy-safe E-Verify deadline is surfaced in Priority without storing credentials, case identifiers, documents or raw mailbox data.",
+      "Completed Gmail product-ingestion, deck separation and targeted continuation release. The 287-card prior library remains intact. Thirty-two article-derived cards and ten optional generated mastery drills expand the library to 329 unique cards. Milestone Questions, Milestone Prep and Kahoot are isolated for verbatim final-exam cramming; Article-linked Review and Mastery Lab remain independently selectable. The continuation captured the complete mandatory GEN9023 pre-submission read-back and PR223’s June 30 throttling-removal and July 7 hotspot-wording updates. GEN8761 and missing exact assessment wording remain queued rather than guessed. A privacy-safe E-Verify deadline is surfaced in Priority without storing credentials, case identifiers, documents or raw mailbox data.",
     recordings: [
+      {
+        id: "gmail-2026-07-15-targeted-continuation",
+        title: "Gmail continuation: PBB read-back and PR223 source control",
+        recordedAt: "2026-07-15T17:00:00-05:00",
+        duration: "targeted mailbox reconciliation pass",
+        status: "ingested",
+        focus: [
+          "GEN9023 mandatory pre-submission read-back",
+          "PBB eligibility confirmation",
+          "12-month charge-back disclosure",
+          "PR223 June 30 throttling removal",
+          "PR223 July 7 hotspot wording removal",
+          "GEN8761 source gap",
+          "Milestone and Kahoot wording search",
+          "duplicate avoidance",
+        ],
+      },
       {
         id: "gmail-2026-07-15-product-ingestion",
         title: "Gmail: product articles, notifications and deck reconciliation",
@@ -250,7 +267,8 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     actionItems: [
       "Start final-exam sessions in Milestone Questions; select Milestone Prep or Kahoot independently when those exact source families are the target.",
       "Enable Article-linked Review for sourced PR, GEN and HOW facts; enable Mastery Lab only when scenario reasoning, comparison, bundling and ideal-solution practice are wanted.",
-      "Review the four Gmail next-ingestion targets in Source queue before the next working-day capture.",
+      "Review the three remaining Gmail next-ingestion targets in Source queue before the next working-day capture.",
+      "Practice the full GEN9023 PBB eligibility sequence before the order-confirmation talking points and before submission.",
       "Use the Source queue before the next working day to target the 30 daily cards missing an article number, full title or exact wording.",
       "Collect the original Kahoot question display or a clean facilitator recap because the July 7 game audio did not preserve every prompt.",
       "Capture the exact text for milestone questions 5, 7, 16, 17, 18, 28–31, 34–35, 38–40 and 45.",
@@ -270,7 +288,6 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     unresolvedQuestions: [
       "What are the exact original classroom-display wordings for every held Milestone and Kahoot prompt not recoverable from Gmail?",
       "What is the full current GEN8761 Mobile Device Trade-In Policies and Business Rules article body?",
-      "What complete current GEN9023 read-back language is required immediately before PBB order submission?",
       "Which approved source and effective date control the remaining PR223 versus public Mobile threshold discrepancy?",
       "Which article numbers and full titles control Customer Commitment, Copilot article types, recently updated articles, FTTP, WiFi pods, Brand Ambassador qualities and Charter values?",
       "What is the exact Multiple Internet Instances limit for Gig, Premier and total residential Internet lines?",

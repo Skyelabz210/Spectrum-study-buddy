@@ -285,6 +285,6 @@ console.log(JSON.stringify(report, null, 2));
 
 if (existingCards.length !== 226)
   throw new Error("Existing-card baseline changed");
-if (newCards.length !== 99) throw new Error("Ingestion count changed");
-if (allCards.length !== 325) throw new Error("Combined-card count changed");
+if (newCards.length !== 103) throw new Error("Ingestion count changed");
+if (allCards.length !== 329) throw new Error("Combined-card count changed");
 if (idGroups.length !== 0) throw new Error("Duplicate flashcard IDs found");

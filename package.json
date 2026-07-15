@@ -1,6 +1,6 @@
 {
   "name": "spectrum-sas",
-  "version": "1.10.0-spectrum.0",
+  "version": "1.10.1-spectrum.0",
   "private": true,
   "sideEffects": false,
   "type": "module",
