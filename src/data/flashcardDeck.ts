@@ -7,6 +7,7 @@ import {
 import { DAILY_CLASS_FLASHCARDS_20260714 } from "@/data/dailyClassFlashcards20260714";
 import { SPECTRUM_PRODUCT_UPDATE_FLASHCARDS } from "@/data/spectrumProductUpdate20260710";
 import { OTTER_CORPUS_FLASHCARDS_20260712 } from "@/data/otterCorpusFlashcards20260712";
+import { GMAIL_FLASHCARDS_20260715 } from "@/data/gmailProductFlashcards20260715";
 
 export const SUPPLEMENTAL_FLASHCARDS: Flashcard[] = [
   {
@@ -346,19 +347,33 @@ export const OUTLOOK_VOICE_FLASHCARDS_20260710: Flashcard[] = [
     id: "outlook-voice-gen9237-01",
     module: 4,
     category: "Voice",
-    front: "GEN9237: What is Spectrum Voice and what equipment does it require?",
+    front:
+      "GEN9237: What is Spectrum Voice and what equipment does it require?",
     back: "Spectrum Voice is a residential landline service using a Spectrum-provided phone modem. Customers connect compatible home phones with a telephone cord; customer-owned modems are not supported. Source: GEN9237 — Explaining Spectrum Voice: Landline Home Phone.",
     deckTags: ["voice"],
-    source: { kind: "article", articleNumber: "GEN9237", articleTitle: "Explaining Spectrum Voice: Landline Home Phone", status: "article-verified", recordedAt: "2026-07-10" },
+    source: {
+      kind: "article",
+      articleNumber: "GEN9237",
+      articleTitle: "Explaining Spectrum Voice: Landline Home Phone",
+      status: "article-verified",
+      recordedAt: "2026-07-10",
+    },
   },
   {
     id: "outlook-voice-gen9237-02",
     module: 4,
     category: "Voice",
-    front: "GEN9237: What destinations are included in standard unlimited calling?",
+    front:
+      "GEN9237: What destinations are included in standard unlimited calling?",
     back: "The U.S., Puerto Rico, Mexico, Canada, Guam, the U.S. Virgin Islands, American Samoa and the Northern Mariana Islands. Source: GEN9237 — Explaining Spectrum Voice: Landline Home Phone.",
     deckTags: ["voice"],
-    source: { kind: "article", articleNumber: "GEN9237", articleTitle: "Explaining Spectrum Voice: Landline Home Phone", status: "article-verified", recordedAt: "2026-07-10" },
+    source: {
+      kind: "article",
+      articleNumber: "GEN9237",
+      articleTitle: "Explaining Spectrum Voice: Landline Home Phone",
+      status: "article-verified",
+      recordedAt: "2026-07-10",
+    },
   },
   {
     id: "outlook-voice-gen9237-03",
@@ -367,7 +382,13 @@ export const OUTLOOK_VOICE_FLASHCARDS_20260710: Flashcard[] = [
     front: "GEN9237: What are Native and Port phone-number choices?",
     back: "Native means choosing a new phone number. Port means transferring an eligible existing number. Residential Spectrum Voice supports up to two telephone lines. Source: GEN9237 — Explaining Spectrum Voice: Landline Home Phone.",
     deckTags: ["voice"],
-    source: { kind: "article", articleNumber: "GEN9237", articleTitle: "Explaining Spectrum Voice: Landline Home Phone", status: "article-verified", recordedAt: "2026-07-10" },
+    source: {
+      kind: "article",
+      articleNumber: "GEN9237",
+      articleTitle: "Explaining Spectrum Voice: Landline Home Phone",
+      status: "article-verified",
+      recordedAt: "2026-07-10",
+    },
   },
   {
     id: "outlook-voice-gen9237-04",
@@ -376,7 +397,13 @@ export const OUTLOOK_VOICE_FLASHCARDS_20260710: Flashcard[] = [
     front: "GEN9237: What must a new Voice customer confirm about E911?",
     back: "Before installation, the customer must confirm understanding of E911 through Third Party Verification. E911 can be unavailable during power/cable outages, after disconnection, or when equipment is moved without proper support. Source: GEN9237 — Explaining Spectrum Voice: Landline Home Phone.",
     deckTags: ["voice"],
-    source: { kind: "article", articleNumber: "GEN9237", articleTitle: "Explaining Spectrum Voice: Landline Home Phone", status: "article-verified", recordedAt: "2026-07-10" },
+    source: {
+      kind: "article",
+      articleNumber: "GEN9237",
+      articleTitle: "Explaining Spectrum Voice: Landline Home Phone",
+      status: "article-verified",
+      recordedAt: "2026-07-10",
+    },
   },
   {
     id: "outlook-voice-gen9237-05",
@@ -385,19 +412,30 @@ export const OUTLOOK_VOICE_FLASHCARDS_20260710: Flashcard[] = [
     front: "GEN9237: How does Spectrum Voice International work?",
     back: "SVI is an optional Voice add-on with unlimited calling to 70 countries and lower per-minute rates elsewhere. The customer must subscribe to Spectrum Voice; incoming international calls do not charge the Spectrum customer. Source: GEN9237 — Explaining Spectrum Voice: Landline Home Phone.",
     deckTags: ["voice"],
-    source: { kind: "article", articleNumber: "GEN9237", articleTitle: "Explaining Spectrum Voice: Landline Home Phone", status: "article-verified", recordedAt: "2026-07-10" },
+    source: {
+      kind: "article",
+      articleNumber: "GEN9237",
+      articleTitle: "Explaining Spectrum Voice: Landline Home Phone",
+      status: "article-verified",
+      recordedAt: "2026-07-10",
+    },
   },
 ];
 
 export const ALL_FLASHCARDS: Flashcard[] = [
   ...DAILY_CLASS_FLASHCARDS_20260714,
   ...OUTLOOK_VOICE_FLASHCARDS_20260710,
+  ...GMAIL_FLASHCARDS_20260715,
   ...EXISTING_FLASHCARDS,
 ];
 
 export type FlashcardDeckId =
   | "milestone"
+  | "milestone-questions"
+  | "milestone-prep"
   | "kahoot"
+  | "article-linked"
+  | "mastery"
   | "internet"
   | "wifi"
   | "mobile"
@@ -410,56 +448,95 @@ export type FlashcardDeckDefinition = {
   id: FlashcardDeckId;
   label: string;
   description: string;
+  family: "Final exam" | "Article study" | "Optional mastery";
 };
 
 export const FLASHCARD_DECKS: FlashcardDeckDefinition[] = [
   {
     id: "milestone",
-    label: "Milestone",
-    description: "Complete July 14 review pool and milestone preparation.",
+    label: "Milestone · Combined",
+    description:
+      "All milestone questions and preparatory exercises in one preserved view.",
+    family: "Final exam",
+  },
+  {
+    id: "milestone-questions",
+    label: "Milestone Questions",
+    description:
+      "The 45 recovered assessment questions, isolated for focused final-exam cramming.",
+    family: "Final exam",
+  },
+  {
+    id: "milestone-prep",
+    label: "Milestone Prep",
+    description:
+      "Testing instructions, timing, scoring and preparatory exercises only.",
+    family: "Final exam",
   },
   {
     id: "kahoot",
     label: "Kahoot",
     description:
       "Recoverable classroom Kahoot questions with source holds exposed.",
+    family: "Final exam",
+  },
+  {
+    id: "article-linked",
+    label: "Article-linked Review",
+    description:
+      "Cards carrying a known PR, GEN or HOW article number and full title.",
+    family: "Article study",
+  },
+  {
+    id: "mastery",
+    label: "Mastery Lab · Optional",
+    description:
+      "Generated scenarios, comparisons, bundles, upgrade avenues and ideal-solution drills.",
+    family: "Optional mastery",
   },
   {
     id: "internet",
     label: "Internet",
     description:
       "Internet tiers, eligibility, speed, equipment and offer rules.",
+    family: "Article study",
   },
   {
     id: "wifi",
     label: "Wi‑Fi",
     description: "Advanced WiFi, pods, Security Shield and Invincible WiFi.",
+    family: "Article study",
   },
   {
     id: "mobile",
     label: "Mobile",
     description:
       "Plans, devices, protection, offers and connectivity features.",
+    family: "Article study",
   },
   {
     id: "tv",
     label: "TV",
     description: "Packages, channels, streaming, add-ons and Xumo.",
+    family: "Article study",
   },
   {
     id: "voice",
     label: "Voice",
     description: "Residential Voice features, lines and international service.",
+    family: "Article study",
   },
   {
     id: "supplementary",
     label: "Supplementary",
     description: "Every pre-ingestion card, preserved without deletion.",
+    family: "Optional mastery",
   },
   {
     id: "all",
     label: "All cards",
     description: "The complete combined library across every deck view.",
+    family: "Optional mastery",
   },
 ];
 
@@ -486,7 +563,33 @@ function cardMatchesTag(card: Flashcard, tag: FlashcardDeckTag) {
 export function getDeckCards(deckId: FlashcardDeckId): Flashcard[] {
   if (deckId === "all") return ALL_FLASHCARDS;
   if (deckId === "supplementary") return EXISTING_FLASHCARDS;
+  if (deckId === "milestone-questions")
+    return ALL_FLASHCARDS.filter(
+      (card) => card.source?.kind === "milestone-review",
+    );
+  if (deckId === "milestone-prep")
+    return ALL_FLASHCARDS.filter(
+      (card) => card.source?.kind === "milestone-prep",
+    );
+  if (deckId === "article-linked")
+    return ALL_FLASHCARDS.filter((card) => {
+      const source = resolveFlashcardSource(card);
+      return /^(?:PR|HOW|GEN)\d+/.test(source.articleNumber);
+    });
+  if (deckId === "mastery")
+    return ALL_FLASHCARDS.filter((card) => card.origin === "generated-mastery");
   return ALL_FLASHCARDS.filter((card) => cardMatchesTag(card, deckId));
+}
+
+export function resolveCardOrigin(card: Flashcard) {
+  if (card.origin) return card.origin;
+  const source = resolveFlashcardSource(card);
+  if (source.kind === "milestone-review" || source.kind === "kahoot")
+    return "verbatim-assessment" as const;
+  if (source.kind === "milestone-prep") return "verbatim-prep" as const;
+  if (/^(?:PR|HOW|GEN)\d+/.test(source.articleNumber))
+    return "source-derived" as const;
+  return "legacy-supplement" as const;
 }
 
 const ARTICLE_TITLES: Record<string, string> = {

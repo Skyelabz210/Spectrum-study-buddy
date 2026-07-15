@@ -23,14 +23,16 @@ function stringArray(node) {
 
 function objectCard(node, file) {
   const values = {};
+  let deckTags = [];
   for (const property of node.properties) {
     if (!ts.isPropertyAssignment(property)) continue;
     const name = propertyName(property.name);
-    if (["id", "category", "front", "back"].includes(name))
+    if (["id", "category", "front", "back", "origin"].includes(name))
       values[name] = stringValue(property.initializer);
+    if (name === "deckTags") deckTags = stringArray(property.initializer);
   }
   if (!values.id || !values.front || !values.back) return null;
-  return { ...values, file, deckTags: [], sourceStatus: "legacy" };
+  return { ...values, file, deckTags, sourceStatus: "legacy" };
 }
 
 function cardsFromArray(file, variableName) {
@@ -89,6 +91,7 @@ function dailyCards() {
         deckTags: ["milestone", ...stringArray(args[3])],
         articleNumber: args[4] ? stringValue(args[4]) : "ARTICLE NEEDED",
         sourceStatus: args[6] ? stringValue(args[6]) : "needs-article",
+        origin: "verbatim-assessment",
         file,
       });
     }
@@ -101,6 +104,7 @@ function dailyCards() {
         deckTags: ["milestone"],
         articleNumber: "CLASS-2026-07-14",
         sourceStatus: "classroom-verified",
+        origin: "verbatim-prep",
         file,
       });
     }
@@ -113,8 +117,49 @@ function dailyCards() {
         deckTags: ["kahoot", ...stringArray(args[3])],
         articleNumber: args[4] ? stringValue(args[4]) : "HOW7726",
         sourceStatus: args[6] ? stringValue(args[6]) : "article-verified",
+        origin: "verbatim-assessment",
         file,
       });
+    }
+    ts.forEachChild(node, visit);
+  }
+  visit(source);
+  return cards;
+}
+
+function gmailCards() {
+  const file = "src/data/gmailProductFlashcards20260715.ts";
+  const source = ts.createSourceFile(
+    file,
+    read(file),
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS,
+  );
+  const cards = [];
+  function visit(node) {
+    if (ts.isCallExpression(node) && ts.isIdentifier(node.expression)) {
+      const name = node.expression.text;
+      const args = node.arguments;
+      if (name === "sourced" || name === "mastery") {
+        const id = stringValue(args[0]);
+        const articleNumber = stringValue(args[1]);
+        const articleTitle = stringValue(args[2]);
+        const isMastery = name === "mastery";
+        cards.push({
+          id: `gmail15-${isMastery ? "mastery-" : ""}${id}`,
+          category: stringValue(args[3]),
+          front: isMastery
+            ? `Mastery scenario · ${stringValue(args[4])}`
+            : `${articleNumber}: ${stringValue(args[4])}`,
+          back: `${stringValue(args[5])} ${isMastery ? "Source basis" : "Source"}: ${articleNumber} — ${articleTitle}.`,
+          deckTags: args[6] ? stringArray(args[6]) : ["mobile"],
+          articleNumber,
+          sourceStatus: "article-verified",
+          origin: isMastery ? "generated-mastery" : "source-derived",
+          file,
+        });
+      }
     }
     ts.forEachChild(node, visit);
   }
@@ -140,6 +185,7 @@ const newCards = [
     "src/data/flashcardDeck.ts",
     "OUTLOOK_VOICE_FLASHCARDS_20260710",
   ),
+  ...gmailCards(),
 ];
 const allCards = [...newCards, ...existingCards];
 
@@ -197,11 +243,28 @@ const report = {
   ).length,
   newKahoot: newCards.filter((card) => card.id.startsWith("daily14-kahoot-"))
     .length,
+  newGmailArticleDerived: newCards.filter(
+    (card) =>
+      card.id.startsWith("gmail15-") && card.origin === "source-derived",
+  ).length,
+  newGmailMastery: newCards.filter((card) =>
+    card.id.startsWith("gmail15-mastery-"),
+  ).length,
   totalCards: allCards.length,
   deckCounts: {
     milestone: allCards.filter((card) => card.deckTags.includes("milestone"))
       .length,
+    milestoneQuestions: allCards.filter(
+      (card) =>
+        card.origin === "verbatim-assessment" &&
+        card.id.startsWith("daily14-mr-"),
+    ).length,
+    milestonePrep: allCards.filter((card) => card.origin === "verbatim-prep")
+      .length,
     kahoot: allCards.filter((card) => card.deckTags.includes("kahoot")).length,
+    articleLinked: allCards.filter(hasArticleNumber).length,
+    mastery: allCards.filter((card) => card.origin === "generated-mastery")
+      .length,
     internet: allCards.filter((card) => matches(card, "internet")).length,
     wifi: allCards.filter((card) => matches(card, "wifi")).length,
     mobile: allCards.filter((card) => matches(card, "mobile")).length,
@@ -222,6 +285,6 @@ console.log(JSON.stringify(report, null, 2));
 
 if (existingCards.length !== 226)
   throw new Error("Existing-card baseline changed");
-if (newCards.length !== 61) throw new Error("Ingestion count changed");
-if (allCards.length !== 287) throw new Error("Combined-card count changed");
+if (newCards.length !== 99) throw new Error("Ingestion count changed");
+if (allCards.length !== 325) throw new Error("Combined-card count changed");
 if (idGroups.length !== 0) throw new Error("Duplicate flashcard IDs found");

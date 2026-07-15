@@ -21,7 +21,7 @@ export type WeeklyTrainingUpdate = {
   unresolvedQuestions: string[];
 };
 
-export const CURRENT_APP_VERSION = "1.9.0-spectrum.0";
+export const CURRENT_APP_VERSION = "1.10.0-spectrum.0";
 export const CURRENT_WEEK_ID = "2026-W29";
 
 export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
@@ -31,8 +31,28 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     dateRange: "2026-07-13 through 2026-07-19",
     source: "mixed",
     summary:
-      "Spectrum SAS mobile workspace and Outlook ingestion release. The 226-card prior library remains intact in Supplementary. Five GEN9237 Voice cards join the 56 July 14 classroom cards for 287 unique cards total. The new My Stuff hub exposes a Priority, Direct and General company bulletin plus a progressive leadership-and-colleague walkthrough. Exact course deadlines, the Tuesday–Saturday work schedule, safe source labels and clarification gaps are visible without storing raw mailbox data, security codes, ADP material or employee performance tables.",
+      "Completed Gmail product-ingestion and deck-separation release. The 287-card prior library remains intact. Twenty-eight article-derived cards and ten optional generated mastery drills expand the library to 325 unique cards. Milestone Questions, Milestone Prep and Kahoot are isolated for verbatim final-exam cramming; Article-linked Review and Mastery Lab remain independently selectable. Gmail verified BYOD, PBB, Anytime Upgrade, RR/RRP, Invincible WiFi, Mobile positioning and Internet/TV bundle details, while duplicate Outlook copies were canonicalized instead of added again. A privacy-safe E-Verify deadline is surfaced in Priority without storing credentials, case identifiers, documents or raw mailbox data.",
     recordings: [
+      {
+        id: "gmail-2026-07-15-product-ingestion",
+        title: "Gmail: product articles, notifications and deck reconciliation",
+        recordedAt: "2026-07-15T09:00:00-05:00",
+        duration: "mailbox ingestion pass",
+        status: "ingested",
+        focus: [
+          "Milestone and Kahoot verbatim-source search",
+          "BYOD",
+          "Phone Balance Buyout",
+          "Anytime Upgrade",
+          "RR and RRP",
+          "Invincible WiFi",
+          "plan comparison",
+          "bundle avenues",
+          "ideal-solution scenarios",
+          "privacy-safe notification routing",
+          "duplicate canonicalization",
+        ],
+      },
       {
         id: "5xL1_QCQXVhI1obxc0Pc2U99EpM",
         title: "Daily class: complete milestone review and assessment",
@@ -177,6 +197,14 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     ],
     modulesTouched: ["m4", "m5", "m6", "m8", "m9", "m10", "m12", "m13"],
     newTerms: [
+      "verbatim assessment deck",
+      "milestone questions deck",
+      "milestone prep deck",
+      "article-linked review",
+      "optional mastery lab",
+      "Gmail duplicate canonicalization",
+      "Anytime Upgrade",
+      "PBB retention gate",
       "daily class ingestion",
       "milestone review pool",
       "Kahoot recovery",
@@ -207,6 +235,10 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "calendar-verified onboarding",
     ],
     scenarioSeeds: [
+      "A customer owes balances on two ported phones and needs PBB eligibility separated from trade-in and device-promotion eligibility.",
+      "A new Unlimited Plus customer and a recently upgraded plan customer have different Anytime Upgrade timing.",
+      "A work-from-home customer expects an Ethernet desktop to receive Invincible WiFi cellular backup.",
+      "A creator household asks for 2 Gig, requiring fit, address eligibility and WiFi coverage to be compared instead of assumed.",
       "Agent asks AI to recommend a plan but supplies no approved price or offer source.",
       "AI returns a plausible price for a field absent from the source packet.",
       "A long prompt buries the controlling disclosure in unrelated call notes.",
@@ -216,7 +248,9 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "A new prompt performs well on one example but fails the regression scenario set.",
     ],
     actionItems: [
-      "Start study sessions in the Milestone deck; use the service selector to isolate Internet, WiFi, Mobile, TV or Voice follow-up.",
+      "Start final-exam sessions in Milestone Questions; select Milestone Prep or Kahoot independently when those exact source families are the target.",
+      "Enable Article-linked Review for sourced PR, GEN and HOW facts; enable Mastery Lab only when scenario reasoning, comparison, bundling and ideal-solution practice are wanted.",
+      "Review the four Gmail next-ingestion targets in Source queue before the next working-day capture.",
       "Use the Source queue before the next working day to target the 30 daily cards missing an article number, full title or exact wording.",
       "Collect the original Kahoot question display or a clean facilitator recap because the July 7 game audio did not preserve every prompt.",
       "Capture the exact text for milestone questions 5, 7, 16, 17, 18, 28–31, 34–35, 38–40 and 45.",
@@ -234,6 +268,10 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "Recheck the live Outlook event and orientation email before departure because they control any schedule or location change.",
     ],
     unresolvedQuestions: [
+      "What are the exact original classroom-display wordings for every held Milestone and Kahoot prompt not recoverable from Gmail?",
+      "What is the full current GEN8761 Mobile Device Trade-In Policies and Business Rules article body?",
+      "What complete current GEN9023 read-back language is required immediately before PBB order submission?",
+      "Which approved source and effective date control the remaining PR223 versus public Mobile threshold discrepancy?",
       "Which article numbers and full titles control Customer Commitment, Copilot article types, recently updated articles, FTTP, WiFi pods, Brand Ambassador qualities and Charter values?",
       "What is the exact Multiple Internet Instances limit for Gig, Premier and total residential Internet lines?",
       "What product name and answer options were intended in milestone question 16?",

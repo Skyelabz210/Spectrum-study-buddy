@@ -66,6 +66,10 @@ require(
         "Source queue",
         "Sender:",
         "Existing-deck article gaps",
+        'useState<FlashcardDeckId>("milestone-questions")',
+        "Verbatim assessment",
+        "Generated mastery",
+        "Gmail ingestion complete",
     ],
 )
 
@@ -73,7 +77,11 @@ require(
     "src/data/flashcardDeck.ts",
     [
         'id: "milestone"',
+        'id: "milestone-questions"',
+        'id: "milestone-prep"',
         'id: "kahoot"',
+        'id: "article-linked"',
+        'id: "mastery"',
         'id: "internet"',
         'id: "wifi"',
         'id: "mobile"',

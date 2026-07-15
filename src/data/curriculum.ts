@@ -504,6 +504,30 @@ export const MODULES: Module[] = [
           },
         ],
       },
+      {
+        id: "m9s3",
+        title: "Gmail Product Application",
+        lessons: [
+          {
+            id: "m9s3l1",
+            title: "Separate the customer need from the offer avenue",
+            why: "A useful bundle starts with fit, not with attaching every available feature.",
+            body: "Identify the need first, then compare only the relevant avenues: plan fit, BYOD or device purchase, PBB, trade-in, Anytime Upgrade, protection, WiFi continuity, and TV bundle value. Verify each avenue in its controlling article and live offer before presenting it.",
+          },
+          {
+            id: "m9s3l2",
+            title: "Do not merge independent eligibility gates",
+            why: "Stackable offers can still have separate qualification, timing and disclosure rules.",
+            body: "For example, GEN9023 may allow PBB to stack with a device promotion or trade-in, but porting, prior-carrier history, order-entry intent and retention remain PBB gates. HOW7449 has separate plan, device-condition, timing and return gates for Anytime Upgrade.",
+          },
+          {
+            id: "m9s3l3",
+            title: "Keep exam wording and mastery reasoning distinct",
+            why: "Generated scenarios improve transfer without contaminating verbatim final-exam practice.",
+            body: "Run Milestone Questions, Milestone Prep and Kahoot as isolated decks when exact classroom wording matters. Use Article-linked Review for source facts and enable Mastery Lab only when practicing comparisons, bundles, upgrade avenues and ideal-solution reasoning.",
+          },
+        ],
+      },
     ],
   },
   {
@@ -551,7 +575,15 @@ export type Flashcard = {
   category: string;
   deckTags?: FlashcardDeckTag[];
   source?: FlashcardSource;
+  origin?: FlashcardOrigin;
 };
+
+export type FlashcardOrigin =
+  | "verbatim-assessment"
+  | "verbatim-prep"
+  | "source-derived"
+  | "generated-mastery"
+  | "legacy-supplement";
 
 export type FlashcardDeckTag =
   "milestone" | "kahoot" | "internet" | "wifi" | "mobile" | "tv" | "voice";

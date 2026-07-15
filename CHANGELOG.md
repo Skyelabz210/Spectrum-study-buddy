@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.10.0-spectrum.0 — 2026-07-15
+
+Gmail product-ingestion, exam-deck separation and mastery-routing release.
+
+Changed:
+
+- Reconciled eight relevant Gmail product messages with the existing Outlook and classroom corpus, canonicalizing duplicates instead of creating duplicate cards.
+- Preserved all 287 prior cards and added 28 article-derived cards plus ten optional generated mastery drills for 325 unique cards total.
+- Split Milestone Questions, Milestone Prep and Kahoot into independently selectable final-exam decks while preserving the combined Milestone view.
+- Added independently selectable Article-linked Review and optional Mastery Lab families, with visible Verbatim Assessment, Milestone Prep, Article-derived, Generated Mastery and Supplementary labels.
+- Expanded BYOD, Phone Balance Buyout, Anytime Upgrade, RR/RRP, Invincible WiFi, Mobile positioning and Internet/TV bundle content with full article number and title attribution.
+- Added applied bundling and offer-routing lessons while keeping generated reasoning outside the verbatim exam decks.
+- Added a Gmail completion report and four explicit next-ingestion targets to Source queue.
+- Added the July 24 E-Verify response deadline to Priority using only privacy-safe action context; credentials, case identifiers and documents remain excluded.
+- Created no speculative people profile from copied-recipient or sender-only evidence.
+
+Verification:
+
+- Enforced 226 legacy cards, 99 ingestion cards, 325 total cards, 45 Milestone Questions, five Milestone Prep cards, six Kahoot cards, 28 Gmail article cards and ten Gmail mastery cards.
+- Confirmed unique IDs and zero exact duplicate fronts or question-and-answer pairs.
+- Ran repository audit, deck analysis, mobile UX tests, speech tests, TypeScript typecheck and production build.
+
 ## v1.9.0-spectrum.0 — 2026-07-15
 
 Spectrum Sales Agent Sidekick, Outlook bulletin and company-walkthrough release.

@@ -48,6 +48,7 @@ function milestoneCard(
       articleTitle,
       status,
     ),
+    origin: "verbatim-assessment",
   };
 }
 
@@ -433,6 +434,7 @@ function prepCard(id: string, front: string, back: string): Flashcard {
       meetingId: PREP_MEETING_ID,
       recordedAt: "2026-07-14T08:21:00-05:00",
     },
+    origin: "verbatim-prep",
   };
 }
 
@@ -488,6 +490,7 @@ function kahootCard(
       meetingId: KAHOOT_MEETING_ID,
       recordedAt: "2026-07-07T08:23:00-05:00",
     },
+    origin: "verbatim-assessment",
   };
 }
 

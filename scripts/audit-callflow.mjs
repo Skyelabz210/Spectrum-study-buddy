@@ -57,6 +57,7 @@ const requiredFiles = [
   "src/data/otterCurriculum20260712.ts",
   "src/data/flashcardDeck.ts",
   "src/data/dailyClassFlashcards20260714.ts",
+  "src/data/gmailProductFlashcards20260715.ts",
   "src/data/otterCorpusFlashcards20260712.ts",
   "src/data/acrossSpectrum.ts",
   "src/data/acrossSpectrumOffers.ts",
@@ -68,6 +69,7 @@ const requiredFiles = [
   "src/lib/simulator.functions.ts",
   "docs/audits/CALLFLOW_LAB_FULL_SYSTEM_AUDIT_2026-07-12.md",
   "docs/audits/FLASHCARD_DECK_ANALYSIS_2026-07-14.md",
+  "docs/audits/FLASHCARD_DECK_ANALYSIS_2026-07-15.md",
 ];
 requiredFiles.forEach(requireFile);
 
@@ -199,10 +201,26 @@ if (failures.length === 0) {
     value: `daily14-kahoot-${entry.value}`,
     file: entry.file,
   }));
+  const gmailArticleCards = collectMatches(
+    ["src/data/gmailProductFlashcards20260715.ts"],
+    /\n\s*sourced\(\s*"([^"]+)"/g,
+  ).map((entry) => ({
+    value: `gmail15-${entry.value}`,
+    file: entry.file,
+  }));
+  const gmailMasteryCards = collectMatches(
+    ["src/data/gmailProductFlashcards20260715.ts"],
+    /\n\s*mastery\(\s*"([^"]+)"/g,
+  ).map((entry) => ({
+    value: `gmail15-mastery-${entry.value}`,
+    file: entry.file,
+  }));
   flashcards.push(
     ...dailyMilestoneCards,
     ...dailyPrepCards,
     ...dailyKahootCards,
+    ...gmailArticleCards,
+    ...gmailMasteryCards,
   );
   assertUnique("Flashcard IDs", flashcards);
   if (dailyMilestoneCards.length !== 45)
@@ -217,15 +235,27 @@ if (failures.length === 0) {
     failures.push(
       `Daily Kahoot recovery expected 6 cards; found ${dailyKahootCards.length}`,
     );
-  if (flashcards.length !== 287)
+  if (gmailArticleCards.length !== 28)
     failures.push(
-      `Flashcard preservation gate expected 287 total cards; found ${flashcards.length}`,
+      `Gmail article-derived deck expected 28 cards; found ${gmailArticleCards.length}`,
+    );
+  if (gmailMasteryCards.length !== 10)
+    failures.push(
+      `Gmail optional mastery deck expected 10 cards; found ${gmailMasteryCards.length}`,
+    );
+  if (flashcards.length !== 325)
+    failures.push(
+      `Flashcard preservation gate expected 325 total cards; found ${flashcards.length}`,
     );
   const flashcardDeck = read("src/data/flashcardDeck.ts");
   const flashcardRoute = read("src/routes/flashcards.tsx");
   for (const deckId of [
     "milestone",
+    "milestone-questions",
+    "milestone-prep",
     "kahoot",
+    "article-linked",
+    "mastery",
     "internet",
     "wifi",
     "mobile",
@@ -241,12 +271,15 @@ if (failures.length === 0) {
     "Source queue",
     "Existing-deck article gaps",
     "resolveFlashcardSource",
+    "Verbatim assessment",
+    "Generated mastery",
+    "Gmail ingestion complete",
   ]) {
     if (!flashcardRoute.includes(marker))
       failures.push(`Flashcard route missing source marker: ${marker}`);
   }
   notes.push(
-    "Daily deck: complete milestone pool, preparation, Kahoot recovery, service views, sender labels and source queue checked",
+    "Deck system: isolated verbatim assessment, preparation, Kahoot, article-derived and optional mastery views checked",
   );
 
   const moduleFiles = [
@@ -411,6 +444,8 @@ if (failures.length === 0) {
     "src/data/flashcardDeck.ts",
     "src/data/otterCorpusFlashcards20260712.ts",
     "src/data/dailyClassFlashcards20260714.ts",
+    "src/data/gmailProductFlashcards20260715.ts",
+    "src/data/companyBulletin.ts",
     "src/data/outlookCalendarSpectrum.ts",
     "src/components/SpectrumCalendarBrief.tsx",
   ];
