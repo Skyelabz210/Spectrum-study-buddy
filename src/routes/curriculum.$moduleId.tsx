@@ -25,7 +25,7 @@ export const Route = createFileRoute("/curriculum/$moduleId")({
   head: ({ loaderData }) => ({
     meta: [
       {
-        title: loaderData ? `${loaderData.mod.title} · CallFlow Lab` : "Module",
+        title: loaderData ? `${loaderData.mod.title} · Spectrum SAS` : "Module",
       },
     ],
   }),
@@ -242,7 +242,7 @@ function ModulePage() {
           <div>
             <div className="font-semibold">Stuck on something here?</div>
             <p className="mt-1 text-sm text-muted-foreground">
-              Open the coach and paste any line — CallFlow Lab will simplify it,
+              Open the coach and paste any line — Spectrum SAS will simplify it,
               quiz you on it, or turn it into a scenario.
             </p>
             <Button

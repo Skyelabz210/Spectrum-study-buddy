@@ -26,6 +26,8 @@ import {
   WandSparkles,
   Building2,
   GraduationCap,
+  BellRing,
+  Users,
   X,
 } from "lucide-react";
 
@@ -57,13 +59,16 @@ const groups = [
       { title: "Curriculum", url: "/curriculum", icon: BookOpen },
       { title: "Prompt Academy", url: "/prompt-academy", icon: GraduationCap },
       { title: "The Full Spectrum", url: "/full-spectrum", icon: Building2 },
-      { title: "Study Plan", url: "/plan", icon: CalendarDays },
       { title: "Tips", url: "/tips", icon: Lightbulb },
     ],
   },
   {
-    label: "System",
+    label: "My Stuff",
     items: [
+      { title: "My Stuff Home", url: "/my-stuff", icon: Home },
+      { title: "Bulletin Board", url: "/bulletin", icon: BellRing },
+      { title: "Company Walkthrough", url: "/company-walkthrough", icon: Users },
+      { title: "Study Plan", url: "/plan", icon: CalendarDays },
       { title: "My Setup", url: "/setup", icon: KeyRound },
       { title: "Weekly Ledger", url: "/corner", icon: History },
     ],
@@ -94,10 +99,10 @@ export function AppSidebar() {
           {!collapsed && (
             <div className="min-w-0 leading-tight">
               <div className="truncate text-sm font-bold tracking-tight">
-                CallFlow Lab
+                Spectrum SAS
               </div>
               <div className="mt-0.5 truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                Spectrum Study Buddy
+                Sales Agent Sidekick
               </div>
             </div>
           )}

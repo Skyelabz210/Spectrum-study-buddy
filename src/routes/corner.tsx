@@ -6,7 +6,7 @@ import { History, CheckCircle2, AlertTriangle } from "lucide-react";
 export const Route = createFileRoute("/corner")({
   head: () => ({
     meta: [
-      { title: "Weekly Ledger · CallFlow Lab" },
+      { title: "Weekly Ledger · Spectrum SAS" },
       { name: "description", content: "Weekly training ingestion ledger and version history." },
     ],
   }),
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/corner")({
 
 function WeeklyLedger() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-10">
+    <div className="page-frame mx-auto max-w-5xl py-6 sm:py-10">
       <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs text-muted-foreground">
         <History className="h-3 w-3 text-neon" /> revision ledger
       </div>

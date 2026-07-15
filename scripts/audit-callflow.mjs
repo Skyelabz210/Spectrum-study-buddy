@@ -56,6 +56,7 @@ const requiredFiles = [
   "src/data/fullCurriculum.ts",
   "src/data/otterCurriculum20260712.ts",
   "src/data/flashcardDeck.ts",
+  "src/data/dailyClassFlashcards20260714.ts",
   "src/data/otterCorpusFlashcards20260712.ts",
   "src/data/acrossSpectrum.ts",
   "src/data/acrossSpectrumOffers.ts",
@@ -66,6 +67,7 @@ const requiredFiles = [
   "src/lib/liveSpeech.ts",
   "src/lib/simulator.functions.ts",
   "docs/audits/CALLFLOW_LAB_FULL_SYSTEM_AUDIT_2026-07-12.md",
+  "docs/audits/FLASHCARD_DECK_ANALYSIS_2026-07-14.md",
 ];
 requiredFiles.forEach(requireFile);
 
@@ -174,9 +176,78 @@ if (failures.length === 0) {
   ];
   const flashcards = collectMatches(
     flashcardFiles,
-    /\bid:\s*["']((?:fc|sfc|july10-|otter12-)[^"']+)["']/g,
+    /\bid:\s*["']((?:fc|sfc|july10-|otter12-|outlook-)[^"']+)["']/g,
+  );
+  const dailyMilestoneCards = collectMatches(
+    ["src/data/dailyClassFlashcards20260714.ts"],
+    /\n\s*milestoneCard\(\s*(\d+),/g,
+  ).map((entry) => ({
+    value: `daily14-mr-${entry.value.padStart(2, "0")}`,
+    file: entry.file,
+  }));
+  const dailyPrepCards = collectMatches(
+    ["src/data/dailyClassFlashcards20260714.ts"],
+    /\n\s*prepCard\(\s*"([^"]+)"/g,
+  ).map((entry) => ({
+    value: `daily14-prep-${entry.value}`,
+    file: entry.file,
+  }));
+  const dailyKahootCards = collectMatches(
+    ["src/data/dailyClassFlashcards20260714.ts"],
+    /\n\s*kahootCard\(\s*"([^"]+)"/g,
+  ).map((entry) => ({
+    value: `daily14-kahoot-${entry.value}`,
+    file: entry.file,
+  }));
+  flashcards.push(
+    ...dailyMilestoneCards,
+    ...dailyPrepCards,
+    ...dailyKahootCards,
   );
   assertUnique("Flashcard IDs", flashcards);
+  if (dailyMilestoneCards.length !== 45)
+    failures.push(
+      `Daily milestone review expected 45 preserved prompts; found ${dailyMilestoneCards.length}`,
+    );
+  if (dailyPrepCards.length !== 5)
+    failures.push(
+      `Daily milestone prep expected 5 cards; found ${dailyPrepCards.length}`,
+    );
+  if (dailyKahootCards.length !== 6)
+    failures.push(
+      `Daily Kahoot recovery expected 6 cards; found ${dailyKahootCards.length}`,
+    );
+  if (flashcards.length !== 287)
+    failures.push(
+      `Flashcard preservation gate expected 287 total cards; found ${flashcards.length}`,
+    );
+  const flashcardDeck = read("src/data/flashcardDeck.ts");
+  const flashcardRoute = read("src/routes/flashcards.tsx");
+  for (const deckId of [
+    "milestone",
+    "kahoot",
+    "internet",
+    "wifi",
+    "mobile",
+    "tv",
+    "voice",
+    "supplementary",
+  ]) {
+    if (!flashcardDeck.includes(`id: "${deckId}"`))
+      failures.push(`Flashcard deck registry missing ${deckId}`);
+  }
+  for (const marker of [
+    "Sender:",
+    "Source queue",
+    "Existing-deck article gaps",
+    "resolveFlashcardSource",
+  ]) {
+    if (!flashcardRoute.includes(marker))
+      failures.push(`Flashcard route missing source marker: ${marker}`);
+  }
+  notes.push(
+    "Daily deck: complete milestone pool, preparation, Kahoot recovery, service views, sender labels and source queue checked",
+  );
 
   const moduleFiles = [
     "src/data/curriculum.ts",
@@ -339,6 +410,7 @@ if (failures.length === 0) {
     "src/data/promptEngineeringAcademy.ts",
     "src/data/flashcardDeck.ts",
     "src/data/otterCorpusFlashcards20260712.ts",
+    "src/data/dailyClassFlashcards20260714.ts",
     "src/data/outlookCalendarSpectrum.ts",
     "src/components/SpectrumCalendarBrief.tsx",
   ];

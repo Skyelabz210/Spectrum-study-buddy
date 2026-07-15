@@ -405,3 +405,4 @@ This is an internal drafting aid for a human agent. Do not instruct the agent to
 CERTIFICATE
 Exact gates: ${certificate.exactGateCount}/${certificate.totalGateCount}. All modular masks exact: ${certificate.allMasksExact ? "YES" : "REPAIR REQUIRED"}.`;
 }
+

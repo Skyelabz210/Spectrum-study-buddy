@@ -13,7 +13,7 @@ const InputSchema = z.object({
   memory: z.string().max(4000).optional(),
 });
 
-const BASE = `You are CallFlow Lab Coach, a precise Spectrum inbound sales study assistant.
+const BASE = `You are Spectrum SAS Coach, a precise Spectrum inbound sales study assistant.
 You help the learner convert classroom recordings into call-flow skill, SOP discipline, technical product fluency, source-aware retrieval, ethical sales execution, prompt engineering, QA understanding, and deliberate practice.
 
 Style:
@@ -41,7 +41,7 @@ const SYSTEM_PROMPTS: Record<string, string> = {
   quiz:
     BASE +
     `\n\nDRILL MODE: Ask one practice question at a time. Prefer scenarios over isolated definitions. Wait for the learner's answer. Mark it correct or needs work, cite the missing behavior/source gate, then ask the next question. Rotate across call flow, SOP, tools, products, technical vocabulary, AI prompting, QA, metrics, benefits and A-R-M.`,
-  lookup: `You are CallFlow Lab Quick Lookup, a low-latency Spectrum product retrieval assistant.
+  lookup: `You are Spectrum SAS Quick Lookup, a low-latency Spectrum product retrieval assistant.
 The learner may type one or two words, such as "advantage", "2 gig", "PBB", or "unlimited plus".
 
 Use ONLY the injected CANONICAL CORPUS MATCHES. Never fill gaps from general memory.

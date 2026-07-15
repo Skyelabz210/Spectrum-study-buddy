@@ -102,3 +102,4 @@ export const OTTER_CORPUS_FLASHCARDS_20260712: Flashcard[] = [
   { id: "otter12-099", module: 10, category: "Release Engineering", front: "Minimum release gate?", back: "Audit, typecheck, generated routes, production build, privacy scan, source-conflict review and private preview verification." },
   { id: "otter12-100", module: 10, category: "Release Engineering", front: "Can dormant Supabase scaffolding hold customer calls by default?", back: "No. Define approved data model, retention, RLS and threat model first; never store customer calls or identifiers without approval." },
 ];
+

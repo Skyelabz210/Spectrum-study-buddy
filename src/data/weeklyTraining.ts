@@ -21,7 +21,7 @@ export type WeeklyTrainingUpdate = {
   unresolvedQuestions: string[];
 };
 
-export const CURRENT_APP_VERSION = "1.7.0-spectrum.0";
+export const CURRENT_APP_VERSION = "1.9.0-spectrum.0";
 export const CURRENT_WEEK_ID = "2026-W29";
 
 export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
@@ -31,8 +31,71 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     dateRange: "2026-07-13 through 2026-07-19",
     source: "mixed",
     summary:
-      "Mobile-first workspace, Prompt Engineering Academy, and Outlook Calendar onboarding release. The landing page is now a compact Today workspace; navigation is grouped by intent, closes after mobile selection, and includes a five-action bottom dock. Spectrum blue and navy tokens replace the inherited magenta scheme. Speech playback now distinguishes completion, cancellation, unsupported browsers, and errors so flashcard and module autoplay cannot race through silent content. Across the Spectrum includes a guide reader, primary-first mobile ordering, and expandable setup and coaching panels. The verified first-day orientation schedule is threaded into Today, Study Plan, and My Setup while personal contact details and Outlook identifiers stay outside the product bundle. Content-heavy reference pages use progressive disclosure while preserving every route, source record, learning mode, and simulator control.",
+      "Spectrum SAS mobile workspace and Outlook ingestion release. The 226-card prior library remains intact in Supplementary. Five GEN9237 Voice cards join the 56 July 14 classroom cards for 287 unique cards total. The new My Stuff hub exposes a Priority, Direct and General company bulletin plus a progressive leadership-and-colleague walkthrough. Exact course deadlines, the Tuesday–Saturday work schedule, safe source labels and clarification gaps are visible without storing raw mailbox data, security codes, ADP material or employee performance tables.",
     recordings: [
+      {
+        id: "5xL1_QCQXVhI1obxc0Pc2U99EpM",
+        title: "Daily class: complete milestone review and assessment",
+        recordedAt: "2026-07-14T15:38:00-05:00",
+        duration: "46m",
+        status: "ingested",
+        focus: [
+          "45-question review pool",
+          "Internet",
+          "WiFi",
+          "Mobile",
+          "TV",
+          "Voice",
+          "Copilot navigation",
+          "offer index",
+          "source clarification",
+        ],
+      },
+      {
+        id: "S7M17ZsmiY3XTrvAQOkCUdRkNXk",
+        title: "Daily class: Spectrum One, Mobile offers and milestone setup",
+        recordedAt: "2026-07-14T12:57:00-05:00",
+        duration: "1h 36m",
+        status: "ingested",
+        focus: [
+          "Spectrum One",
+          "Mobile plans",
+          "offer comparison",
+          "milestone setup",
+          "classroom source control",
+        ],
+      },
+      {
+        id: "0EO6q7NtX6hd_XBZr7VhYzhK2jQ",
+        title: "Daily class: systems, products and milestone preparation",
+        recordedAt: "2026-07-14T08:21:00-05:00",
+        duration: "3h",
+        status: "ingested",
+        focus: [
+          "systems",
+          "training tracker",
+          "product review",
+          "milestone scoring",
+          "attempt rules",
+          "assessment preparation",
+        ],
+      },
+      {
+        id: "CuSN_Y2sLNIFY3ty9ytKq-jbd4k",
+        title: "Daily reconciliation: WiFi Kahoot and HOW7726 lesson",
+        recordedAt: "2026-07-07T08:23:00-05:00",
+        duration: "2h 31m",
+        status: "fragment",
+        focus: [
+          "Kahoot recovery",
+          "Invincible WiFi",
+          "WiFi 7",
+          "5G backup",
+          "battery resilience",
+          "instance limit",
+          "transcript repair queue",
+        ],
+      },
       {
         id: "outlook-calendar-2026-08-11-orientation",
         title: "Outlook Calendar: Spectrum New Hire Orientation — First Day",
@@ -112,8 +175,16 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
         ],
       },
     ],
-    modulesTouched: ["m5", "m6", "m8", "m9", "m12", "m13"],
+    modulesTouched: ["m4", "m5", "m6", "m8", "m9", "m10", "m12", "m13"],
     newTerms: [
+      "daily class ingestion",
+      "milestone review pool",
+      "Kahoot recovery",
+      "article-as-sender",
+      "source hold card",
+      "supplementary deck",
+      "service deck view",
+      "next-ingestion queue",
       "Prompt Engineering Academy",
       "task-facts-limits-format-verify",
       "zero-shot",
@@ -145,6 +216,11 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "A new prompt performs well on one example but fails the regression scenario set.",
     ],
     actionItems: [
+      "Start study sessions in the Milestone deck; use the service selector to isolate Internet, WiFi, Mobile, TV or Voice follow-up.",
+      "Use the Source queue before the next working day to target the 30 daily cards missing an article number, full title or exact wording.",
+      "Collect the original Kahoot question display or a clean facilitator recap because the July 7 game audio did not preserve every prompt.",
+      "Capture the exact text for milestone questions 5, 7, 16, 17, 18, 28–31, 34–35, 38–40 and 45.",
+      "Add article numbers and full titles to the 189 existing Supplementary cards during future source passes without deleting or merging them.",
       "Use the mobile bottom dock for Today, Live, Practice and Learn; use More for the complete grouped route directory.",
       "When browser audio is blocked, tap Read card or the page reader again after confirming text-to-speech permissions.",
       "Run the Prompt Academy beginner path before relying on the advanced deep-dive material.",
@@ -158,6 +234,14 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       "Recheck the live Outlook event and orientation email before departure because they control any schedule or location change.",
     ],
     unresolvedQuestions: [
+      "Which article numbers and full titles control Customer Commitment, Copilot article types, recently updated articles, FTTP, WiFi pods, Brand Ambassador qualities and Charter values?",
+      "What is the exact Multiple Internet Instances limit for Gig, Premier and total residential Internet lines?",
+      "What product name and answer options were intended in milestone question 16?",
+      "What is the current approved term for the visiting-customer feature: Spectrum Mobile SSID, Mobile wireless access point or another label?",
+      "What complete statement was presented in milestone question 28 about Internet 2 Gig?",
+      "What were every answer option for the Security Shield, Spectrum equipment, Spectrum Voice International and Spectrum Voice questions?",
+      "Which exact TV package and add-on names appeared in milestone questions 31, 35 and 38?",
+      "Which Xumo Stream Box feature appeared as ‘won't control’ in the captured transcript?",
       "Physical Android-device confirmation of installed voice selection, browser audio permission and microphone permission behavior.",
       "Which exact prompting features and output formats are available in the approved internal Agent OS interface.",
       "Whether an approved internal retrieval source can automatically attach current source IDs and effective dates.",
@@ -223,7 +307,7 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
       },
       {
         id: "manual-2026-07-12-full-system-audit",
-        title: "Manual: CallFlow Lab full system and subsystem audit",
+        title: "Manual: Spectrum SAS full system and subsystem audit",
         recordedAt: "2026-07-12T12:00:00-05:00",
         duration: "system audit",
         status: "ingested",
@@ -586,7 +670,7 @@ export const WEEKLY_UPDATES: WeeklyTrainingUpdate[] = [
     dateRange: "2026-06-27 through 2026-07-04",
     source: "otter",
     summary:
-      "Initial conversion from the former study shell into CallFlow Lab. July 1–3 classroom recordings became the first call-flow, SOP, systems, benefits, sales-skill and A-R-M curriculum.",
+      "Initial conversion from the former study shell into Spectrum SAS. July 1–3 classroom recordings became the first call-flow, SOP, systems, benefits, sales-skill and A-R-M curriculum.",
     recordings: [
       {
         id: "1jaYdigiIkoS9OgdZl-WjGTBisE",

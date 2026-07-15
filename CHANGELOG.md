@@ -1,5 +1,43 @@
 # Changelog
 
+## v1.9.0-spectrum.0 — 2026-07-15
+
+Spectrum Sales Agent Sidekick, Outlook bulletin and company-walkthrough release.
+
+Changed:
+
+- Renamed the product to Spectrum Sales Agent Sidekick (`Spectrum SAS`) across the active app shell, metadata and assistant prompts.
+- Added a mobile-first My Stuff hub and promoted it into the persistent bottom dock.
+- Added an Outlook-ingested Spectrum Bulletin Board with Priority, Direct and General routing.
+- Added five-second, refresh-only priority long-press planning state, exact deadline math and Tuesday–Saturday work-shift counts.
+- Added a progressive Company Walkthrough person deck with sourced roles, communication channels, hierarchy boundaries and clarification gaps.
+- Ingested GEN9237 into the canonical corpus and added five sourced Voice cards without removing any existing card.
+- Excluded credentials, security codes, mailbox identifiers, ADP material, private addresses, raw documents and employee performance tables.
+
+## v1.8.0-spectrum.0 — 2026-07-14
+
+Daily classroom ingestion and service-deck release.
+
+Changed:
+
+- Ingested the three July 14 Otter classroom blocks and reconciled the July 7 WiFi Kahoot lesson.
+- Added the complete 45-card milestone review pool, five milestone-preparation cards and six recoverable Kahoot cards.
+- Preserved all 226 prior cards in Supplementary and expanded the canonical library to 282 cards.
+- Added mobile deck switching for Milestone, Kahoot, Internet, WiFi, Mobile, TV, Voice, Supplementary and All Cards.
+- Added article-number sender labels and full article-number-plus-title footers to flip mode and cheatsheet mode.
+- Extended speech playback so answers include the article number and full title.
+- Added a progressive-disclosure Source queue with 30 daily source or wording gaps and 189 pre-existing article-number gaps.
+- Kept damaged transcript questions as visible hold cards with exact next-ingestion targets.
+- Added `scripts/analyze-flashcard-decks.mjs` and the detailed deck-analysis report.
+- Updated the Weekly Ledger with all source meeting IDs, daily-ingestion actions and unresolved questions.
+
+Verification:
+
+- Enforced 226 existing cards, 56 daily additions, 282 total cards and unique IDs.
+- Confirmed zero exact duplicate fronts and zero exact duplicate question-and-answer pairs.
+- Added mobile deck-selector, source-label and queue regression gates.
+- Ran repository audit, deck analysis, mobile UX tests, speech tests, TypeScript typecheck and production build.
+
 ## v1.7.0-spectrum.0 — 2026-07-13
 
 Outlook Calendar onboarding ingestion and cross-app schedule release.

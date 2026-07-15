@@ -7,7 +7,7 @@ export const Route = createFileRoute("/plan")({
   component: Plan,
   head: () => ({
     meta: [
-      { title: "Study Plan · CallFlow Lab" },
+      { title: "Study Plan · Spectrum SAS" },
       {
         name: "description",
         content:

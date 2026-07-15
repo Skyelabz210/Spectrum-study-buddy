@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static regression gates for the mobile-first CallFlow Lab shell."""
+"""Static regression gates for the mobile-first Spectrum SAS shell."""
 
 from pathlib import Path
 
@@ -25,7 +25,9 @@ require(
         'label: "Live Call"',
         'label: "Practice"',
         'label: "Learn"',
-        'label: "System"',
+        'label: "My Stuff"',
+        'url: "/bulletin"',
+        'url: "/company-walkthrough"',
         "setOpenMobile(false)",
         'aria-label="Close menu"',
     ],
@@ -60,6 +62,25 @@ require(
         "answerResult",
         "Read card",
         "Audio could not start",
+        'id="flashcard-deck"',
+        "Source queue",
+        "Sender:",
+        "Existing-deck article gaps",
+    ],
+)
+
+require(
+    "src/data/flashcardDeck.ts",
+    [
+        'id: "milestone"',
+        'id: "kahoot"',
+        'id: "internet"',
+        'id: "wifi"',
+        'id: "mobile"',
+        'id: "tv"',
+        'id: "voice"',
+        'id: "supplementary"',
+        "EXISTING_FLASHCARDS",
     ],
 )
 
@@ -99,6 +120,9 @@ require(
 require("src/routes/index.tsx", ['<SpectrumCalendarBrief variant="compact" />'])
 require("src/routes/plan.tsx", ['<SpectrumCalendarBrief variant="plan" />'])
 require("src/routes/setup.tsx", ['<SpectrumCalendarBrief variant="setup" />'])
+require("src/routes/my-stuff.tsx", ["Bulletin Board", "Company Walkthrough"])
+require("src/routes/bulletin.tsx", ["5_000", "bg-[#39ff14]", "bg-[#ff3b30]", "Due date needs confirmation"])
+require("src/routes/company-walkthrough.tsx", ["Person deck", "Profile gaps for next ingestion"])
 
 require(
     "src/styles.css",

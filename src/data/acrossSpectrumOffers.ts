@@ -76,3 +76,4 @@ function offerReason(lane: OfferLane, record: KnowledgeRecord) {
   if (lane === "best-fit") return `Use this as the working recommendation when discovery supports the household need and live eligibility confirms it.`;
   return "Keep this visible as the lower-complexity or lower-cost alternative if the richer option does not fit.";
 }
+

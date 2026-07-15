@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { PageReader } from "@/components/PageReader";
@@ -28,13 +28,14 @@ import {
   ShieldCheck,
   TrendingUp,
   Users,
+  BellRing,
 } from "lucide-react";
 
 export const Route = createFileRoute("/full-spectrum")({
   component: FullSpectrumPage,
   head: () => ({
     meta: [
-      { title: "The Full Spectrum · CallFlow Lab" },
+      { title: "The Full Spectrum · Spectrum SAS" },
       {
         name: "description",
         content:
@@ -92,6 +93,9 @@ function FullSpectrumPage() {
               approved Spectrum systems and leadership direction control when
               facts or procedures change.
             </p>
+            <Link to="/bulletin" className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-card/70 px-4 text-sm font-semibold text-neon hover:border-neon/40">
+              <BellRing className="h-4 w-4" /> Open internal bulletin
+            </Link>
           </Card>
         </div>
       </section>
@@ -318,9 +322,9 @@ function FullSpectrumPage() {
             <div className="flex items-start gap-3">
               <Cpu className="mt-0.5 h-5 w-5 shrink-0 text-neon" />
               <div>
-                <h3 className="font-semibold">Where CallFlow Lab fits</h3>
+                <h3 className="font-semibold">Where Spectrum SAS fits</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  CallFlow Lab is a private learning and decision-support
+                  Spectrum SAS is a private learning and decision-support
                   prototype: source-grounded retrieval, structured practice,
                   prompt assistance and QA repair. It is useful only as a
                   human-controlled study layer. It is not a Spectrum system of

@@ -286,3 +286,4 @@ export const SPECTRUM_PRODUCT_UPDATE_FLASHCARDS: Flashcard[] = [
     back: "Preserve the conflict, identify each source and timestamp, then use the current approved operational source for the action. Update the study record instead of silently flattening the discrepancy.",
   },
 ];
+

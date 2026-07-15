@@ -51,7 +51,7 @@ export const Route = createFileRoute("/across-spectrum")({
   component: AcrossSpectrumPage,
   head: () => ({
     meta: [
-      { title: "Spectrum Across the Spectrum · CallFlow Lab" },
+      { title: "Spectrum Across the Spectrum · Spectrum SAS" },
       {
         name: "description",
         content:

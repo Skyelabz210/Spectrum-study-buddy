@@ -14,6 +14,7 @@ import {
   Menu as MenuIcon,
   PhoneCall,
   Search,
+  UserRound,
 } from "lucide-react";
 
 import appCss from "../styles.css?url";
@@ -86,16 +87,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       meta: [
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title: "CallFlow Lab — Weekly Spectrum Sales Study" },
+        { title: "Spectrum Sales Agent Sidekick" },
         {
           name: "description",
           content:
             "A weekly-updated study system for Spectrum inbound sales training: call flow, SOP gates, tools, scenarios, flashcards, and an AI coach.",
         },
-        { name: "author", content: "CallFlow Lab" },
+        { name: "author", content: "Spectrum SAS" },
         {
           property: "og:title",
-          content: "CallFlow Lab — Weekly Spectrum Sales Study",
+          content: "Spectrum Sales Agent Sidekick",
         },
         {
           property: "og:description",
@@ -106,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { name: "twitter:card", content: "summary" },
         {
           name: "twitter:title",
-          content: "CallFlow Lab — Weekly Spectrum Sales Study",
+          content: "Spectrum Sales Agent Sidekick",
         },
         {
           name: "twitter:description",
@@ -166,10 +167,13 @@ const routeContext = [
   { match: "/curriculum", workspace: "Learn", label: "Curriculum" },
   { match: "/prompt-academy", workspace: "Learn", label: "Prompt Academy" },
   { match: "/full-spectrum", workspace: "Learn", label: "The Full Spectrum" },
-  { match: "/plan", workspace: "Learn", label: "Study Plan" },
+  { match: "/my-stuff", workspace: "My Stuff", label: "Overview" },
+  { match: "/bulletin", workspace: "My Stuff", label: "Bulletin Board" },
+  { match: "/company-walkthrough", workspace: "My Stuff", label: "Company Walkthrough" },
+  { match: "/plan", workspace: "My Stuff", label: "Study Plan" },
   { match: "/tips", workspace: "Learn", label: "Tips" },
-  { match: "/setup", workspace: "System", label: "My Setup" },
-  { match: "/corner", workspace: "System", label: "Weekly Ledger" },
+  { match: "/setup", workspace: "My Stuff", label: "My Setup" },
+  { match: "/corner", workspace: "My Stuff", label: "Weekly Ledger" },
 ] as const;
 
 function resolveRouteContext(pathname: string) {
@@ -237,6 +241,7 @@ const mobileLinks = [
   { title: "Live", url: "/lookup", icon: Search },
   { title: "Practice", url: "/across-spectrum", icon: PhoneCall },
   { title: "Learn", url: "/curriculum", icon: BookOpen },
+  { title: "My Stuff", url: "/my-stuff", icon: UserRound },
 ] as const;
 
 function MobileDock() {
@@ -262,13 +267,9 @@ function MobileDock() {
           </Link>
         );
       })}
-      <button
-        type="button"
-        onClick={() => setOpenMobile(true)}
-        aria-label="Open all sections"
-      >
+      <button type="button" onClick={() => setOpenMobile(true)} aria-label="Open all sections" className="mobile-dock-more">
         <MenuIcon className="h-4 w-4" />
-        <span>More</span>
+        <span>All</span>
       </button>
     </nav>
   );

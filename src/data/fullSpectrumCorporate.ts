@@ -300,3 +300,4 @@ export const CORPORATE_SOURCES: CorporateSource[] = [
     note: "Public reporting on GitLab Duo, Amazon Q Developer and planned agentic applications across Charter.",
   },
 ];
+

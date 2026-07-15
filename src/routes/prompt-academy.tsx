@@ -45,7 +45,7 @@ export const Route = createFileRoute("/prompt-academy")({
   component: PromptAcademyPage,
   head: () => ({
     meta: [
-      { title: "Prompt Engineering Academy · CallFlow Lab" },
+      { title: "Prompt Engineering Academy · Spectrum SAS" },
       {
         name: "description",
         content:

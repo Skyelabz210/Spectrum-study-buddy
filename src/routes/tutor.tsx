@@ -40,7 +40,7 @@ export const Route = createFileRoute("/tutor")({
   validateSearch: (search) => TutorSearchSchema.parse(search),
   head: () => ({
     meta: [
-      { title: "Coach · CallFlow Lab" },
+      { title: "Coach · Spectrum SAS" },
       {
         name: "description",
         content:

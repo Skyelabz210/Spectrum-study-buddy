@@ -39,7 +39,7 @@ export const Route = createFileRoute("/sales-prompts")({
   component: SalesPromptEngineerPage,
   head: () => ({
     meta: [
-      { title: "AI Sales Specialist Prompt Engineer · CallFlow Lab" },
+      { title: "AI Sales Specialist Prompt Engineer · Spectrum SAS" },
       {
         name: "description",
         content:

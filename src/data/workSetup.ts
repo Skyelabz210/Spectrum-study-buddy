@@ -232,3 +232,4 @@ export const EMPLOYEE_PERKS = [
   "HBO/Max, Peacock, ESPN, and Paramount access were discussed as employee TV/premium benefits; verify exact login path.",
   "Spark rewards were described as dollar-for-dollar recognition points redeemable for gift cards or catalog items.",
 ];
+

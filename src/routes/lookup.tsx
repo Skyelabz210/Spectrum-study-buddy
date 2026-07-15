@@ -15,7 +15,7 @@ export const Route = createFileRoute("/lookup")({
   component: QuickLookupPage,
   head: () => ({
     meta: [
-      { title: "Quick Lookup · CallFlow Lab" },
+      { title: "Quick Lookup · Spectrum SAS" },
       {
         name: "description",
         content: "Type one or two words and retrieve verified Spectrum plan, speed, service, requirement, note, and source data.",
@@ -29,7 +29,7 @@ function QuickLookupPage() {
   const matches = useMemo(() => searchKnowledgeCorpus(query, 6), [query]);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <main className="page-frame mx-auto max-w-6xl py-6 sm:py-8">
       <section className="max-w-3xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs text-muted-foreground">
           <Search className="h-3.5 w-3.5 text-neon" /> Exact-source retrieval

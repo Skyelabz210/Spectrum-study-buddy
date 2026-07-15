@@ -10,7 +10,7 @@ export const Route = createFileRoute("/scenarios")({
   component: ScenariosPage,
   head: () => ({
     meta: [
-      { title: "Scenario Trainer · CallFlow Lab" },
+      { title: "Scenario Trainer · Spectrum SAS" },
       {
         name: "description",
         content:

@@ -1,6 +1,6 @@
 {
-  "name": "callflow-lab",
-  "version": "1.7.0-spectrum.0",
+  "name": "spectrum-sas",
+  "version": "1.9.0-spectrum.0",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -12,9 +12,10 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "audit": "node scripts/audit-callflow.mjs",
+    "audit:decks": "node scripts/analyze-flashcard-decks.mjs",
     "test:ux": "python3 scripts/test-mobile-ux.py",
     "test:speech": "node scripts/test-speech.mjs",
-    "check": "npm run audit && npm run test:ux && npm run test:speech && npm run typecheck && npm run build"
+    "check": "npm run audit && npm run audit:decks && npm run test:ux && npm run test:speech && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",

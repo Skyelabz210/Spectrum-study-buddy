@@ -38,6 +38,7 @@ export const CORPUS_SOURCES: CorpusSource[] = [
   { id: "GEN9008", title: "Spectrum Internet Assist Overview", kind: "copilot-kb", publishedOrChecked: "Referenced by PR131", authority: "Overview source referenced by PR131; full article not independently ingested." },
   { id: "PUBLIC-MOBILE-2026-07-10", title: "Spectrum Mobile Plans", kind: "public-spectrum", publishedOrChecked: "2026-07-10", authority: "Current customer-facing Spectrum plan page. Live account offer and current internal workflow still control fulfillment." },
   { id: "EMAIL-MII-DELAY-2026-07-06", title: "Multiple Internet Instances Launch Delayed", kind: "internal-email", publishedOrChecked: "2026-07-06", authority: "Internal alert source pointer; full clean business-rule body was not extractable." },
+  { id: "GEN9237", title: "Explaining Spectrum Voice: Landline Home Phone", kind: "copilot-kb", publishedOrChecked: "2026-07-10", authority: "Current internal Spectrum Voice overview captured from the forwarded Outlook knowledge article; it replaces PR139." },
 ];
 
 export const KNOWLEDGE_CORPUS: KnowledgeRecord[] = [
@@ -164,6 +165,21 @@ export const KNOWLEDGE_CORPUS: KnowledgeRecord[] = [
     requirements: ["Spectrum Internet and WiFi service", "Primary service-location use only", "One Invincible WiFi instance per account", "Tier/account-specific pricing and eligibility"],
     notes: ["Not a mobile hotspot; off-location use can disable and remove the service.", "Legacy pods are not compatible; use a WiFi 7 Extender.", "An upgrade generates a router swap and the old router must be returned.", "Complete a disconnect work order before removing equipment or the billing work order can become stuck.", "SPP4 2 Gig and above were listed as $0-add eligibility in the captured article; verify current account pricing."],
     sourceIds: ["HOW7726"],
+    verification: "verified-internal",
+    lastVerified: "2026-07-10",
+    businessDepth: "residential",
+  },
+  {
+    id: "spectrum-voice-home-phone",
+    title: "Spectrum Voice — Landline Home Phone",
+    aliases: ["voice", "home phone", "landline", "e911", "svi", "native", "port"],
+    category: "Voice",
+    summary: "Residential landline service delivered through a Spectrum-provided phone modem and compatible home phone equipment.",
+    plan: "Spectrum Voice",
+    services: ["Unlimited calling to the U.S. and listed North American/U.S. territories", "Up to two residential telephone lines", "Calling features", "Enhanced 911", "Optional Spectrum Voice International"],
+    requirements: ["Spectrum-issued Voice modem", "Compatible telephone connected by telephone cord", "E911 Third Party Verification before new installation", "Eligibility check when porting an existing number"],
+    notes: ["Customer-owned modems are not supported for Voice.", "Customers may choose a new Native number or port an eligible existing number.", "E911 can be unavailable during power or cable outages, after service disconnection, or when the modem is moved without proper support.", "Spectrum Voice International requires Spectrum Voice and includes unlimited calling to 70 countries; verify current rates and country list.", "GEN9237 was initially published July 10, 2026 and replaces PR139."],
+    sourceIds: ["GEN9237"],
     verification: "verified-internal",
     lastVerified: "2026-07-10",
     businessDepth: "residential",
@@ -413,4 +429,6 @@ export const QUICK_LOOKUP_TERMS = [
   "PBB",
   "RR",
   "RRP",
+  "Voice",
+  "E911",
 ];
