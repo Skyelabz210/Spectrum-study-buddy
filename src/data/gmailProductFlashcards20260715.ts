@@ -381,7 +381,7 @@ export const GMAIL_INGESTION_REPORT_20260715 = {
   medium: "Gmail",
   completedOn: "2026-07-15",
   reviewedProductMessages: 8,
-  articleFamilies: 6,
+  articleFamilies: 7,
   sourceCardsAdded: GMAIL_SOURCE_FLASHCARDS_20260715.length,
   masteryCardsAdded: GMAIL_MASTERY_FLASHCARDS_20260715.length,
   verbatimAssessmentCardsAdded: 0,

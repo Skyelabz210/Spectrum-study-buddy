@@ -4,7 +4,7 @@
 
 The Gmail ingestion preserves the complete 287-card pre-ingestion library and adds 38 cards:
 
-- 28 article-derived cards from six canonical article families.
+- 28 article-derived cards from seven canonical article families.
 - 10 generated mastery drills for comparison, bundling, upgrade avenues and ideal-solution reasoning.
 - 0 new verbatim Milestone or Kahoot questions from Gmail.
 - 325 total cards.
