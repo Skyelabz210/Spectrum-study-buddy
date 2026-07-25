@@ -73,6 +73,7 @@ type ReaderItem = { id: string; segments: string[] };      // e.g. flashcard = [
 type UseReaderOptions = {
   segmentPauseMs?: number;   // between segments of one item (default 400)
   itemPauseMs?: number;      // between items (default 800)
+  endBehavior?: "loop" | "stop";  // at the last item: "loop" wraps to the first (flashcards' `(x+1) % length`), "stop" halts and announces completion (curriculum/academy). Default "stop"; flashcards passes "loop". The reader test must cover BOTH.
   onSegment?: (itemId: string, segmentIndex: number) => void;  // flip/scroll/highlight hook
   onActiveChange?: (itemId: string | null) => void;
 };
@@ -84,6 +85,8 @@ type UseReaderResult = {
   audioMessage: string;      // aria-live text, preserves existing error/permission copy
   ratePercent: number;
   setRatePercent: (n: number) => void;
+  preferredVoiceToken?: string;              // the remembered voice preference the hook forwards to speakAndWait as preferredVoiceTokens
+  setPreferredVoiceToken: (token?: string) => void;   // backs the optional voice picker; persisted alongside ratePercent
   play: (fromIndex?: number) => void;   // start from an index (default 0)
   pause: () => void;         // halt playback but retain activeId/activeSegment so ReaderControls' Pause can resume — distinct from stop
   resume: () => void;        // continue from the paused item/segment (Pause/Resume is the flashcards Autoplay toggle's real contract)
