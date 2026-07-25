@@ -78,14 +78,17 @@ type UseReaderOptions = {
 };
 type UseReaderResult = {
   isPlaying: boolean;
+  isPaused: boolean;         // paused mid-playlist with activeId/activeSegment retained (distinct from stopped)
   activeId: string | null;
   activeSegment: number;
   audioMessage: string;      // aria-live text, preserves existing error/permission copy
   ratePercent: number;
   setRatePercent: (n: number) => void;
-  play: (fromIndex?: number) => void;
+  play: (fromIndex?: number) => void;   // start from an index (default 0)
+  pause: () => void;         // halt playback but retain activeId/activeSegment so ReaderControls' Pause can resume — distinct from stop
+  resume: () => void;        // continue from the paused item/segment (Pause/Resume is the flashcards Autoplay toggle's real contract)
   skip: () => void;          // advance to next item mid-playback (cancels only the current utterance; playback continues) — preserves curriculum's existing Skip
-  stop: () => void;          // terminate the whole playlist
+  stop: () => void;          // terminate the whole playlist and clear active state
   readOne: (itemId: string, segmentIndex?: number) => void;   // one-shot, non-advancing; segmentIndex selects the visible segment (flashcard: question when unflipped, answer when flipped) so FlipDeck.readCard's behavior is preserved
 };
 function useReaderPlaylist(items: ReaderItem[], opts?: UseReaderOptions): UseReaderResult;
@@ -161,7 +164,7 @@ Each step is independently shippable, so this can land as one PR or a short seri
 
 ## 5. Verification
 - **`npm run check`** = `audit` + `audit:decks` + `test:ux` + `test:speech` + `typecheck` + `build`. This is the gate; it also regenerates the route tree during `build`. **WS1 extends it** with the new `test:reader` (hook coverage) and **WS2 extends `audit:decks`** with the HR-membership assertion (below), so the composite gate — not just the separately-run targeted commands — catches a broken hook or an incomplete HR deck.
-- Targeted: after WS1, the new hook test plus `npm run test:speech` (the latter guards `speak.ts` only — see WS1 guardrails). After the HR-deck change, **extend `scripts/analyze-flashcard-decks.mjs`**: today it only asserts baseline totals (103/329) and duplicate IDs and never calls `getDeckCards`, so an empty or `Employee Support`-missing HR deck would still pass. Add an explicit assertion that `getDeckCards("hr-onboarding")` (a) is non-empty and (b) includes the module-14 `Employee Support` cards, so the audit actually gates HR membership. Run `npm run typecheck` after the `Module.track` change.
+- Targeted: after WS1, the new hook test plus `npm run test:speech` (the latter guards `speak.ts` only — see WS1 guardrails). After the HR-deck change, **extend `scripts/analyze-flashcard-decks.mjs`**: today it only asserts baseline totals (103/329) and duplicate IDs and never calls `getDeckCards`, so an empty or `Employee Support`-missing HR deck would still pass. Add an explicit assertion that `getDeckCards("hr-onboarding")` (a) is non-empty and (b) covers **every category in the HR allowlist** — `Benefits`, `Employee Perks`, `Spark`, `My Setup`, `Employee Support`, `Study Accommodation` — asserting at least one card per category (ideally an exact expected card-count / ID set), and (c) contains **no `Affordability` card**. A partial "contains Employee Support" check would let an implementation silently drop `Benefits`, `My Setup`, or `Study Accommodation` and still pass, so the assertion must span the full allowlist to actually gate HR membership. Run `npm run typecheck` after the `Module.track` change.
 - Manual: autoplay parity on flashcards vs. the two lesson surfaces (start/stop/skip/rate persists across reloads and across pages); each of the four tracks reachable from sidebar + mobile dock; Corpus/Packages render all records with correct verification badges; reduced-motion path.
 
 ## 6. Risks & non-goals
