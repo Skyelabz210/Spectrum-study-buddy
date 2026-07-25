@@ -112,17 +112,17 @@ function useReaderPlaylist(items: ReaderItem[], opts?: UseReaderOptions): UseRea
 export type ModuleTrack = "course" | "hr-onboarding";
 export type Module = { /* …existing… */ track?: ModuleTrack };  // default "course"
 ```
-Tag **Module 6** `track: "hr-onboarding"`; everything else stays `"course"`. `fullCurriculum.ts` still merges base + Otter modules. This cleanly splits HR out **without moving content between files**.
+Tag the HR modules `track: "hr-onboarding"`; everything else stays `"course"`. Two modules qualify today: **Module 6 "Employee Benefits, Spark & Incentives"** (base curriculum) and **Module 14 "Benefits, Support & Learning Accommodations"** (tag `Employee support`, in `otterCurriculum20260712.ts`). Both must be tagged, or the HR hub silently omits Module 14. `fullCurriculum.ts` still merges base + Otter modules. This cleanly splits HR out **without moving content between files**.
 
 **Course Training** — `curriculum.index.tsx` filters `MODULES` to `track !== "hr-onboarding"`; page reframed as "Course Training." Module detail route unchanged (already gets the WS1 voice).
 
 **HR / Onboarding — new hub `src/routes/hr-onboarding.tsx`** that pulls the HR module(s), the HR/benefits/Spark/`My Setup` flashcard subset, and links to `/setup`. Add an **HR flashcard family**:
 - extend `FlashcardDeckDefinition.family` union with `"HR & Onboarding"` and add deck id(s) in `FLASHCARD_DECKS` (`src/data/flashcardDeck.ts`);
-- add a `getDeckCards` branch matching HR categories (`Benefits`, `Spark`, `Employee Perks`, `My Setup`) — membership is *computed*, so no per-card edits.
+- add a `getDeckCards` branch matching HR categories — `Benefits`, `Spark`, `Employee Perks`, `My Setup`, **and `Employee Support`** (the module-14 EAP / pay-schedule cards `otter12-086..089` in `otterCorpusFlashcards20260712.ts`, which would otherwise be dropped) — membership is *computed*, so no per-card edits.
 
 **Corpus — new browse route `src/routes/corpus.tsx`** rendering `KNOWLEDGE_CORPUS` grouped by `category` (Internet / Mobile / Mobile Devices / Mobile Protection / WiFi / Voice / …), each record showing summary, services, requirements, `verification` badge, and `CORPUS_SOURCES` provenance. Reuses `surface-panel` / `card-elevated` / `eyebrow` utilities and the existing verification-badge visual language. This finally gives the ingested corpus a home outside Quick Lookup. (Source-queue / ingestion status already lives in `/flashcards` and `/corner` and can cross-link.)
 
-**Packages & Plans — new route `src/routes/packages.tsx`** presenting the product-tier subset of `KNOWLEDGE_CORPUS` (records with `plan`/`speed`) as clean comparison cards per service line (Internet tiers, Mobile plans, TV packages, Voice), reusing the offer/lane framing from `acrossSpectrumOffers.ts` where useful. Study-oriented (no pricing/checkout — there is no billing system, and none is added).
+**Packages & Plans — new route `src/routes/packages.tsx`** presenting the product-tier subset of `KNOWLEDGE_CORPUS` (records with `plan`/`speed`) as clean comparison cards per service line. **Scope note:** the corpus only covers **Internet, Mobile (incl. devices/protection), WiFi, and Voice** — there is **no TV-category corpus record**, and `acrossSpectrumOffers.ts` builds only Internet/Mobile/WiFi lanes. TV package study content currently lives in the **`tv` flashcard deck** (`flashcardDeck.ts` `SERVICE_PATTERNS.tv`), not the corpus. So the page renders the four corpus-backed lines, and TV is either (a) surfaced via a cross-link to the `tv` deck, or (b) added later once a TV-package record is ingested into the corpus — it is **not** promised as a corpus-driven comparison here. Reuses the offer/lane framing from `acrossSpectrumOffers.ts` where useful. Study-oriented (no pricing/checkout — there is no billing system, and none is added).
 
 **Navigation restructure** (`AppSidebar.tsx` + `__root.tsx` `routeContext` + `MobileDock`):
 - Introduce a **"Training" group** with the four destinations front and center: **Course Training** (`/curriculum`), **HR & Onboarding** (`/hr-onboarding`), **Corpus** (`/corpus`), **Packages & Plans** (`/packages`).
