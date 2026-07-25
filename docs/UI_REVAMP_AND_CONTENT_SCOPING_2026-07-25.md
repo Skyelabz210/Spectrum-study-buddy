@@ -86,7 +86,7 @@ type UseReaderResult = {
   play: (fromIndex?: number) => void;
   skip: () => void;          // advance to next item mid-playback (cancels only the current utterance; playback continues) — preserves curriculum's existing Skip
   stop: () => void;          // terminate the whole playlist
-  readOne: (itemId: string) => void;   // one-shot, non-advancing
+  readOne: (itemId: string, segmentIndex?: number) => void;   // one-shot, non-advancing; segmentIndex selects the visible segment (flashcard: question when unflipped, answer when flipped) so FlipDeck.readCard's behavior is preserved
 };
 function useReaderPlaylist(items: ReaderItem[], opts?: UseReaderOptions): UseReaderResult;
 ```
@@ -100,9 +100,9 @@ function useReaderPlaylist(items: ReaderItem[], opts?: UseReaderOptions): UseRea
 **Refactor the three consumers onto the hook:**
 - `flashcards.tsx` `FlipDeck` → items = `[{id, segments:[`Question. ${front}`, `Answer. ${answerWithSource}`]}]`, `onSegment` flips.
 - `curriculum.$moduleId.tsx` → items = lessons, segments = `[`${title}. Why it matters: ${why}. ${body}${tips}`]`, `onSegment` scrolls + highlights. Removes the bespoke `playFrom`.
-- `prompt-academy.tsx` Lessons tab → **new**: items from `ACADEMY_LESSONS`, segments built from `title / plainEnglish / objective / spectrumExample / exercise`; add per-lesson ▶ and the shared controls. Closes the gap.
+- `prompt-academy.tsx` Lessons tab → **new**: items built from **`filteredLessons`** (the level-filtered list actually rendered, `prompt-academy.tsx:122`), *not* all `ACADEMY_LESSONS` — otherwise autoplay walks through hidden lessons with no visible card to scroll to/highlight. Segments built from `title / plainEnglish / objective / spectrumExample / exercise`; add per-lesson ▶ and the shared controls. **Reset/stop playback when `selectedLevel` changes** (re-key the hook on the filter). Closes the gap.
 
-**Risk/guardrails:** keep all `window`/`speechSynthesis` guards (SSR); keep single-active-utterance invariant. Note the existing `scripts/test-speech.mjs` only transpiles `src/lib/speak.ts` and asserts wrapper outcomes (`ended`/`error`/`unsupported`/cancel) — it does **not** exercise the hook's sequencing, pauses, `onSegment` callbacks, item advancement, or cleanup. **WS1 must add hook-level coverage** (a new `scripts/test-reader-playlist.mjs`, or a component/unit test) with `speakAndWait` mocked, so a broken playlist can't pass green. `test:speech` alone is not the WS1 gate.
+**Risk/guardrails:** keep all `window`/`speechSynthesis` guards (SSR); keep single-active-utterance invariant. Note the existing `scripts/test-speech.mjs` only transpiles `src/lib/speak.ts` and asserts wrapper outcomes (`ended`/`error`/`unsupported`/cancel) — it does **not** exercise the hook's sequencing, pauses, `onSegment` callbacks, item advancement, or cleanup. **WS1 must add hook-level coverage** (a new `scripts/test-reader-playlist.mjs`, or a component/unit test) with `speakAndWait` mocked, so a broken playlist can't pass green. Expose it as a new npm script (e.g. `test:reader`) **and add it to the composite `check` script** (`package.json:18`, currently `audit && audit:decks && test:ux && test:speech && typecheck && build`) so CI/the single gate actually exercises the hook. `test:speech` alone is not the WS1 gate.
 
 ### WS2 — Content reorganization into four tracks
 
@@ -120,7 +120,7 @@ Tag the HR modules `track: "hr-onboarding"`; everything else stays `"course"`. T
 **HR / Onboarding — new hub `src/routes/hr-onboarding.tsx`** that pulls the HR module(s), the HR/benefits/Spark/`My Setup` flashcard subset, and links to `/setup`. Add an **HR flashcard family**:
 - extend `FlashcardDeckDefinition.family` union with `"HR & Onboarding"` and add deck id(s) in `FLASHCARD_DECKS` (`src/data/flashcardDeck.ts`);
 - **also update the hard-coded family tuple in `src/routes/flashcards.tsx:77`** — the deck selector renders `<optgroup>`s from a literal `["Final exam", "Article study", "Optional mastery"]`, so a new `"HR & Onboarding"` family stays invisible until it's added there (and mirrored on the new HR hub);
-- add a `getDeckCards` branch matching HR categories — `Benefits`, `Spark`, `Employee Perks`, `My Setup`, **and `Employee Support`** (the module-14 EAP / pay-schedule cards `otter12-086..089` in `otterCorpusFlashcards20260712.ts`, which would otherwise be dropped) — membership is *computed*, so no per-card edits.
+- add a `getDeckCards` branch for the HR deck. **Derive membership from the tagged HR module numbers (6 and 14)** rather than an ever-growing category allowlist, so the flashcard split stays consistent with the curriculum `track` split and no module-14 card is missed. All three module-14 categories must be captured — `Benefits`, `Employee Support` (EAP/pay-schedule, `otter12-086..089`), **and `Study Accommodation`** (`otter12-090..092`) — plus the base-curriculum HR categories (`Spark`, `Employee Perks`, `My Setup`). Membership is *computed*, so no per-card edits.
 
 **Corpus — new browse route `src/routes/corpus.tsx`** rendering `KNOWLEDGE_CORPUS` grouped by `category` (Internet / Mobile / Mobile Devices / Mobile Protection / WiFi / Voice / …), each record showing summary, services, requirements, `verification` badge, and `CORPUS_SOURCES` provenance. Reuses `surface-panel` / `card-elevated` / `eyebrow` utilities and the existing verification-badge visual language. This finally gives the ingested corpus a home outside Quick Lookup. (Source-queue / ingestion status already lives in `/flashcards` and `/corner` and can cross-link.)
 
@@ -160,7 +160,7 @@ Covered jointly by WS2 (routes/nav) and WS3 (visual). The home "More when you ne
 Each step is independently shippable, so this can land as one PR or a short series.
 
 ## 5. Verification
-- **`npm run check`** = `audit` + `audit:decks` + `test:ux` + `test:speech` + `typecheck` + `build`. This is the gate; it also regenerates the route tree during `build`.
+- **`npm run check`** = `audit` + `audit:decks` + `test:ux` + `test:speech` + `typecheck` + `build`. This is the gate; it also regenerates the route tree during `build`. **WS1 extends it** with the new `test:reader` (hook coverage) and **WS2 extends `audit:decks`** with the HR-membership assertion (below), so the composite gate — not just the separately-run targeted commands — catches a broken hook or an incomplete HR deck.
 - Targeted: after WS1, the new hook test plus `npm run test:speech` (the latter guards `speak.ts` only — see WS1 guardrails). After the HR-deck change, **extend `scripts/analyze-flashcard-decks.mjs`**: today it only asserts baseline totals (103/329) and duplicate IDs and never calls `getDeckCards`, so an empty or `Employee Support`-missing HR deck would still pass. Add an explicit assertion that `getDeckCards("hr-onboarding")` (a) is non-empty and (b) includes the module-14 `Employee Support` cards, so the audit actually gates HR membership. Run `npm run typecheck` after the `Module.track` change.
 - Manual: autoplay parity on flashcards vs. the two lesson surfaces (start/stop/skip/rate persists across reloads and across pages); each of the four tracks reachable from sidebar + mobile dock; Corpus/Packages render all records with correct verification badges; reduced-motion path.
 
