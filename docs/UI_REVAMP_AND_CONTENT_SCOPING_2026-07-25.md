@@ -84,7 +84,8 @@ type UseReaderResult = {
   ratePercent: number;
   setRatePercent: (n: number) => void;
   play: (fromIndex?: number) => void;
-  stop: () => void;
+  skip: () => void;          // advance to next item mid-playback (cancels only the current utterance; playback continues) — preserves curriculum's existing Skip
+  stop: () => void;          // terminate the whole playlist
   readOne: (itemId: string) => void;   // one-shot, non-advancing
 };
 function useReaderPlaylist(items: ReaderItem[], opts?: UseReaderOptions): UseReaderResult;
