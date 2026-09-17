@@ -6,7 +6,7 @@ export const Route = createFileRoute("/curriculum/")({
   component: CurriculumIndex,
   head: () => ({
     meta: [
-      { title: "Curriculum · Spectrum SAS" },
+      { title: "Curriculum · CallFlow Lab" },
       { name: "description", content: "The complete Spectrum sales training spine, including products, tools, QA, prompt engineering, benefits and floor-readiness practice." },
     ],
   }),
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/curriculum/")({
 
 function CurriculumIndex() {
   return (
-    <div className="page-frame mx-auto max-w-4xl py-6 sm:py-10">
+    <div className="mx-auto max-w-4xl px-6 py-10">
       <h1 className="text-3xl font-bold tracking-tight">Curriculum</h1>
       <p className="mt-2 text-muted-foreground">
         The training spine covers call flow, SOP gates, tools, products, objections, technical fluency, AI prompting, QA metrics, benefits, practice and weekly source review. Tap any module and take one bite at a time.

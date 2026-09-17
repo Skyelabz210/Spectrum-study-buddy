@@ -160,4 +160,3 @@ export const SCENARIOS: Scenario[] = [
     tags: ["TV", "Xumo", "equipment"],
   },
 ];
-

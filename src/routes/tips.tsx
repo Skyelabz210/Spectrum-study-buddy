@@ -17,7 +17,7 @@ export const Route = createFileRoute("/tips")({
   component: Tips,
   head: () => ({
     meta: [
-      { title: "Study tips · Spectrum SAS" },
+      { title: "Study tips · CallFlow Lab" },
       { name: "description", content: "Practical study tactics for source-aware Spectrum sales training, QA, AI tools and call simulation." },
     ],
   }),
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/tips")({
 function Tips() {
   const tips = [...STUDY_TIPS, ...AUDIT_TIPS];
   return (
-    <div className="page-frame mx-auto max-w-3xl py-6 sm:py-10">
+    <div className="mx-auto max-w-3xl px-6 py-10">
       <h1 className="text-3xl font-bold tracking-tight">Study tips</h1>
       <p className="mt-2 text-muted-foreground">
         Capture the rule, verify the source, attach it to a scenario and practice the call behavior out loud.

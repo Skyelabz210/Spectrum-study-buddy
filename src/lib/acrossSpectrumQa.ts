@@ -80,4 +80,3 @@ export function nextQaSuggestion(achievedIds: string[], turnIndex: number) {
   }
   return missing[0]?.description ?? "Summarize the fit, verify the facts, and close with consent.";
 }
-

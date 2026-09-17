@@ -17,30 +17,21 @@ const InputSchema = z.object({
 async function callGateway(messages: { role: string; content: string }[]) {
   const apiKey = process.env.LOVABLE_API_KEY;
   if (!apiKey) throw new Error("LOVABLE_API_KEY is not configured");
-  const model =
-    process.env.LOVABLE_SIMULATOR_MODEL ??
-    process.env.LOVABLE_AI_MODEL ??
-    "google/gemini-3-flash-preview";
+  const model = process.env.LOVABLE_SIMULATOR_MODEL ?? process.env.LOVABLE_AI_MODEL ?? "google/gemini-3-flash-preview";
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 12_000);
   try {
-    const response = await fetch(
-      "https://ai.gateway.lovable.dev/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        signal: controller.signal,
-        body: JSON.stringify({ model, temperature: 0.7, messages }),
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
       },
-    );
-    if (!response.ok)
-      throw new Error(`Simulator gateway returned ${response.status}`);
-    const payload = (await response.json()) as {
-      choices?: { message?: { content?: string } }[];
-    };
+      signal: controller.signal,
+      body: JSON.stringify({ model, temperature: 0.7, messages }),
+    });
+    if (!response.ok) throw new Error(`Simulator gateway returned ${response.status}`);
+    const payload = (await response.json()) as { choices?: { message?: { content?: string } }[] };
     return payload.choices?.[0]?.message?.content?.trim() ?? "";
   } finally {
     clearTimeout(timeout);
@@ -48,21 +39,15 @@ async function callGateway(messages: { role: string; content: string }[]) {
 }
 
 export const simulateCallerTurn = createServerFn({ method: "POST" })
-  .validator((data: unknown) => InputSchema.parse(data))
+  .inputValidator((data: unknown) => InputSchema.parse(data))
   .handler(async ({ data }) => {
     const persona = CALLER_PERSONAS.find((item) => item.id === data.personaId);
     if (!persona) throw new Error("Unknown simulator persona");
 
-    const deduplicatedTranscript = data.transcript.filter(
-      (line, index, lines) => {
-        const previous = lines[index - 1];
-        return (
-          !previous ||
-          previous.speaker !== line.speaker ||
-          previous.text !== line.text
-        );
-      },
-    );
+    const deduplicatedTranscript = data.transcript.filter((line, index, lines) => {
+      const previous = lines[index - 1];
+      return !previous || previous.speaker !== line.speaker || previous.text !== line.text;
+    });
     const history = deduplicatedTranscript
       .map((line) => `${line.speaker.toUpperCase()}: ${line.text}`)
       .join("\n");
@@ -90,10 +75,7 @@ Rules:
 
     const reply = await callGateway([
       { role: "system", content: system },
-      {
-        role: "user",
-        content: `Conversation so far:\n${history}\n\nLatest agent response:\n${data.agentText}\n\nGive only the caller's next spoken reply.`,
-      },
+      { role: "user", content: `Conversation so far:\n${history}\n\nLatest agent response:\n${data.agentText}\n\nGive only the caller's next spoken reply.` },
     ]);
 
     if (!reply) throw new Error("Simulator caller returned no reply");

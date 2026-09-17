@@ -1,6 +1,6 @@
 {
-  "name": "spectrum-sas",
-  "version": "1.10.1-spectrum.0",
+  "name": "callflow-lab",
+  "version": "1.5.0-spectrum.0",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -12,10 +12,7 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "audit": "node scripts/audit-callflow.mjs",
-    "audit:decks": "node scripts/analyze-flashcard-decks.mjs",
-    "test:ux": "python3 scripts/test-mobile-ux.py",
-    "test:speech": "node scripts/test-speech.mjs",
-    "check": "npm run audit && npm run audit:decks && npm run test:ux && npm run test:speech && npm run typecheck && npm run build"
+    "check": "npm run audit && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
@@ -59,6 +56,7 @@
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.575.0",
+    "nitro": "3.0.260603-beta",
     "react": "^19.2.0",
     "react-day-picker": "^9.14.0",
     "react-dom": "^19.2.0",
@@ -75,7 +73,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
-    "@lovable.dev/vite-tanstack-config": "^1.5.1",
+    "@lovable.dev/vite-tanstack-config": "2.7.7",
     "@types/node": "^22.16.5",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",

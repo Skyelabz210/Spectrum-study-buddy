@@ -630,4 +630,3 @@ The interface is ready for continued weekly expansion when:
 - the primary task remains visible while details are progressively revealed
 - every route has a clear next action and related-tool path
 - new pages inherit the same visual tokens and component hierarchy without one-off styling
-

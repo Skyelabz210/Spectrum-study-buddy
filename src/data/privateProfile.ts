@@ -11,4 +11,3 @@ export const DEFAULT_PRIVATE_PROFILE: PrivateWorkProfile = {
   pid: "",
   workEmail: "",
 };
-

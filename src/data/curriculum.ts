@@ -1,4 +1,4 @@
-// Spectrum SAS curriculum derived from weekly Otter training review.
+// CallFlow Lab curriculum derived from weekly Otter training review.
 // Domain: Spectrum inbound sales onboarding, call flow, SOP discipline, tools, and scenario practice.
 // Official SOP, facilitator updates, and current company policy control when any conflict appears.
 
@@ -33,8 +33,7 @@ export const MODULES: Module[] = [
     title: "Call Flow & Scope of Support",
     tag: "Foundation",
     emoji: "☎️",
-    summary:
-      "The call spine: greet, discover, present, handle, close, and route only after the correct support path is complete.",
+    summary: "The call spine: greet, discover, present, handle, close, and route only after the correct support path is complete.",
     sections: [
       {
         id: "m1s1",
@@ -73,10 +72,7 @@ export const MODULES: Module[] = [
             title: "Lowering a bill is relative",
             why: "A customer may ask to lower the bill, but the real need may be value, consolidation, or a better service mix.",
             body: "Discovery decides the path. A lower bill may come from a downgrade, but it may also come from moving mobile lines, improving coverage, or replacing a more expensive provider. Connect the offer to the stated problem.",
-            tips: [
-              "Ask who they use for mobile and what they pay before proposing mobile.",
-              "Move from price-only thinking to benefit-per-cost thinking.",
-            ],
+            tips: ["Ask who they use for mobile and what they pay before proposing mobile.", "Move from price-only thinking to benefit-per-cost thinking."],
           },
           {
             id: "m1s2l2",
@@ -94,8 +90,7 @@ export const MODULES: Module[] = [
     title: "Integrity, SOP & Zero-Tolerance Rules",
     tag: "Policy gates",
     emoji: "🛡️",
-    summary:
-      "The non-negotiables: consent, account changes, discounts, orders, time codes, and audit behavior.",
+    summary: "The non-negotiables: consent, account changes, discounts, orders, time codes, and audit behavior.",
     sections: [
       {
         id: "m2s1",
@@ -136,9 +131,7 @@ export const MODULES: Module[] = [
             title: "Official SOP controls",
             why: "Training examples are learning tools; current SOP is the authority.",
             body: "When a facilitator, top performer, old habit, or peer advice conflicts with official SOP, use official SOP. Record the conflict as a question for clarification.",
-            tips: [
-              "This app is a study aid, not a replacement for official policy.",
-            ],
+            tips: ["This app is a study aid, not a replacement for official policy."],
           },
         ],
       },
@@ -150,8 +143,7 @@ export const MODULES: Module[] = [
     title: "Authentication & Customer Privacy",
     tag: "Trust",
     emoji: "🔐",
-    summary:
-      "How to protect account access, customer information, and yourself while still moving the conversation forward.",
+    summary: "How to protect account access, customer information, and yourself while still moving the conversation forward.",
     sections: [
       {
         id: "m3s1",
@@ -197,8 +189,7 @@ export const MODULES: Module[] = [
     title: "Product Map: Internet, TV, Mobile, Voice",
     tag: "Products",
     emoji: "📡",
-    summary:
-      "The product surface you need to understand before you can position offers cleanly.",
+    summary: "The product surface you need to understand before you can position offers cleanly.",
     sections: [
       {
         id: "m4s1",
@@ -221,9 +212,7 @@ export const MODULES: Module[] = [
             title: "Voice as the spare tire",
             why: "Home phone can be positioned as a backup rather than an old-fashioned product.",
             body: "A clean voice pitch connects to backup access, children at home, emergencies, home systems, or secondary authentication. The value is contingency, not nostalgia.",
-            tips: [
-              "Use the spare-tire analogy only when it fits the customer's household.",
-            ],
+            tips: ["Use the spare-tire analogy only when it fits the customer's household."],
           },
         ],
       },
@@ -253,8 +242,7 @@ export const MODULES: Module[] = [
     title: "Systems: Spectrum.com, Copilot, Panorama, Webex",
     tag: "Navigation",
     emoji: "🧭",
-    summary:
-      "Where to find answers, how to move through tools, and how to avoid getting stuck on navigation noise.",
+    summary: "Where to find answers, how to move through tools, and how to avoid getting stuck on navigation noise.",
     sections: [
       {
         id: "m5s1",
@@ -306,8 +294,7 @@ export const MODULES: Module[] = [
     title: "Employee Benefits, Spark & Incentives",
     tag: "Onboarding",
     emoji: "🎯",
-    summary:
-      "The practical employee systems: benefits window, employee services, recognition, Sparks, and incentive attention.",
+    summary: "The practical employee systems: benefits window, employee services, recognition, Sparks, and incentive attention.",
     sections: [
       {
         id: "m6s1",
@@ -353,8 +340,7 @@ export const MODULES: Module[] = [
     title: "Sales Presence & Traits",
     tag: "Performance",
     emoji: "🗣️",
-    summary:
-      "The human layer: empathy, confidence, coachability, tone, posture, active listening, and teamwork.",
+    summary: "The human layer: empathy, confidence, coachability, tone, posture, active listening, and teamwork.",
     sections: [
       {
         id: "m7s1",
@@ -406,8 +392,7 @@ export const MODULES: Module[] = [
     title: "A-R-M Objection Handling",
     tag: "Scenarios",
     emoji: "🔁",
-    summary:
-      "Acknowledge, Respond, Move forward: the classroom pattern for positive framing and forward motion.",
+    summary: "Acknowledge, Respond, Move forward: the classroom pattern for positive framing and forward motion.",
     sections: [
       {
         id: "m8s1",
@@ -459,8 +444,7 @@ export const MODULES: Module[] = [
     title: "Offer Positioning & Ethical Bundling",
     tag: "Closing",
     emoji: "📦",
-    summary:
-      "How to present value, savings, discounts, mobile, voice, and bundles without crossing consent or compliance lines.",
+    summary: "How to present value, savings, discounts, mobile, voice, and bundles without crossing consent or compliance lines.",
     sections: [
       {
         id: "m9s1",
@@ -504,30 +488,6 @@ export const MODULES: Module[] = [
           },
         ],
       },
-      {
-        id: "m9s3",
-        title: "Gmail Product Application",
-        lessons: [
-          {
-            id: "m9s3l1",
-            title: "Separate the customer need from the offer avenue",
-            why: "A useful bundle starts with fit, not with attaching every available feature.",
-            body: "Identify the need first, then compare only the relevant avenues: plan fit, BYOD or device purchase, PBB, trade-in, Anytime Upgrade, protection, WiFi continuity, and TV bundle value. Verify each avenue in its controlling article and live offer before presenting it.",
-          },
-          {
-            id: "m9s3l2",
-            title: "Do not merge independent eligibility gates",
-            why: "Stackable offers can still have separate qualification, timing and disclosure rules.",
-            body: "For example, GEN9023 may allow PBB to stack with a device promotion or trade-in, but porting, prior-carrier history, order-entry intent and retention remain PBB gates. HOW7449 has separate plan, device-condition, timing and return gates for Anytime Upgrade.",
-          },
-          {
-            id: "m9s3l3",
-            title: "Keep exam wording and mastery reasoning distinct",
-            why: "Generated scenarios improve transfer without contaminating verbatim final-exam practice.",
-            body: "Run Milestone Questions, Milestone Prep and Kahoot as isolated decks when exact classroom wording matters. Use Article-linked Review for source facts and enable Mastery Lab only when practicing comparisons, bundles, upgrade avenues and ideal-solution reasoning.",
-          },
-        ],
-      },
     ],
   },
   {
@@ -536,8 +496,7 @@ export const MODULES: Module[] = [
     title: "Weekly Recap & Update Pipeline",
     tag: "Versioning",
     emoji: "🗂️",
-    summary:
-      "How this app absorbs each week's recordings, preserves provenance, and turns training into drills.",
+    summary: "How this app absorbs each week's recordings, preserves provenance, and turns training into drills.",
     sections: [
       {
         id: "m10s1",
@@ -573,346 +532,56 @@ export type Flashcard = {
   front: string;
   back: string;
   category: string;
-  deckTags?: FlashcardDeckTag[];
-  source?: FlashcardSource;
-  origin?: FlashcardOrigin;
-};
-
-export type FlashcardOrigin =
-  | "verbatim-assessment"
-  | "verbatim-prep"
-  | "source-derived"
-  | "generated-mastery"
-  | "legacy-supplement";
-
-export type FlashcardDeckTag =
-  "milestone" | "kahoot" | "internet" | "wifi" | "mobile" | "tv" | "voice";
-
-export type FlashcardSourceStatus =
-  | "article-verified"
-  | "classroom-verified"
-  | "needs-article"
-  | "needs-article-title"
-  | "needs-clarification";
-
-export type FlashcardSource = {
-  kind: "article" | "milestone-review" | "milestone-prep" | "kahoot";
-  articleNumber: string;
-  articleTitle: string;
-  status: FlashcardSourceStatus;
-  meetingId?: string;
-  questionNumber?: number;
-  recordedAt?: string;
 };
 
 export const FLASHCARDS: Flashcard[] = [
-  {
-    id: "fc1",
-    module: 1,
-    category: "Call Flow",
-    front: "A customer asks for a supervisor immediately. First move?",
-    back: "Do not route immediately. Ask for a brief scenario, review scope, and follow the escalation process.",
-  },
-  {
-    id: "fc2",
-    module: 1,
-    category: "Call Flow",
-    front: "What is the basic sales call spine?",
-    back: "Greeting, discovery, present the offer, handle objections, close or route correctly.",
-  },
-  {
-    id: "fc3",
-    module: 1,
-    category: "Call Flow",
-    front: "What does a hold check-in protect?",
-    back: "Trust, orientation, and control of the call.",
-  },
-  {
-    id: "fc4",
-    module: 1,
-    category: "Scope",
-    front: "When is routing appropriate?",
-    back: "After the intended role is complete and the customer still needs a different department.",
-  },
-  {
-    id: "fc5",
-    module: 2,
-    category: "Integrity",
-    front: "Can you substitute your own identity data in a customer workflow?",
-    back: "No. That is a serious integrity risk.",
-  },
-  {
-    id: "fc6",
-    module: 2,
-    category: "Integrity",
-    front: "What are placeholder orders?",
-    back: "Invalid orders placed before full customer commitment. Do not use them.",
-  },
-  {
-    id: "fc7",
-    module: 2,
-    category: "Integrity",
-    front: "What is cramming in this context?",
-    back: "Adding or implying services without clear customer knowledge and consent.",
-  },
-  {
-    id: "fc8",
-    module: 2,
-    category: "Audit",
-    front: "Why do universal audits matter?",
-    back: "Another site can review the call without local bias, so process must be clean every time.",
-  },
-  {
-    id: "fc9",
-    module: 2,
-    category: "SOP",
-    front: "What controls if training advice conflicts with current SOP?",
-    back: "Current official SOP controls.",
-  },
-  {
-    id: "fc10",
-    module: 3,
-    category: "Authentication",
-    front:
-      "Should you give sensitive account details before the customer provides them?",
-    back: "No. Have them provide information first, then confirm only under approved procedure.",
-  },
-  {
-    id: "fc11",
-    module: 3,
-    category: "Authentication",
-    front:
-      "Someone knows all account facts. Are they automatically authorized?",
-    back: "No. Only the account holder or authorized user can make approved changes.",
-  },
-  {
-    id: "fc12",
-    module: 3,
-    category: "Privacy",
-    front: "Can you follow a customer on social media after a friendly call?",
-    back: "No. Keep customer contact inside approved business channels.",
-  },
-  {
-    id: "fc13",
-    module: 3,
-    category: "Privacy",
-    front: "Can you promote your side business during a call?",
-    back: "No. That is outside-business solicitation and a conflict.",
-  },
-  {
-    id: "fc14",
-    module: 4,
-    category: "Products",
-    front: "Which service anchors many employee and mobile workflows?",
-    back: "Internet service.",
-  },
-  {
-    id: "fc15",
-    module: 4,
-    category: "Products",
-    front: "Voice spare-tire method means what?",
-    back: "Position home phone as backup access when it fits the household need.",
-  },
-  {
-    id: "fc16",
-    module: 4,
-    category: "Mobile",
-    front: "Why ask about the customer's mobile provider?",
-    back: "Mobile may solve the real cost problem better than forcing an internet discount.",
-  },
-  {
-    id: "fc17",
-    module: 4,
-    category: "Products",
-    front: "How should old equipment resistance be handled?",
-    back: "Bridge from familiarity to the new value without mocking the old setup.",
-  },
-  {
-    id: "fc18",
-    module: 5,
-    category: "Navigation",
-    front: "Where do public product pages help you?",
-    back: "They show what the customer may have seen and misunderstood.",
-  },
-  {
-    id: "fc19",
-    module: 5,
-    category: "Navigation",
-    front: "What is Copilot Residential used for?",
-    back: "Finding internal articles, product details, navigation answers, and process support.",
-  },
-  {
-    id: "fc20",
-    module: 5,
-    category: "Navigation",
-    front: "Why watch Webex chat?",
-    back: "Updates, incentives, and instructions may appear there before being repeated aloud.",
-  },
-  {
-    id: "fc21",
-    module: 5,
-    category: "Panorama",
-    front: "Where does the employee service workflow start?",
-    back: "Panorama, then My Charter and Connectivity Services.",
-  },
-  {
-    id: "fc22",
-    module: 5,
-    category: "Panorama",
-    front: "What must be accurate before employee service setup?",
-    back: "The service address in the employee profile/system.",
-  },
-  {
-    id: "fc23",
-    module: 6,
-    category: "Benefits",
-    front: "What should you track for benefits enrollment?",
-    back: "The Benefit Connect countdown and deadline.",
-  },
-  {
-    id: "fc24",
-    module: 6,
-    category: "Benefits",
-    front: "Enhanced dental differs mainly by what discussed area?",
-    back: "Orthodontia coverage was called out; verify exact details in benefits documents.",
-  },
-  {
-    id: "fc25",
-    module: 6,
-    category: "Spark",
-    front: "What are Sparks?",
-    back: "Recognition and reward points tied to incentives, shout-outs, contests, and milestones.",
-  },
-  {
-    id: "fc26",
-    module: 6,
-    category: "Spark",
-    front: "How often were shout-outs expected?",
-    back: "Weekly recognitions were discussed as a recurring classroom behavior.",
-  },
-  {
-    id: "fc27",
-    module: 7,
-    category: "Sales Traits",
-    front: "Most emphasized sales trait in the workshop?",
-    back: "Empathy.",
-  },
-  {
-    id: "fc28",
-    module: 7,
-    category: "Sales Traits",
-    front: "Why does posture matter on the phone?",
-    back: "Posture changes tone, energy, and confidence that the customer can hear.",
-  },
-  {
-    id: "fc29",
-    module: 7,
-    category: "Sales Traits",
-    front: "What does coachability look like?",
-    back: "Ask what to adjust, test feedback, and make the corrected method your own.",
-  },
-  {
-    id: "fc30",
-    module: 7,
-    category: "Active Listening",
-    front: "What can background noise reveal?",
-    back: "Household size, kids, work-from-home needs, or service opportunities.",
-  },
-  {
-    id: "fc31",
-    module: 8,
-    category: "A-R-M",
-    front: "What does A-R-M stand for?",
-    back: "Acknowledge, Respond, Move forward.",
-  },
-  {
-    id: "fc32",
-    module: 8,
-    category: "A-R-M",
-    front: "What should acknowledgement target?",
-    back: "The customer's actual concern, not a new problem you accidentally introduce.",
-  },
-  {
-    id: "fc33",
-    module: 8,
-    category: "A-R-M",
-    front: "Why avoid centering 'new customers only'?",
-    back: "It can make the customer feel punished; redirect to available account options.",
-  },
-  {
-    id: "fc34",
-    module: 8,
-    category: "A-R-M",
-    front: "Move-forward example after payment concern?",
-    back: "Explain the path clearly, then ask whether they want to complete the approved next step.",
-  },
-  {
-    id: "fc35",
-    module: 9,
-    category: "Closing",
-    front: "Ethical assumptive close rule?",
-    back: "Move forward confidently, but keep consent and payment requirements truthful.",
-  },
-  {
-    id: "fc36",
-    module: 9,
-    category: "Bundling",
-    front: "When is bundling clean?",
-    back: "When each service, price, and reason is explained and the customer agrees.",
-  },
-  {
-    id: "fc37",
-    module: 9,
-    category: "Performance",
-    front: "Why does attendance affect commission opportunity?",
-    back: "Missed calls mean missed sales reps and missed practice.",
-  },
-  {
-    id: "fc38",
-    module: 9,
-    category: "Burnout",
-    front: "Sustainable performance needs what?",
-    back: "Goal tracking, approved breaks, recovery time, and clean boundaries after work.",
-  },
-  {
-    id: "fc39",
-    module: 10,
-    category: "Weekly Updates",
-    front: "What should every weekly Otter update extract?",
-    back: "Terms, policy gates, tool paths, scenarios, flashcards, action items, and unresolved questions.",
-  },
-  {
-    id: "fc40",
-    module: 10,
-    category: "Versioning",
-    front: "Why version the training app weekly?",
-    back: "So changes can be compared, rolled back, and audited instead of becoming ad hoc edits.",
-  },
+  { id: "fc1", module: 1, category: "Call Flow", front: "A customer asks for a supervisor immediately. First move?", back: "Do not route immediately. Ask for a brief scenario, review scope, and follow the escalation process." },
+  { id: "fc2", module: 1, category: "Call Flow", front: "What is the basic sales call spine?", back: "Greeting, discovery, present the offer, handle objections, close or route correctly." },
+  { id: "fc3", module: 1, category: "Call Flow", front: "What does a hold check-in protect?", back: "Trust, orientation, and control of the call." },
+  { id: "fc4", module: 1, category: "Scope", front: "When is routing appropriate?", back: "After the intended role is complete and the customer still needs a different department." },
+  { id: "fc5", module: 2, category: "Integrity", front: "Can you substitute your own identity data in a customer workflow?", back: "No. That is a serious integrity risk." },
+  { id: "fc6", module: 2, category: "Integrity", front: "What are placeholder orders?", back: "Invalid orders placed before full customer commitment. Do not use them." },
+  { id: "fc7", module: 2, category: "Integrity", front: "What is cramming in this context?", back: "Adding or implying services without clear customer knowledge and consent." },
+  { id: "fc8", module: 2, category: "Audit", front: "Why do universal audits matter?", back: "Another site can review the call without local bias, so process must be clean every time." },
+  { id: "fc9", module: 2, category: "SOP", front: "What controls if training advice conflicts with current SOP?", back: "Current official SOP controls." },
+  { id: "fc10", module: 3, category: "Authentication", front: "Should you give sensitive account details before the customer provides them?", back: "No. Have them provide information first, then confirm only under approved procedure." },
+  { id: "fc11", module: 3, category: "Authentication", front: "Someone knows all account facts. Are they automatically authorized?", back: "No. Only the account holder or authorized user can make approved changes." },
+  { id: "fc12", module: 3, category: "Privacy", front: "Can you follow a customer on social media after a friendly call?", back: "No. Keep customer contact inside approved business channels." },
+  { id: "fc13", module: 3, category: "Privacy", front: "Can you promote your side business during a call?", back: "No. That is outside-business solicitation and a conflict." },
+  { id: "fc14", module: 4, category: "Products", front: "Which service anchors many employee and mobile workflows?", back: "Internet service." },
+  { id: "fc15", module: 4, category: "Products", front: "Voice spare-tire method means what?", back: "Position home phone as backup access when it fits the household need." },
+  { id: "fc16", module: 4, category: "Mobile", front: "Why ask about the customer's mobile provider?", back: "Mobile may solve the real cost problem better than forcing an internet discount." },
+  { id: "fc17", module: 4, category: "Products", front: "How should old equipment resistance be handled?", back: "Bridge from familiarity to the new value without mocking the old setup." },
+  { id: "fc18", module: 5, category: "Navigation", front: "Where do public product pages help you?", back: "They show what the customer may have seen and misunderstood." },
+  { id: "fc19", module: 5, category: "Navigation", front: "What is Copilot Residential used for?", back: "Finding internal articles, product details, navigation answers, and process support." },
+  { id: "fc20", module: 5, category: "Navigation", front: "Why watch Webex chat?", back: "Updates, incentives, and instructions may appear there before being repeated aloud." },
+  { id: "fc21", module: 5, category: "Panorama", front: "Where does the employee service workflow start?", back: "Panorama, then My Charter and Connectivity Services." },
+  { id: "fc22", module: 5, category: "Panorama", front: "What must be accurate before employee service setup?", back: "The service address in the employee profile/system." },
+  { id: "fc23", module: 6, category: "Benefits", front: "What should you track for benefits enrollment?", back: "The Benefit Connect countdown and deadline." },
+  { id: "fc24", module: 6, category: "Benefits", front: "Enhanced dental differs mainly by what discussed area?", back: "Orthodontia coverage was called out; verify exact details in benefits documents." },
+  { id: "fc25", module: 6, category: "Spark", front: "What are Sparks?", back: "Recognition and reward points tied to incentives, shout-outs, contests, and milestones." },
+  { id: "fc26", module: 6, category: "Spark", front: "How often were shout-outs expected?", back: "Weekly recognitions were discussed as a recurring classroom behavior." },
+  { id: "fc27", module: 7, category: "Sales Traits", front: "Most emphasized sales trait in the workshop?", back: "Empathy." },
+  { id: "fc28", module: 7, category: "Sales Traits", front: "Why does posture matter on the phone?", back: "Posture changes tone, energy, and confidence that the customer can hear." },
+  { id: "fc29", module: 7, category: "Sales Traits", front: "What does coachability look like?", back: "Ask what to adjust, test feedback, and make the corrected method your own." },
+  { id: "fc30", module: 7, category: "Active Listening", front: "What can background noise reveal?", back: "Household size, kids, work-from-home needs, or service opportunities." },
+  { id: "fc31", module: 8, category: "A-R-M", front: "What does A-R-M stand for?", back: "Acknowledge, Respond, Move forward." },
+  { id: "fc32", module: 8, category: "A-R-M", front: "What should acknowledgement target?", back: "The customer's actual concern, not a new problem you accidentally introduce." },
+  { id: "fc33", module: 8, category: "A-R-M", front: "Why avoid centering 'new customers only'?", back: "It can make the customer feel punished; redirect to available account options." },
+  { id: "fc34", module: 8, category: "A-R-M", front: "Move-forward example after payment concern?", back: "Explain the path clearly, then ask whether they want to complete the approved next step." },
+  { id: "fc35", module: 9, category: "Closing", front: "Ethical assumptive close rule?", back: "Move forward confidently, but keep consent and payment requirements truthful." },
+  { id: "fc36", module: 9, category: "Bundling", front: "When is bundling clean?", back: "When each service, price, and reason is explained and the customer agrees." },
+  { id: "fc37", module: 9, category: "Performance", front: "Why does attendance affect commission opportunity?", back: "Missed calls mean missed sales reps and missed practice." },
+  { id: "fc38", module: 9, category: "Burnout", front: "Sustainable performance needs what?", back: "Goal tracking, approved breaks, recovery time, and clean boundaries after work." },
+  { id: "fc39", module: 10, category: "Weekly Updates", front: "What should every weekly Otter update extract?", back: "Terms, policy gates, tool paths, scenarios, flashcards, action items, and unresolved questions." },
+  { id: "fc40", module: 10, category: "Versioning", front: "Why version the training app weekly?", back: "So changes can be compared, rolled back, and audited instead of becoming ad hoc edits." },
 ];
 
 export const STUDY_TIPS = [
-  {
-    title: "One call-flow win",
-    body: "Low energy day: study one objection and write one A-R-M response. That counts.",
-  },
-  {
-    title: "Scenario before memorization",
-    body: "Policy sticks better when attached to a customer situation. Convert every rule into a call example.",
-  },
-  {
-    title: "Keep an unresolved list",
-    body: "If SOP, benefits, commission, or merger details are unclear, capture the question and resolve it with an official source.",
-  },
-  {
-    title: "Practice out loud",
-    body: "Sales language is muscle memory. Say the response aloud until it sounds natural and compliant.",
-  },
-  {
-    title: "Watch the systems",
-    body: "Webex, Copilot, Panorama, and Spark are part of the work. Navigation fluency reduces call stress.",
-  },
-  {
-    title: "Protect consent",
-    body: "A confident close still needs a clear yes. Consent is the line that keeps selling clean.",
-  },
+  { title: "One call-flow win", body: "Low energy day: study one objection and write one A-R-M response. That counts." },
+  { title: "Scenario before memorization", body: "Policy sticks better when attached to a customer situation. Convert every rule into a call example." },
+  { title: "Keep an unresolved list", body: "If SOP, benefits, commission, or merger details are unclear, capture the question and resolve it with an official source." },
+  { title: "Practice out loud", body: "Sales language is muscle memory. Say the response aloud until it sounds natural and compliant." },
+  { title: "Watch the systems", body: "Webex, Copilot, Panorama, and Spark are part of the work. Navigation fluency reduces call stress." },
+  { title: "Protect consent", body: "A confident close still needs a clear yes. Consent is the line that keeps selling clean." },
 ];

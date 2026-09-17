@@ -734,4 +734,3 @@ export const ACADEMY_PRACTICE_DRILLS = [
   { title: "Source audit", task: "Grade an AI answer and identify every claim that lacks a supplied source ID." },
   { title: "Prompt regression", task: "Test two prompt versions against the same five fictional customer cases and score unsupported claims." },
 ];
-

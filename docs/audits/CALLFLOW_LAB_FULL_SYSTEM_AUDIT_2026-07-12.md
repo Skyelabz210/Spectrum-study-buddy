@@ -659,4 +659,3 @@ Future audio must be ephemeral by default. Recording/storage requires explicit c
 CallFlow Lab has a coherent product direction: a private, source-aware Spectrum sales-agent learning environment that joins retrieval, study, practice, simulation and prompt assistance. Its educational architecture is stronger than its release engineering. The next maturity step is not another isolated screen; it is a verified platform layer: generated routes, automated integrity checks, source freshness, accessibility, semantic QA and privacy-controlled deployment.
 
 All existing features should remain additive. New corpus material should enter through the weekly ledger, receive source/status metadata, map to curriculum and flashcards, pass integrity checks, and only then become active study content.
-

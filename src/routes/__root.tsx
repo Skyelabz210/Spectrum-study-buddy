@@ -8,14 +8,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import {
-  BookOpen,
-  Home,
-  Menu as MenuIcon,
-  PhoneCall,
-  Search,
-  UserRound,
-} from "lucide-react";
+import { Search } from "lucide-react";
 
 import appCss from "../styles.css?url";
 
@@ -25,9 +18,7 @@ function NotFoundComponent() {
       <div className="surface-panel max-w-md rounded-2xl p-8 text-center">
         <div className="eyebrow text-neon">Navigation</div>
         <h1 className="mt-3 text-7xl font-bold text-gradient-primary">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">
-          Page not found
-        </h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you are looking for does not exist or has moved.
         </p>
@@ -56,8 +47,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           This page did not load
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something failed in the study shell. Refresh, or return home and
-          reopen the module.
+          Something failed in the study shell. Refresh, or return home and reopen the module.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -81,52 +71,33 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
-  {
-    head: () => ({
-      meta: [
-        { charSet: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title: "Spectrum Sales Agent Sidekick" },
-        {
-          name: "description",
-          content:
-            "A weekly-updated study system for Spectrum inbound sales training: call flow, SOP gates, tools, scenarios, flashcards, and an AI coach.",
-        },
-        { name: "author", content: "Spectrum SAS" },
-        {
-          property: "og:title",
-          content: "Spectrum Sales Agent Sidekick",
-        },
-        {
-          property: "og:description",
-          content:
-            "Call flow, policy gates, A-R-M scenario drills, weekly Otter ingestion, and a plain-language AI coach.",
-        },
-        { property: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary" },
-        {
-          name: "twitter:title",
-          content: "Spectrum Sales Agent Sidekick",
-        },
-        {
-          name: "twitter:description",
-          content: "Weekly-updated sales training in small, actionable bites.",
-        },
-      ],
-      links: [
-        {
-          rel: "stylesheet",
-          href: appCss,
-        },
-      ],
-    }),
-    shellComponent: RootShell,
-    component: RootComponent,
-    notFoundComponent: NotFoundComponent,
-    errorComponent: ErrorComponent,
-  },
-);
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "CallFlow Lab — Weekly Spectrum Sales Study" },
+      { name: "description", content: "A weekly-updated study system for Spectrum inbound sales training: call flow, SOP gates, tools, scenarios, flashcards, and an AI coach." },
+      { name: "author", content: "CallFlow Lab" },
+      { property: "og:title", content: "CallFlow Lab — Weekly Spectrum Sales Study" },
+      { property: "og:description", content: "Call flow, policy gates, A-R-M scenario drills, weekly Otter ingestion, and a plain-language AI coach." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "CallFlow Lab — Weekly Spectrum Sales Study" },
+      { name: "twitter:description", content: "Weekly-updated sales training in small, actionable bites." },
+    ],
+    links: [
+      {
+        rel: "stylesheet",
+        href: appCss,
+      },
+    ],
+  }),
+  shellComponent: RootShell,
+  component: RootComponent,
+  notFoundComponent: NotFoundComponent,
+  errorComponent: ErrorComponent,
+});
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
@@ -142,54 +113,33 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
-import {
-  SidebarProvider,
-  SidebarTrigger,
-  useSidebar,
-} from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 
 const routeContext = [
   { match: "/lookup", workspace: "Live Call", label: "Quick Lookup" },
-  {
-    match: "/sales-prompts",
-    workspace: "Live Call",
-    label: "AI Sales Specialist",
-  },
+  { match: "/sales-prompts", workspace: "Live Call", label: "AI Sales Specialist" },
   { match: "/tutor", workspace: "Live Call", label: "Sales Coach" },
-  {
-    match: "/across-spectrum",
-    workspace: "Practice",
-    label: "Across the Spectrum",
-  },
+  { match: "/across-spectrum", workspace: "Practice", label: "Across the Spectrum" },
   { match: "/scenarios", workspace: "Practice", label: "Scenario Trainer" },
   { match: "/flashcards", workspace: "Practice", label: "Flashcards" },
   { match: "/curriculum", workspace: "Learn", label: "Curriculum" },
-  { match: "/prompt-academy", workspace: "Learn", label: "Prompt Academy" },
-  { match: "/full-spectrum", workspace: "Learn", label: "The Full Spectrum" },
-  { match: "/my-stuff", workspace: "My Stuff", label: "Overview" },
-  { match: "/bulletin", workspace: "My Stuff", label: "Bulletin Board" },
-  { match: "/company-walkthrough", workspace: "My Stuff", label: "Company Walkthrough" },
-  { match: "/plan", workspace: "My Stuff", label: "Study Plan" },
+  { match: "/plan", workspace: "Learn", label: "Study Plan" },
   { match: "/tips", workspace: "Learn", label: "Tips" },
-  { match: "/setup", workspace: "My Stuff", label: "My Setup" },
-  { match: "/corner", workspace: "My Stuff", label: "Weekly Ledger" },
+  { match: "/setup", workspace: "System", label: "My Setup" },
+  { match: "/corner", workspace: "System", label: "Weekly Ledger" },
 ] as const;
 
 function resolveRouteContext(pathname: string) {
-  return (
-    routeContext.find((item) => pathname.startsWith(item.match)) ?? {
-      workspace: "Today",
-      label: "Home",
-    }
-  );
+  return routeContext.find((item) => pathname.startsWith(item.match)) ?? {
+    workspace: "Today",
+    label: "Home",
+  };
 }
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const pathname = useRouterState({
-    select: (state) => state.location.pathname,
-  });
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
   const context = resolveRouteContext(pathname);
 
   return (
@@ -200,20 +150,11 @@ function RootComponent() {
           <div className="flex min-w-0 flex-1 flex-col">
             <header className="shell-bar sticky top-0 z-30 flex h-14 items-center justify-between gap-3 border-b px-3 sm:px-4">
               <div className="flex min-w-0 items-center gap-3">
-                <SidebarTrigger
-                  className="h-10 w-auto rounded-xl border border-border/70 bg-card/60 px-3 hover:bg-secondary"
-                  aria-label="Open navigation menu"
-                  title="Open navigation menu"
-                >
-                  <MenuIcon className="h-4 w-4" />
-                  <span className="text-xs font-semibold md:hidden">Menu</span>
-                </SidebarTrigger>
+                <SidebarTrigger className="rounded-xl border border-border/70 bg-card/60 hover:bg-secondary" />
                 <div className="hidden h-6 w-px bg-border/80 sm:block" />
                 <div className="min-w-0 leading-tight">
                   <div className="eyebrow truncate">{context.workspace}</div>
-                  <div className="truncate text-sm font-semibold tracking-tight">
-                    {context.label}
-                  </div>
+                  <div className="truncate text-sm font-semibold tracking-tight">{context.label}</div>
                 </div>
               </div>
 
@@ -225,52 +166,12 @@ function RootComponent() {
                 <span className="hidden sm:inline">Quick Lookup</span>
               </Link>
             </header>
-            <main className="app-main flex-1 pb-16 md:pb-0">
+            <main className="app-main flex-1">
               <Outlet />
             </main>
-            <MobileDock />
           </div>
         </div>
       </SidebarProvider>
     </QueryClientProvider>
-  );
-}
-
-const mobileLinks = [
-  { title: "Today", url: "/", icon: Home },
-  { title: "Live", url: "/lookup", icon: Search },
-  { title: "Practice", url: "/across-spectrum", icon: PhoneCall },
-  { title: "Learn", url: "/curriculum", icon: BookOpen },
-  { title: "My Stuff", url: "/my-stuff", icon: UserRound },
-] as const;
-
-function MobileDock() {
-  const path = useRouterState({ select: (state) => state.location.pathname });
-  const { setOpenMobile } = useSidebar();
-
-  return (
-    <nav
-      className="mobile-dock md:hidden"
-      aria-label="Primary mobile navigation"
-    >
-      {mobileLinks.map((item) => {
-        const active =
-          item.url === "/" ? path === "/" : path.startsWith(item.url);
-        return (
-          <Link
-            key={item.url}
-            to={item.url}
-            className={active ? "is-active" : ""}
-          >
-            <item.icon className="h-4 w-4" />
-            <span>{item.title}</span>
-          </Link>
-        );
-      })}
-      <button type="button" onClick={() => setOpenMobile(true)} aria-label="Open all sections" className="mobile-dock-more">
-        <MenuIcon className="h-4 w-4" />
-        <span>All</span>
-      </button>
-    </nav>
   );
 }

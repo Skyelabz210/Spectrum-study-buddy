@@ -247,4 +247,3 @@ export const DIFFICULTY_COPY: Record<SimulatorDifficulty, { label: string; descr
     description: "Minimal hints. Use this when you want the simulator to feel closest to a live call.",
   },
 };
-

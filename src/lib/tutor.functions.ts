@@ -13,7 +13,7 @@ const InputSchema = z.object({
   memory: z.string().max(4000).optional(),
 });
 
-const BASE = `You are Spectrum SAS Coach, a precise Spectrum inbound sales study assistant.
+const BASE = `You are CallFlow Lab Coach, a precise Spectrum inbound sales study assistant.
 You help the learner convert classroom recordings into call-flow skill, SOP discipline, technical product fluency, source-aware retrieval, ethical sales execution, prompt engineering, QA understanding, and deliberate practice.
 
 Style:
@@ -41,7 +41,8 @@ const SYSTEM_PROMPTS: Record<string, string> = {
   quiz:
     BASE +
     `\n\nDRILL MODE: Ask one practice question at a time. Prefer scenarios over isolated definitions. Wait for the learner's answer. Mark it correct or needs work, cite the missing behavior/source gate, then ask the next question. Rotate across call flow, SOP, tools, products, technical vocabulary, AI prompting, QA, metrics, benefits and A-R-M.`,
-  lookup: `You are Spectrum SAS Quick Lookup, a low-latency Spectrum product retrieval assistant.
+  lookup:
+    `You are CallFlow Lab Quick Lookup, a low-latency Spectrum product retrieval assistant.
 The learner may type one or two words, such as "advantage", "2 gig", "PBB", or "unlimited plus".
 
 Use ONLY the injected CANONICAL CORPUS MATCHES. Never fill gaps from general memory.
@@ -70,36 +71,26 @@ async function callGateway(messages: { role: string; content: string }[]) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 30_000);
   try {
-    const res = await fetch(
-      "https://ai.gateway.lovable.dev/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        signal: controller.signal,
-        body: JSON.stringify({ model, messages }),
+    const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
       },
-    );
+      signal: controller.signal,
+      body: JSON.stringify({ model, messages }),
+    });
     if (!res.ok) {
-      if (res.status === 429)
-        throw new Error("The coach hit a rate limit. Try again shortly.");
-      if (res.status === 402)
-        throw new Error(
-          "AI credits ran out. Add credits in workspace settings to keep coaching enabled.",
-        );
+      if (res.status === 429) throw new Error("The coach hit a rate limit. Try again shortly.");
+      if (res.status === 402) throw new Error("AI credits ran out. Add credits in workspace settings to keep coaching enabled.");
       const text = await res.text().catch(() => "");
       console.error("AI gateway error", res.status, text.slice(0, 500));
       throw new Error("Coach had a hiccup. Please try again.");
     }
-    const json = (await res.json()) as {
-      choices?: { message?: { content?: string } }[];
-    };
+    const json = (await res.json()) as { choices?: { message?: { content?: string } }[] };
     return json.choices?.[0]?.message?.content?.trim() ?? "";
   } catch (error) {
-    if (error instanceof Error && error.name === "AbortError")
-      throw new Error("Coach request timed out. Try a shorter request.");
+    if (error instanceof Error && error.name === "AbortError") throw new Error("Coach request timed out. Try a shorter request.");
     throw error;
   } finally {
     clearTimeout(timeout);
@@ -107,13 +98,11 @@ async function callGateway(messages: { role: string; content: string }[]) {
 }
 
 export const askTutor = createServerFn({ method: "POST" })
-  .validator((data: unknown) => InputSchema.parse(data))
+  .inputValidator((data: unknown) => InputSchema.parse(data))
   .handler(async ({ data }) => {
     let system = SYSTEM_PROMPTS[data.mode] ?? SYSTEM_PROMPTS.tutor;
     if (data.mode === "lookup") {
-      const query =
-        [...data.messages].reverse().find((message) => message.role === "user")
-          ?.content ?? "";
+      const query = [...data.messages].reverse().find((message) => message.role === "user")?.content ?? "";
       system += `\n\n--- CANONICAL CORPUS MATCHES ---\n${buildLookupContext(query)}\n--- END CANONICAL CORPUS MATCHES ---`;
     }
     const memoryBlock = data.memory?.trim()
@@ -132,7 +121,7 @@ const TakeawayInput = z.object({
 });
 
 export const extractTakeaway = createServerFn({ method: "POST" })
-  .validator((data: unknown) => TakeawayInput.parse(data))
+  .inputValidator((data: unknown) => TakeawayInput.parse(data))
   .handler(async ({ data }) => {
     const prompt = `Read this short coaching exchange. If the learner clearly learned or confirmed one specific call-flow, SOP, tool, product, technical, prompt-engineering, QA, metric, benefits, objection-handling, or weekly-update fact, output one concise takeaway in twelve words or less. If nothing concrete was learned, output exactly: NONE.
 
@@ -142,11 +131,7 @@ Learner: ${data.userMessage}
 Coach: ${data.assistantReply}`;
     try {
       const out = await callGateway([
-        {
-          role: "system",
-          content:
-            "You distill one concise non-sensitive study takeaway, or output NONE.",
-        },
+        { role: "system", content: "You distill one concise non-sensitive study takeaway, or output NONE." },
         { role: "user", content: prompt },
       ]);
       const cleaned = out.replace(/^takeaway[:\-]\s*/i, "").trim();
@@ -154,10 +139,7 @@ Coach: ${data.assistantReply}`;
       if (cleaned.length > 140) return { takeaway: cleaned.slice(0, 140) };
       return { takeaway: cleaned };
     } catch (error) {
-      console.error(
-        "extractTakeaway failed",
-        error instanceof Error ? error.message : "unknown",
-      );
+      console.error("extractTakeaway failed", error instanceof Error ? error.message : "unknown");
       return { takeaway: null };
     }
   });

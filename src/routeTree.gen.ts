@@ -16,13 +16,11 @@ import { Route as ScenariosRouteImport } from './routes/scenarios'
 import { Route as SalesPromptsRouteImport } from './routes/sales-prompts'
 import { Route as PromptAcademyRouteImport } from './routes/prompt-academy'
 import { Route as PlanRouteImport } from './routes/plan'
-import { Route as MyStuffRouteImport } from './routes/my-stuff'
 import { Route as LookupRouteImport } from './routes/lookup'
 import { Route as FullSpectrumRouteImport } from './routes/full-spectrum'
 import { Route as FlashcardsRouteImport } from './routes/flashcards'
 import { Route as CornerRouteImport } from './routes/corner'
-import { Route as CompanyWalkthroughRouteImport } from './routes/company-walkthrough'
-import { Route as BulletinRouteImport } from './routes/bulletin'
+import { Route as CallDropRouteImport } from './routes/call-drop'
 import { Route as AcrossSpectrumRouteImport } from './routes/across-spectrum'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CurriculumIndexRouteImport } from './routes/curriculum.index'
@@ -63,11 +61,6 @@ const PlanRoute = PlanRouteImport.update({
   path: '/plan',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MyStuffRoute = MyStuffRouteImport.update({
-  id: '/my-stuff',
-  path: '/my-stuff',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LookupRoute = LookupRouteImport.update({
   id: '/lookup',
   path: '/lookup',
@@ -88,14 +81,9 @@ const CornerRoute = CornerRouteImport.update({
   path: '/corner',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CompanyWalkthroughRoute = CompanyWalkthroughRouteImport.update({
-  id: '/company-walkthrough',
-  path: '/company-walkthrough',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BulletinRoute = BulletinRouteImport.update({
-  id: '/bulletin',
-  path: '/bulletin',
+const CallDropRoute = CallDropRouteImport.update({
+  id: '/call-drop',
+  path: '/call-drop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcrossSpectrumRoute = AcrossSpectrumRouteImport.update({
@@ -122,13 +110,11 @@ const CurriculumModuleIdRoute = CurriculumModuleIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/across-spectrum': typeof AcrossSpectrumRoute
-  '/bulletin': typeof BulletinRoute
-  '/company-walkthrough': typeof CompanyWalkthroughRoute
+  '/call-drop': typeof CallDropRoute
   '/corner': typeof CornerRoute
   '/flashcards': typeof FlashcardsRoute
   '/full-spectrum': typeof FullSpectrumRoute
   '/lookup': typeof LookupRoute
-  '/my-stuff': typeof MyStuffRoute
   '/plan': typeof PlanRoute
   '/prompt-academy': typeof PromptAcademyRoute
   '/sales-prompts': typeof SalesPromptsRoute
@@ -142,13 +128,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/across-spectrum': typeof AcrossSpectrumRoute
-  '/bulletin': typeof BulletinRoute
-  '/company-walkthrough': typeof CompanyWalkthroughRoute
+  '/call-drop': typeof CallDropRoute
   '/corner': typeof CornerRoute
   '/flashcards': typeof FlashcardsRoute
   '/full-spectrum': typeof FullSpectrumRoute
   '/lookup': typeof LookupRoute
-  '/my-stuff': typeof MyStuffRoute
   '/plan': typeof PlanRoute
   '/prompt-academy': typeof PromptAcademyRoute
   '/sales-prompts': typeof SalesPromptsRoute
@@ -163,13 +147,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/across-spectrum': typeof AcrossSpectrumRoute
-  '/bulletin': typeof BulletinRoute
-  '/company-walkthrough': typeof CompanyWalkthroughRoute
+  '/call-drop': typeof CallDropRoute
   '/corner': typeof CornerRoute
   '/flashcards': typeof FlashcardsRoute
   '/full-spectrum': typeof FullSpectrumRoute
   '/lookup': typeof LookupRoute
-  '/my-stuff': typeof MyStuffRoute
   '/plan': typeof PlanRoute
   '/prompt-academy': typeof PromptAcademyRoute
   '/sales-prompts': typeof SalesPromptsRoute
@@ -185,13 +167,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/across-spectrum'
-    | '/bulletin'
-    | '/company-walkthrough'
+    | '/call-drop'
     | '/corner'
     | '/flashcards'
     | '/full-spectrum'
     | '/lookup'
-    | '/my-stuff'
     | '/plan'
     | '/prompt-academy'
     | '/sales-prompts'
@@ -205,13 +185,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/across-spectrum'
-    | '/bulletin'
-    | '/company-walkthrough'
+    | '/call-drop'
     | '/corner'
     | '/flashcards'
     | '/full-spectrum'
     | '/lookup'
-    | '/my-stuff'
     | '/plan'
     | '/prompt-academy'
     | '/sales-prompts'
@@ -225,13 +203,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/across-spectrum'
-    | '/bulletin'
-    | '/company-walkthrough'
+    | '/call-drop'
     | '/corner'
     | '/flashcards'
     | '/full-spectrum'
     | '/lookup'
-    | '/my-stuff'
     | '/plan'
     | '/prompt-academy'
     | '/sales-prompts'
@@ -246,13 +222,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AcrossSpectrumRoute: typeof AcrossSpectrumRoute
-  BulletinRoute: typeof BulletinRoute
-  CompanyWalkthroughRoute: typeof CompanyWalkthroughRoute
+  CallDropRoute: typeof CallDropRoute
   CornerRoute: typeof CornerRoute
   FlashcardsRoute: typeof FlashcardsRoute
   FullSpectrumRoute: typeof FullSpectrumRoute
   LookupRoute: typeof LookupRoute
-  MyStuffRoute: typeof MyStuffRoute
   PlanRoute: typeof PlanRoute
   PromptAcademyRoute: typeof PromptAcademyRoute
   SalesPromptsRoute: typeof SalesPromptsRoute
@@ -315,13 +289,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/my-stuff': {
-      id: '/my-stuff'
-      path: '/my-stuff'
-      fullPath: '/my-stuff'
-      preLoaderRoute: typeof MyStuffRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/lookup': {
       id: '/lookup'
       path: '/lookup'
@@ -350,18 +317,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CornerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/company-walkthrough': {
-      id: '/company-walkthrough'
-      path: '/company-walkthrough'
-      fullPath: '/company-walkthrough'
-      preLoaderRoute: typeof CompanyWalkthroughRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bulletin': {
-      id: '/bulletin'
-      path: '/bulletin'
-      fullPath: '/bulletin'
-      preLoaderRoute: typeof BulletinRouteImport
+    '/call-drop': {
+      id: '/call-drop'
+      path: '/call-drop'
+      fullPath: '/call-drop'
+      preLoaderRoute: typeof CallDropRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/across-spectrum': {
@@ -398,13 +358,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AcrossSpectrumRoute: AcrossSpectrumRoute,
-  BulletinRoute: BulletinRoute,
-  CompanyWalkthroughRoute: CompanyWalkthroughRoute,
+  CallDropRoute: CallDropRoute,
   CornerRoute: CornerRoute,
   FlashcardsRoute: FlashcardsRoute,
   FullSpectrumRoute: FullSpectrumRoute,
   LookupRoute: LookupRoute,
-  MyStuffRoute: MyStuffRoute,
   PlanRoute: PlanRoute,
   PromptAcademyRoute: PromptAcademyRoute,
   SalesPromptsRoute: SalesPromptsRoute,
@@ -418,13 +376,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

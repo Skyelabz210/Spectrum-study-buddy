@@ -1,4 +1,4 @@
-// Local-only memory for the Spectrum SAS coach.
+// Local-only memory for the CallFlow Lab coach.
 // Persists in localStorage so the coach remembers without accounts.
 
 const KEY = "callflowlab.memory.v1";
@@ -140,4 +140,3 @@ export function buildMemoryPrompt(m: TutorMemory): string {
   }
   return lines.join("\n");
 }
-

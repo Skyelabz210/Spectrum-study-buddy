@@ -1,18 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MODULES } from "@/data/fullCurriculum";
 import { Card } from "@/components/ui/card";
-import { SpectrumCalendarBrief } from "@/components/SpectrumCalendarBrief";
 
 export const Route = createFileRoute("/plan")({
   component: Plan,
   head: () => ({
     meta: [
-      { title: "Study Plan · Spectrum SAS" },
-      {
-        name: "description",
-        content:
-          "A weekly call-flow, product, AI, QA and sales-training plan built from approved sources and Otter sessions.",
-      },
+      { title: "Study Plan · CallFlow Lab" },
+      { name: "description", content: "A weekly call-flow, product, AI, QA and sales-training plan built from approved sources and Otter sessions." },
     ],
   }),
 });
@@ -64,24 +59,16 @@ const PLAN = [
 
 function Plan() {
   return (
-    <div className="page-frame mx-auto max-w-3xl py-6 sm:py-10">
+    <div className="mx-auto max-w-3xl px-6 py-10">
       <h1 className="text-3xl font-bold tracking-tight">Your study plan</h1>
       <p className="mt-2 text-muted-foreground">
-        No wasted motion. Rotate retrieval, product fluency, delivery, QA and
-        source verification until the call language is natural and accurate.
+        No wasted motion. Rotate retrieval, product fluency, delivery, QA and source verification until the call language is natural and accurate.
       </p>
-
-      <SpectrumCalendarBrief variant="plan" />
 
       <div className="mt-8 space-y-4">
         {PLAN.map((p) => (
-          <Card
-            key={p.title}
-            className="card-elevated border-border bg-card/70 p-5"
-          >
-            <div className="text-xs font-semibold uppercase tracking-wider text-neon">
-              {p.title}
-            </div>
+          <Card key={p.title} className="card-elevated border-border bg-card/70 p-5">
+            <div className="text-xs font-semibold uppercase tracking-wider text-neon">{p.title}</div>
             <div className="mt-1 text-lg font-semibold">{p.desc}</div>
             <ul className="mt-3 space-y-2 text-sm">
               {p.items.map((item) => (
@@ -96,17 +83,10 @@ function Plan() {
       </div>
 
       <div className="mt-10">
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-          Jump to a module
-        </h2>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Jump to a module</h2>
         <div className="grid gap-2 sm:grid-cols-2">
           {MODULES.map((m) => (
-            <Link
-              key={m.id}
-              to="/curriculum/$moduleId"
-              params={{ moduleId: m.id }}
-              className="rounded-lg border border-border bg-card/60 px-3 py-2 text-sm transition hover:border-neon/40"
-            >
+            <Link key={m.id} to="/curriculum/$moduleId" params={{ moduleId: m.id }} className="rounded-lg border border-border bg-card/60 px-3 py-2 text-sm transition hover:border-neon/40">
               <span className="mr-2">{m.emoji}</span>
               <span className="font-medium">M{m.number}.</span>{" "}
               <span className="text-muted-foreground">{m.title}</span>
